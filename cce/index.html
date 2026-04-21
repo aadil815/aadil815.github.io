@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Long Island Water, Cost, and 1,4-Dioxane Reform</title>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <style>
+    :root {
+      --bg: #08141a;
+      --panel: #10242c;
+      --panel-2: #14333d;
+      --text: #ecf7f6;
+      --muted: #b8d0cf;
+      --accent: #56c7c0;
+      --accent-2: #8be28c;
+      --accent-3: #ffd166;
+      --danger: #ff7f7f;
+      --line: rgba(255,255,255,0.10);
+      --shadow: 0 18px 50px rgba(0,0,0,.28);
+      --radius: 24px;
+      --maxw: 1180px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(86,199,192,.13), transparent 30%),
+        radial-gradient(circle at top right, rgba(139,226,140,.10), transparent 26%),
+        linear-gradient(180deg, #08141a 0%, #0a1d24 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .wrap {
+      width: min(var(--maxw), calc(100% - 32px));
+      margin: 0 auto;
+    }
+    .hero { padding: 72px 0 32px; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      background: rgba(86,199,192,.12);
+      border: 1px solid rgba(86,199,192,.22);
+      border-radius: 999px;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: .02em;
+      font-size: .9rem;
+    }
+    h1 {
+      font-size: clamp(2.6rem, 6vw, 5rem);
+      line-height: .98;
+      margin: 18px 0 16px;
+      letter-spacing: -0.04em;
+      max-width: 900px;
+    }
+    .subhead {
+      max-width: 860px;
+      font-size: 1.08rem;
+      color: var(--muted);
+    }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 34px;
+    }
+    .stat {
+      background: rgba(16,36,44,.72);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px 18px 16px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    .stat .k {
+      font-size: 1.75rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat .l {
+      color: var(--muted);
+      font-size: .95rem;
+    }
+    section { padding: 26px 0 10px; }
+    .section-card {
+      background: linear-gradient(180deg, rgba(16,36,44,.92), rgba(16,36,44,.82));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: clamp(1.7rem, 3vw, 2.5rem);
+      line-height: 1.05;
+      letter-spacing: -.03em;
+    }
+    p { margin: 0 0 14px; }
+    .lede {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 860px;
+    }
+    .split {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 22px;
+      align-items: start;
+    }
+    .callout {
+      background: linear-gradient(180deg, rgba(86,199,192,.11), rgba(139,226,140,.07));
+      border: 1px solid rgba(86,199,192,.20);
+      border-radius: 18px;
+      padding: 18px;
+    }
+    .callout h3 { margin: 0 0 10px; font-size: 1.05rem; }
+    .keyline { height: 1px; background: var(--line); margin: 18px 0; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .viz-card {
+      background: rgba(20,51,61,.72);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px;
+      overflow: hidden;
+    }
+    .viz-title { margin: 0 0 10px; font-size: 1.05rem; font-weight: 800; }
+    .viz-note { color: var(--muted); font-size: .93rem; margin-bottom: 12px; }
+    .plot { width: 100%; height: 420px; }
+    .long-plot { width: 100%; height: 560px; }
+    .takeaways { margin: 0; padding-left: 20px; color: var(--muted); }
+    .mini { font-size: .92rem; color: var(--muted); }
+    .pill-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+    .pill {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      font-size: .9rem;
+      color: var(--muted);
+    }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: .95rem; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; }
+    th { color: var(--accent); font-weight: 800; }
+    .footer { padding: 22px 0 50px; color: var(--muted); font-size: .92rem; }
+    .source-box {
+      margin-top: 16px;
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+    @media (max-width: 960px) {
+      .meta-grid, .split, .grid-2 { grid-template-columns: 1fr; }
+      .plot, .long-plot { height: 360px; }
+      h1 { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap hero">
+    <div class="eyebrow">💧 Portfolio Project · Long Island Water Justice</div>
+    <h1>From hidden contamination to uneven water bills to measurable reform.</h1>
+    <p class="subhead">
+      This project connects three linked stories on Long Island and in New York State:
+      the discovery of widespread 1,4-dioxane contamination in consumer products,
+      the unequal and often opaque cost of residential water across Long Island,
+      and the measurable results of state intervention a few years later.
+    </p>
+
+    <div class="meta-grid">
+      <div class="stat"><div class="k">80%+</div><div class="l">of personal care products in CCE's 2018 testing contained 1,4-dioxane</div></div>
+      <div class="stat"><div class="k">48</div><div class="l">water districts analyzed across Nassau and Suffolk in the 2019 water cost report</div></div>
+      <div class="stat"><div class="k">$148 → $1,124.52</div><div class="l">range between the least and most expensive annual residential water costs identified</div></div>
+      <div class="stat"><div class="k">95.8%</div><div class="l">average reduction across five laundry detergents re-tested after the NY law took effect</div></div>
+    </div>
+  </div>
+
+  <section class="wrap">
+    <div class="section-card">
+      <h2>1. The problem: contamination was hidden, widespread, and flowing back into the water supply.</h2>
+      <div class="split">
+        <div>
+          <p class="lede">
+            In 2018, Citizens Campaign for the Environment found 1,4-dioxane in more than 80% of tested personal care products.
+            The contaminant was especially concerning because it was not intentionally added, was not listed on labels,
+            and could enter Long Island's aquifer system through wastewater and septic systems after everyday household use.
+          </p>
+          <p>
+            That made this more than a consumer safety issue. It was also a drinking water issue. New York later responded
+            with a first-of-its-kind law that limited 1,4-dioxane in cleaning, cosmetic, and personal care products,
+            alongside an aggressive drinking water standard.
+          </p>
+        </div>
+        <div class="callout">
+          <h3>🧪 2018 signal examples</h3>
+          <p><strong>Tide Original:</strong> 14,000 ppb</p>
+          <p><strong>Gain Original:</strong> 10,000 ppb</p>
+          <p><strong>Dreft Stage 1/Newborn:</strong> 10,000 ppb</p>
+          <p><strong>Victoria's Secret Bombshell Fragrance Wash:</strong> 17,000 ppb</p>
+          <p class="mini">The proposed NY drinking water standard referenced in the report was 1 ppb.</p>
+        </div>
+      </div>
+      <div class="pill-row">
+        <div class="pill">Hidden byproduct of ethoxylation</div>
+        <div class="pill">Long Island relies on a sole source aquifer</div>
+        <div class="pill">Consumer products became a policy lever</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="section-card">
+      <h2>2. The body of the story: what water cost on Long Island in 2019, and why that mattered.</h2>
+      <p class="lede">
+        The 2019 report asked a deceptively simple question: what does water cost on Long Island? The answer turned out to be highly uneven.
+        CCE compared 48 districts and found that consumers faced a confusing mix of rate systems, taxes, service charges, privatized service areas,
+        and billing structures that made apples-to-apples comparisons unusually hard. The result was not just variation, but opacity.
+      </p>
+
+      <div class="grid-2" style="margin-top:18px;">
+        <div class="viz-card">
+          <div class="viz-title">📊 Most expensive vs least expensive districts</div>
+          <div class="viz-note">Annual residential cost estimates based on a family of four using 10,000 gallons per month.</div>
+          <div id="plot1" class="plot"></div>
+        </div>
+        <div class="viz-card">
+          <div class="viz-title">🏷️ Where hidden taxes drove the bill</div>
+          <div class="viz-note">In several districts, taxes formed a very large share of total annual water cost even when they were not obvious on the bill.</div>
+          <div id="plot2" class="plot"></div>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:18px;">
+        <div class="viz-card">
+          <div class="viz-title">🌐 Population size did not guarantee affordability</div>
+          <div class="viz-note">Smaller districts often looked vulnerable, but population alone did not explain price. Structure, taxes, and administration mattered too.</div>
+          <div id="plot3" class="long-plot"></div>
+        </div>
+        <div class="viz-card">
+          <div class="viz-title">🔎 What the report revealed</div>
+          <ul class="takeaways">
+            <li>The most expensive district in the report was NY American Water Area 2 in North Shore–Sea Cliff at <strong>$1,124.52</strong> annually, while Greenlawn was the least expensive at <strong>$148.00</strong>.</li>
+            <li>Several districts had large tax burdens layered on top of rates, including Albertson, Bethpage, Garden City Park, Carle Place, Roslyn, and Hicksville.</li>
+            <li>The report flagged multiple waterless districts and fifteen districts serving fewer than 10,000 people, strengthening the argument for consolidation.</li>
+            <li>CCE also criticized confusing pricing systems such as daily rate structures, cubic-feet billing, and hard-to-find fee schedules.</li>
+            <li>Privatization was directly tied to cost concerns, especially in New York American Water service areas that appeared repeatedly among the most expensive districts.</li>
+          </ul>
+
+          <div class="keyline"></div>
+
+          <div class="viz-title">💡 Portfolio takeaway</div>
+          <p class="mini">
+            This middle section is not just about price. It shows how environmental risk, infrastructure governance,
+            and consumer transparency intersect. Clean water is a public health issue, but it is also a pricing and access issue.
+          </p>
+
+          <table>
+            <thead>
+              <tr><th>District</th><th>Annual Cost</th><th>Tax Share</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Carle Place</td><td>$520.00</td><td>76.9%</td></tr><tr><td>Garden City Park</td><td>$568.25</td><td>75.4%</td></tr><tr><td>Hicksville</td><td>$444.65</td><td>73.9%</td></tr><tr><td>Roslyn</td><td>$457.09</td><td>73.2%</td></tr><tr><td>Bethpage</td><td>$605.39</td><td>67.8%</td></tr><tr><td>Westbury</td><td>$424.94</td><td>64.7%</td></tr><tr><td>Albertson</td><td>$658.05</td><td>62.8%</td></tr><tr><td>NY American Water Area 2 (North Shore–Sea Cliff)</td><td>$1124.52</td><td>59%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="section-card">
+      <h2>3. The result: New York's law changed product chemistry, and the follow-up data shows it.</h2>
+      <div class="split">
+        <div>
+          <p class="lede">
+            By 2024, CCE's follow-up testing showed clear evidence that the law worked. New York had already set a 1 ppb drinking water standard,
+            then required products sold in the state to reduce 1,4-dioxane to 2,000 ppb in 2023 and 1,000 ppb in 2024.
+            The five detergents re-tested by CCE all fell below the 1,000 ppb threshold.
+          </p>
+          <p>
+            That matters because these products were not marginal cases. They had been among the highest-contaminant products in the original dataset and were part of the evidence used to justify regulation.
+          </p>
+        </div>
+        <div class="callout">
+          <h3>✅ Policy outcome</h3>
+          <p><strong>Average 2019 level:</strong> 9,680.0 ppb</p>
+          <p><strong>Average 2024 level:</strong> 403.0 ppb</p>
+          <p><strong>Average reduction:</strong> 95.8%</p>
+          <p class="mini">All five re-tested detergents came in below the 2024 product limit of 1,000 ppb.</p>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:18px;">
+        <div class="viz-card">
+          <div class="viz-title">🧼 Before vs after the law</div>
+          <div class="viz-note">Independent testing from the original 2019 product data compared with 2024 re-testing.</div>
+          <div id="plot4" class="plot"></div>
+        </div>
+        <div class="viz-card">
+          <div class="viz-title">📉 Percent reduction by detergent</div>
+          <div class="viz-note">Every tested detergent posted a very large reduction, indicating manufacturers could reformulate and still comply.</div>
+          <div id="plot5" class="plot"></div>
+        </div>
+      </div>
+
+      <div class="source-box">
+        <strong>Project framing:</strong> This portfolio page is structured as a policy narrative:
+        consumer contamination evidence → uneven public water costs → measurable regulatory results.
+        It is designed to show how data storytelling can connect environmental exposure, affordability, and policy outcomes in one coherent arc.
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap footer">
+    Source basis for this page: Citizens Campaign for the Environment's 2018 consumer shopping report, 2019 Long Island water cost report, and 2024 update on New York's 1,4-dioxane legislation results.
+  </div>
+
+  <script>
+    const expensive = [["NY American Water\nArea 2 (North Shore\u2013Sea Cliff)", 1124.52], ["Shelter Island Heights", 1090.0], ["NY American Water\nArea 1", 936.12], ["East Williston", 814.8], ["City of Long Beach", 765.78]];
+    const least = [["Greenlawn", 148.0], ["Jericho", 195.89], ["Riverhead", 224.92], ["Village of Sands Point", 234.0], ["Freeport Village", 249.6]];
+    const taxShare = [{"district": "Carle Place", "population": 9005, "annual_total": 520.0, "annual_taxes": 400.0, "tax_share_pct": 76.9}, {"district": "Garden City Park", "population": 18000, "annual_total": 568.25, "annual_taxes": 428.25, "tax_share_pct": 75.4}, {"district": "Hicksville", "population": 42000, "annual_total": 444.65, "annual_taxes": 328.65, "tax_share_pct": 73.9}, {"district": "Roslyn", "population": 17900, "annual_total": 457.09, "annual_taxes": 334.45, "tax_share_pct": 73.2}, {"district": "Bethpage", "population": 35000, "annual_total": 605.39, "annual_taxes": 410.39, "tax_share_pct": 67.8}, {"district": "Westbury", "population": 20500, "annual_total": 424.94, "annual_taxes": 274.94, "tax_share_pct": 64.7}, {"district": "Albertson", "population": 13500, "annual_total": 658.05, "annual_taxes": 413.09, "tax_share_pct": 62.8}, {"district": "NY American Water Area 2 (North Shore\u2013Sea Cliff)", "population": 135000, "annual_total": 1124.52, "annual_taxes": null, "tax_share_pct": 59}, {"district": "Locust Valley (inside district)", "population": 7500, "annual_total": 638.98, "annual_taxes": 366.98, "tax_share_pct": 57.4}, {"district": "Plainview", "population": 34000, "annual_total": 530.78, "annual_taxes": 291.67, "tax_share_pct": 55.0}];
+    const popData = [{"district": "NY American Water Area 2 (North Shore\u2013Sea Cliff)", "population": 135000, "annual_total": 1124.52, "annual_taxes": null, "tax_share_pct": 59}, {"district": "NY American Water Area 1", "population": 135000, "annual_total": 936.12, "annual_taxes": null, "tax_share_pct": 33}, {"district": "East Williston", "population": 2500, "annual_total": 814.8, "annual_taxes": 0.0, "tax_share_pct": 0.0}, {"district": "City of Long Beach", "population": 35000, "annual_total": 765.78, "annual_taxes": 0.0, "tax_share_pct": 0.0}, {"district": "NY American Water Area 2 (Merrick)", "population": 135000, "annual_total": 719.28, "annual_taxes": null, "tax_share_pct": 35}, {"district": "Village of Plandome", "population": 1350, "annual_total": 680.4, "annual_taxes": 0.0, "tax_share_pct": 0.0}, {"district": "Albertson", "population": 13500, "annual_total": 658.05, "annual_taxes": 413.09, "tax_share_pct": 62.8}, {"district": "Locust Valley (inside district)", "population": 7500, "annual_total": 638.98, "annual_taxes": 366.98, "tax_share_pct": 57.4}, {"district": "Water Authority of Western Nassau County", "population": 120000, "annual_total": 617.36, "annual_taxes": 0.0, "tax_share_pct": 0.0}, {"district": "Williston Park", "population": 7500, "annual_total": 616.8, "annual_taxes": 0.0, "tax_share_pct": 0.0}, {"district": "Bethpage", "population": 35000, "annual_total": 605.39, "annual_taxes": 410.39, "tax_share_pct": 67.8}, {"district": "Glenwood", "population": 1000, "annual_total": 596.1, "annual_taxes": 194.1, "tax_share_pct": 32.6}, {"district": "Great Neck North", "population": 32400, "annual_total": 570.77, "annual_taxes": 0.0, "tax_share_pct": 0.0}, {"district": "Garden City Park", "population": 18000, "annual_total": 568.25, "annual_taxes": 428.25, "tax_share_pct": 75.4}, {"district": "West Hempstead\u2013Hempstead Gardens", "population": 32000, "annual_total": 534.81, "annual_taxes": 216.85, "tax_share_pct": 40.5}, {"district": "Plainview", "population": 34000, "annual_total": 530.78, "annual_taxes": 291.67, "tax_share_pct": 55.0}, {"district": "Carle Place", "population": 9005, "annual_total": 520.0, "annual_taxes": 400.0, "tax_share_pct": 76.9}, {"district": "Franklin Square", "population": 20000, "annual_total": 497.6, "annual_taxes": 200.0, "tax_share_pct": 40.2}, {"district": "Roslyn", "population": 17900, "annual_total": 457.09, "annual_taxes": 334.45, "tax_share_pct": 73.2}, {"district": "Rockville Centre Village", "population": 24568, "annual_total": 457.06, "annual_taxes": 0.0, "tax_share_pct": 0.0}, {"district": "Hicksville", "population": 42000, "annual_total": 444.65, "annual_taxes": 328.65, "tax_share_pct": 73.9}, {"district": "South Farmingdale", "population": 44700, "annual_total": 443.88, "annual_taxes": 243.88, "tax_share_pct": 54.9}, {"district": "Westbury", "population": 20500, "annual_total": 424.94, "annual_taxes": 274.94, "tax_share_pct": 64.7}, {"district": "Oyster Bay", "population": 8000, "annual_total": 423.5, "annual_taxes": 217.5, "tax_share_pct": 51.4}, {"district": "Manhasset\u2013Lakeville", "population": 45000, "annual_total": 420.26, "annual_taxes": 216.26, "tax_share_pct": 51.5}, {"district": "Port Washington", "population": 30000, "annual_total": 420.04, "annual_taxes": 134.86, "tax_share_pct": 32.1}, {"district": "Village of Garden City", "population": 22371, "annual_total": 381.4, "annual_taxes": 0.0, "tax_share_pct": 0.0}, {"district": "Village of Farmingdale", "population": 9254, "annual_total": 366.0, "annual_taxes": 0.0, "tax_share_pct": 0.0}, {"district": "Village of Hempstead", "population": 53891, "annual_total": 354.0, "annual_taxes": 0.0, "tax_share_pct": 0.0}, {"district": "Jericho", "population": 58000, "annual_total": 195.89, "annual_taxes": 71.89, "tax_share_pct": 36.7}];
+    const detergentRows = [{"name": "Tide Original", "old": 14000, "new": 205, "reduction_pct": 98.5}, {"name": "Persil", "old": 6100, "new": 928, "reduction_pct": 84.8}, {"name": "Tide Simply Oxi", "old": 8300, "new": 567, "reduction_pct": 93.2}, {"name": "Gain Original", "old": 10000, "new": 188, "reduction_pct": 98.1}, {"name": "Dreft Stage 1 Newborn", "old": 10000, "new": 127, "reduction_pct": 98.7}];
+
+    const layoutBase = {
+      paper_bgcolor: 'rgba(0,0,0,0)',
+      plot_bgcolor: 'rgba(0,0,0,0)',
+      font: {color: '#ecf7f6', family: 'Inter, Segoe UI, sans-serif'},
+      margin: {l: 60, r: 18, t: 10, b: 55},
+      xaxis: {
+        gridcolor: 'rgba(255,255,255,0.10)',
+        zerolinecolor: 'rgba(255,255,255,0.10)',
+        tickfont: {color: '#b8d0cf'}
+      },
+      yaxis: {
+        gridcolor: 'rgba(255,255,255,0.10)',
+        zerolinecolor: 'rgba(255,255,255,0.10)',
+        tickfont: {color: '#b8d0cf'}
+      },
+      legend: {
+        orientation: 'h',
+        yanchor: 'bottom',
+        y: 1.02,
+        xanchor: 'left',
+        x: 0
+      }
+    };
+
+    Plotly.newPlot('plot1', [
+      {
+        type: 'bar',
+        orientation: 'h',
+        x: expensive.map(d => d[1]).reverse(),
+        y: expensive.map(d => d[0]).reverse(),
+        name: 'Most expensive',
+        marker: {color: '#56c7c0'},
+        hovertemplate: '%{y}<br>$%{x:.2f}<extra></extra>'
+      },
+      {
+        type: 'bar',
+        orientation: 'h',
+        x: least.map(d => d[1]).reverse(),
+        y: least.map(d => d[0]).reverse(),
+        name: 'Least expensive',
+        marker: {color: '#8be28c'},
+        hovertemplate: '%{y}<br>$%{x:.2f}<extra></extra>'
+      }
+    ], {
+      ...layoutBase,
+      barmode: 'group',
+      xaxis: {...layoutBase.xaxis, title: 'Annual residential cost ($)'},
+      yaxis: {...layoutBase.yaxis, automargin: true},
+      margin: {l: 150, r: 18, t: 10, b: 55}
+    }, {responsive: true, displayModeBar: false});
+
+    Plotly.newPlot('plot2', [
+      {
+        type: 'bar',
+        x: taxShare.slice(0,10).map(d => d.district),
+        y: taxShare.slice(0,10).map(d => d.tax_share_pct),
+        marker: {color: '#ffd166'},
+        hovertemplate: '%{x}<br>%{y}% tax share<extra></extra>'
+      }
+    ], {
+      ...layoutBase,
+      xaxis: {...layoutBase.xaxis, tickangle: -30},
+      yaxis: {...layoutBase.yaxis, title: 'Tax share of annual cost (%)', range: [0, 65]}
+    }, {responsive: true, displayModeBar: false});
+
+    Plotly.newPlot('plot3', [
+      {
+        type: 'scatter',
+        mode: 'markers+text',
+        x: popData.map(d => d.population),
+        y: popData.map(d => d.annual_total),
+        text: popData.map(d => d.district),
+        textposition: 'top center',
+        marker: {
+          size: popData.map(d => Math.max(10, Math.min(24, d.tax_share_pct / 2 + 10))),
+          color: popData.map(d => d.tax_share_pct),
+          colorscale: [
+            [0, '#56c7c0'],
+            [0.5, '#ffd166'],
+            [1, '#ff7f7f']
+          ],
+          cmin: 0,
+          cmax: 60,
+          line: {color: 'rgba(255,255,255,0.35)', width: 1},
+          showscale: true,
+          colorbar: {title: 'Tax %', tickfont: {color: '#ecf7f6'}, titlefont: {color: '#ecf7f6'}}
+        },
+        hovertemplate: '<b>%{text}</b><br>Population: %{x:,}<br>Annual cost: $%{y:.2f}<br>Tax share: %{customdata}%<extra></extra>',
+        customdata: popData.map(d => d.tax_share_pct)
+      }
+    ], {
+      ...layoutBase,
+      xaxis: {...layoutBase.xaxis, title: 'Population served'},
+      yaxis: {...layoutBase.yaxis, title: 'Annual residential water cost ($)'},
+      margin: {l: 65, r: 25, t: 10, b: 60}
+    }, {responsive: true, displayModeBar: false});
+
+    Plotly.newPlot('plot4', [
+      {
+        type: 'bar',
+        x: detergentRows.map(d => d.name),
+        y: detergentRows.map(d => d.old),
+        name: '2019',
+        marker: {color: '#ff7f7f'},
+        hovertemplate: '%{x}<br>%{y:,} ppb<extra>2019</extra>'
+      },
+      {
+        type: 'bar',
+        x: detergentRows.map(d => d.name),
+        y: detergentRows.map(d => d.new),
+        name: '2024',
+        marker: {color: '#8be28c'},
+        hovertemplate: '%{x}<br>%{y:,} ppb<extra>2024</extra>'
+      }
+    ], {
+      ...layoutBase,
+      barmode: 'group',
+      xaxis: {...layoutBase.xaxis, tickangle: -20},
+      yaxis: {...layoutBase.yaxis, title: '1,4-dioxane concentration (ppb)'}
+    }, {responsive: true, displayModeBar: false});
+
+    Plotly.newPlot('plot5', [
+      {
+        type: 'bar',
+        orientation: 'h',
+        x: detergentRows.map(d => d.reduction_pct).reverse(),
+        y: detergentRows.map(d => d.name).reverse(),
+        marker: {color: '#56c7c0'},
+        text: detergentRows.map(d => d.reduction_pct + '%').reverse(),
+        textposition: 'outside',
+        cliponaxis: false,
+        hovertemplate: '%{y}<br>%{x}% reduction<extra></extra>'
+      }
+    ], {
+      ...layoutBase,
+      xaxis: {...layoutBase.xaxis, title: 'Reduction from 2019 to 2024 (%)', range: [0, 100]},
+      yaxis: {...layoutBase.yaxis, automargin: true},
+      margin: {l: 150, r: 30, t: 10, b: 55}
+    }, {responsive: true, displayModeBar: false});
+  </script>
+</body>
+</html>
