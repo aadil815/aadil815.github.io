@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aadil Khan | Data Portfolio</title>
+  <style>
+    :root {
+      --bg: #f6f4ef;
+      --panel: rgba(255, 255, 255, 0.72);
+      --text: #111111;
+      --muted: #5f5f5f;
+      --line: rgba(17, 17, 17, 0.10);
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+      --radius: 22px;
+      --accent: #111111;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(circle at top left, rgba(0,0,0,0.03), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(0,0,0,0.025), transparent 24%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 34px 22px 70px;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 42px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-left {
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .nav-right {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .nav-right a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.95rem;
+      border-bottom: 1px solid transparent;
+      transition: 0.2s ease;
+    }
+
+    .nav-right a:hover {
+      border-color: var(--text);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .hero-main,
+    .hero-side,
+    .project-card,
+    .footer-panel {
+      background: var(--panel);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.6);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main {
+      padding: 42px 36px;
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .eyebrow {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.6rem, 5vw, 5rem);
+      line-height: 0.96;
+      font-weight: 600;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-desc {
+      max-width: 720px;
+      font-size: 1.05rem;
+      color: #2d2d2d;
+      margin-bottom: 28px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 0.92rem;
+      color: #222;
+      background: rgba(255,255,255,0.6);
+    }
+
+    .hero-side {
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 360px;
+    }
+
+    .side-top h2,
+    .section-title {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+      letter-spacing: -0.02em;
+    }
+
+    .side-top p,
+    .footer-panel p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .stat-block {
+      display: grid;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .stat {
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin: 42px 0 20px;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 0.98rem;
+      max-width: 640px;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .project-card {
+      padding: 28px 26px;
+      display: flex;
+      flex-direction: column;
+      min-height: 310px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.09);
+    }
+
+    .project-tag {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .project-title {
+      margin: 0 0 12px;
+      font-size: 1.8rem;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      font-weight: 600;
+    }
+
+    .project-desc {
+      color: #333;
+      font-size: 1rem;
+      margin-bottom: 22px;
+    }
+
+    .project-highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 26px;
+    }
+
+    .project-highlights span {
+      font-size: 0.88rem;
+      padding: 8px 11px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.6);
+    }
+
+    .project-actions {
+      margin-top: auto;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      text-decoration: none;
+      padding: 12px 16px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      transition: 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      border: 1px solid var(--accent);
+    }
+
+    .btn-primary:hover {
+      opacity: 0.92;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.6);
+    }
+
+    .footer-wrap {
+      margin-top: 26px;
+    }
+
+    .footer-panel {
+      padding: 26px 24px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.95rem;
+      border-bottom: 1px solid transparent;
+    }
+
+    .footer-links a:hover {
+      border-color: var(--text);
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .projects,
+      .footer-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-main,
+      .hero-side {
+        min-height: auto;
+      }
+
+      .section-header {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .page {
+        padding: 22px 14px 48px;
+      }
+
+      .hero-main,
+      .hero-side,
+      .project-card,
+      .footer-panel {
+        padding: 22px 18px;
+        border-radius: 18px;
+      }
+
+      .nav {
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .project-title {
+        font-size: 1.45rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <div class="nav">
+      <div class="nav-left">Aadil Khan • Data Portfolio</div>
+      <div class="nav-right">
+        <a href="#projects">Projects</a>
+        <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+        <a href="mailto:youremail@example.com">Contact</a>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="hero-main">
+        <div>
+          <div class="eyebrow">Interactive HTML Portfolio</div>
+          <h1>Data stories, models, and visual work built for clarity.</h1>
+          <p class="hero-desc">
+            This portfolio brings together four finished projects across healthcare,
+            transportation policy, music analytics, and fragrance data. Each one is presented
+            as a standalone HTML experience designed to feel polished, readable, and presentation-ready.
+          </p>
+        </div>
+
+        <div class="hero-meta">
+          <div class="pill">Python</div>
+          <div class="pill">SQL</div>
+          <div class="pill">Plotly</div>
+          <div class="pill">Machine Learning</div>
+          <div class="pill">Data Storytelling</div>
+        </div>
+      </div>
+
+      <div class="hero-side">
+        <div class="side-top">
+          <h2>Portfolio Snapshot</h2>
+          <p>
+            A focused collection of projects built through graduate coursework and applied analysis,
+            with an emphasis on clean visuals, strong narrative flow, and useful interpretation.
+          </p>
+        </div>
+
+        <div class="stat-block">
+          <div class="stat">
+            <div class="stat-number">4</div>
+            <div class="stat-label">Completed HTML projects</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Browser-viewable presentation format</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">1</div>
+            <div class="stat-label">Central portfolio homepage</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-header" id="projects">
+      <div>
+        <h2 class="section-title">Selected Projects</h2>
+        <div class="section-sub">
+          Open each project directly from this page. Replace the file names below with your exact uploaded file names if they differ.
+        </div>
+      </div>
+    </div>
+
+    <section class="projects">
+
+      <article class="project-card">
+        <div class="project-tag">Healthcare Analytics</div>
+        <h3 class="project-title">ICU Patient Care Analysis</h3>
+        <p class="project-desc">
+          An analytical project focused on ICU length of stay and in-hospital mortality, combining
+          patient characteristics, care-process variables, and interpretable modeling outputs.
+        </p>
+        <div class="project-highlights">
+          <span>Regression</span>
+          <span>Classification</span>
+          <span>Clinical Data</span>
+          <span>CRISP-DM</span>
+        </div>
+        <div class="project-actions">
+          <a class="btn btn-primary" href="icu.html" target="_blank">Open Project</a>
+        </div>
+      </article>
+
+      <article class="project-card">
+        <div class="project-tag">Policy & Transportation</div>
+        <h3 class="project-title">NYC Congestion Pricing Analysis</h3>
+        <p class="project-desc">
+          A policy-centered data story examining ridership recovery, borough-level change,
+          and congestion pricing impacts using interactive transit visualizations.
+        </p>
+        <div class="project-highlights">
+          <span>Plotly</span>
+          <span>Mapping</span>
+          <span>Ridership Trends</span>
+          <span>Policy Analysis</span>
+        </div>
+        <div class="project-actions">
+          <a class="btn btn-primary" href="nyc.html" target="_blank">Open Project</a>
+        </div>
+      </article>
+
+      <article class="project-card">
+        <div class="project-tag">Music & Machine Learning</div>
+        <h3 class="project-title">Spotify Hit Analysis</h3>
+        <p class="project-desc">
+          A project that explores audio features, clustering structure, and predictive modeling
+          to explain what drives song popularity across a large Spotify dataset.
+        </p>
+        <div class="project-highlights">
+          <span>Clustering</span>
+          <span>Logistic Models</span>
+          <span>Feature Analysis</span>
+          <span>Interactive Visuals</span>
+        </div>
+        <div class="project-actions">
+          <a class="btn btn-primary" href="spotify.html" target="_blank">Open Project</a>
+        </div>
+      </article>
+
+      <article class="project-card">
+        <div class="project-tag">Database & Visualization</div>
+        <h3 class="project-title">Parfumo Fragrance Database Project</h3>
+        <p class="project-desc">
+          A visually styled analysis of fragrance data featuring structured querying,
+          exploratory visuals, and presentation-focused storytelling around brands, notes, and accords.
+        </p>
+        <div class="project-highlights">
+          <span>SQL Design</span>
+          <span>EDA</span>
+          <span>Brand Trends</span>
+          <span>Storytelling</span>
+        </div>
+        <div class="project-actions">
+          <a class="btn btn-primary" href="parfumo.html" target="_blank">Open Project</a>
+        </div>
+      </article>
+
+    </section>
+
+    <div class="footer-wrap">
+      <div class="footer-panel">
+        <div>
+          <h2 class="section-title" style="margin-bottom: 8px;">About This Site</h2>
+          <p>
+            Built as a lightweight GitHub Pages portfolio to showcase finished HTML-based data projects
+            in one place with a cleaner, more editorial presentation style.
+          </p>
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+          <a href="mailto:youremail@example.com">Email</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
