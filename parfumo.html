@@ -1,0 +1,603 @@
+<html><head><meta charset='utf-8'><title>Parfumo Database Project</title>
+    <style>
+        body {
+    	      font-family: Arial, sans-serif;
+	      margin: 0 auto;
+	      padding: 48px 20px;
+	      max-width: 1100px;
+	      line-height: 1.7;
+	      color: #2B2B2B;
+	      background: #F7F1EA;
+	}
+
+        h1 {
+            color: #2B2B2B;
+            margin-bottom: 8px;
+        }
+
+        h2 {
+            color: #4B1D3F;
+            margin-bottom: 14px;
+        }
+
+        h3 {
+            color: #4B1D3F;
+        }
+
+        .subtitle {
+            color: #555;
+            margin-top: -6px;
+            margin-bottom: 24px;
+        }
+
+        .note {
+            background: #F3E7DE;
+            padding: 16px 18px;
+            border-left: 5px solid #C9A86A;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .chart-section {
+            margin-bottom: 56px;
+            padding: 22px 22px 18px 22px;
+            background: rgba(255,255,255,0.45);
+            border: 1px solid rgba(75,29,63,0.10);
+            border-radius: 14px;
+        }
+
+        .chart-intro {
+            margin-bottom: 14px;
+            color: #3A3A3A;
+        }
+
+        .chart-intro p {
+            margin: 0;
+        }
+
+        .chart-box {
+            margin-bottom: 14px;
+        }
+
+        .chart-takeaway {
+            background: #FFF8F0;
+            border-left: 4px solid #7A284B;
+            padding: 12px 14px;
+            border-radius: 8px;
+            color: #2B2B2B;
+        }
+
+        details {
+            margin-top: 24px;
+            margin-bottom: 24px;
+            background: rgba(255,255,255,0.55);
+            border: 1px solid rgba(75,29,63,0.12);
+            border-radius: 12px;
+            padding: 14px 16px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #4B1D3F;
+            font-size: 18px;
+            outline: none;
+        }
+
+        summary:hover {
+            color: #7A284B;
+        }
+
+        .details-intro {
+            margin-top: 12px;
+            margin-bottom: 20px;
+            color: #444;
+        }
+
+        table.dataframe {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 10px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        table.dataframe th,
+        table.dataframe td {
+            border: 1px solid #E4D9D3;
+            padding: 9px 10px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        table.dataframe th {
+            background: #EFE3DB;
+            color: #2B2B2B;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        code {
+            background: rgba(75,29,63,0.08);
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+
+        section {
+            margin-bottom: 48px;
+        }
+    </style>
+    </head><body><h1>✨ Magic in the Bottle: Unveiling the Parfumo Top 100</h1><p class='subtitle'>A luxury fragrance data story by Aadil Khan</p><div class='note'><strong>Background:</strong> This data story visualizes the cleaned and normalized relational SQL database for <code>Parfumo</code> by reproducing the five analytical queries in pandas and visualizing the results in Plotly.</div><section><h2>🕵🏽 Key Findings</h2><ul><li>The strongest recent unisex performer by sillage in the filtered top 10 set is Tony Iommi Monkey Special (Xerjoff) with a sillage rating of 8.7.</li><li>The most common note in the dataset is Vanilla, appearing in 47 perfumes.</li><li>The concentration with the highest average longevity is Elixir at 8.85.</li><li>Francis Kurkdjian appears most often among perfumers with at least 3 entries, with 7 perfumes and an average scent rating of 8.09.</li><li>The most popular accord in the dataset is Spicy, appearing in 73 perfumes.</li></ul></section>
+    <section class="chart-section">
+        <h2>💨 Sillage Stars</h2>
+        <div class="chart-intro">
+            <p>This chart highlights the recent (2015–2024) unisex fragrances that pair strong overall scent reception with the highest sillage. Rather than measuring popularity alone, this chart highlights projection — the fragrances that leave the strongest impression in the air.</p>
+        </div>
+        <div class="chart-box">
+            <div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-2.29.1.min.js"></script>                <div id="eb3e3dac-f61f-48c4-87a9-2e8d2154a701" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("eb3e3dac-f61f-48c4-87a9-2e8d2154a701")) {                    Plotly.newPlot(                        "eb3e3dac-f61f-48c4-87a9-2e8d2154a701",                        [{"hoverinfo":"skip","line":{"color":"#A06A8F","width":4},"mode":"lines","showlegend":false,"x":[0,6.3],"y":["Afternoon Swim","Afternoon Swim"],"type":"scatter"},{"customdata":[["Louis Vuitton",8.6,2019]],"hovertemplate":"\u003cb\u003e%{y}\u003c\u002fb\u003e\u003cbr\u003eBrand: %{customdata[0]}\u003cbr\u003eSillage: %{x:.1f}\u003cbr\u003eScent Rating: %{customdata[1]:.1f}\u003cbr\u003eRelease Year: %{customdata[2]}\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#4B1D3F","line":{"color":"white","width":1.5},"size":14},"mode":"markers","showlegend":false,"x":[6.3],"y":["Afternoon Swim"],"type":"scatter"},{"hoverinfo":"skip","line":{"color":"#A06A8F","width":4},"mode":"lines","showlegend":false,"x":[0,7.5],"y":["Torino21","Torino21"],"type":"scatter"},{"customdata":[["Xerjoff",8.6,2021]],"hovertemplate":"\u003cb\u003e%{y}\u003c\u002fb\u003e\u003cbr\u003eBrand: %{customdata[0]}\u003cbr\u003eSillage: %{x:.1f}\u003cbr\u003eScent Rating: %{customdata[1]:.1f}\u003cbr\u003eRelease Year: %{customdata[2]}\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#4B1D3F","line":{"color":"white","width":1.5},"size":14},"mode":"markers","showlegend":false,"x":[7.5],"y":["Torino21"],"type":"scatter"},{"hoverinfo":"skip","line":{"color":"#A06A8F","width":4},"mode":"lines","showlegend":false,"x":[0,8.1],"y":["Side Effect","Side Effect"],"type":"scatter"},{"customdata":[["Initio",8.6,2016]],"hovertemplate":"\u003cb\u003e%{y}\u003c\u002fb\u003e\u003cbr\u003eBrand: %{customdata[0]}\u003cbr\u003eSillage: %{x:.1f}\u003cbr\u003eScent Rating: %{customdata[1]:.1f}\u003cbr\u003eRelease Year: %{customdata[2]}\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#4B1D3F","line":{"color":"white","width":1.5},"size":14},"mode":"markers","showlegend":false,"x":[8.1],"y":["Side Effect"],"type":"scatter"},{"hoverinfo":"skip","line":{"color":"#A06A8F","width":4},"mode":"lines","showlegend":false,"x":[0,8.2],"y":["Angels' Share","Angels' Share"],"type":"scatter"},{"customdata":[["Killian",8.7,2020]],"hovertemplate":"\u003cb\u003e%{y}\u003c\u002fb\u003e\u003cbr\u003eBrand: %{customdata[0]}\u003cbr\u003eSillage: %{x:.1f}\u003cbr\u003eScent Rating: %{customdata[1]:.1f}\u003cbr\u003eRelease Year: %{customdata[2]}\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#4B1D3F","line":{"color":"white","width":1.5},"size":14},"mode":"markers","showlegend":false,"x":[8.2],"y":["Angels' Share"],"type":"scatter"},{"hoverinfo":"skip","line":{"color":"#A06A8F","width":4},"mode":"lines","showlegend":false,"x":[0,8.3],"y":["Grand Soir","Grand Soir"],"type":"scatter"},{"customdata":[["Maison Francis Kurkdjian",8.6,2016]],"hovertemplate":"\u003cb\u003e%{y}\u003c\u002fb\u003e\u003cbr\u003eBrand: %{customdata[0]}\u003cbr\u003eSillage: %{x:.1f}\u003cbr\u003eScent Rating: %{customdata[1]:.1f}\u003cbr\u003eRelease Year: %{customdata[2]}\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#4B1D3F","line":{"color":"white","width":1.5},"size":14},"mode":"markers","showlegend":false,"x":[8.3],"y":["Grand Soir"],"type":"scatter"},{"hoverinfo":"skip","line":{"color":"#A06A8F","width":4},"mode":"lines","showlegend":false,"x":[0,8.4],"y":["Carlisle","Carlisle"],"type":"scatter"},{"customdata":[["Parfums de Marly",8.4,2015]],"hovertemplate":"\u003cb\u003e%{y}\u003c\u002fb\u003e\u003cbr\u003eBrand: %{customdata[0]}\u003cbr\u003eSillage: %{x:.1f}\u003cbr\u003eScent Rating: %{customdata[1]:.1f}\u003cbr\u003eRelease Year: %{customdata[2]}\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#4B1D3F","line":{"color":"white","width":1.5},"size":14},"mode":"markers","showlegend":false,"x":[8.4],"y":["Carlisle"],"type":"scatter"},{"hoverinfo":"skip","line":{"color":"#A06A8F","width":4},"mode":"lines","showlegend":false,"x":[0,8.6],"y":["London","London"],"type":"scatter"},{"customdata":[["Widian",9.0,2018]],"hovertemplate":"\u003cb\u003e%{y}\u003c\u002fb\u003e\u003cbr\u003eBrand: %{customdata[0]}\u003cbr\u003eSillage: %{x:.1f}\u003cbr\u003eScent Rating: %{customdata[1]:.1f}\u003cbr\u003eRelease Year: %{customdata[2]}\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#4B1D3F","line":{"color":"white","width":1.5},"size":14},"mode":"markers","showlegend":false,"x":[8.6],"y":["London"],"type":"scatter"},{"hoverinfo":"skip","line":{"color":"#A06A8F","width":4},"mode":"lines","showlegend":false,"x":[0,8.6],"y":["Naxos","Naxos"],"type":"scatter"},{"customdata":[["Xerjoff",8.9,2015]],"hovertemplate":"\u003cb\u003e%{y}\u003c\u002fb\u003e\u003cbr\u003eBrand: %{customdata[0]}\u003cbr\u003eSillage: %{x:.1f}\u003cbr\u003eScent Rating: %{customdata[1]:.1f}\u003cbr\u003eRelease Year: %{customdata[2]}\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#4B1D3F","line":{"color":"white","width":1.5},"size":14},"mode":"markers","showlegend":false,"x":[8.6],"y":["Naxos"],"type":"scatter"},{"hoverinfo":"skip","line":{"color":"#A06A8F","width":4},"mode":"lines","showlegend":false,"x":[0,8.6],"y":["Baccarat Rouge 540","Baccarat Rouge 540"],"type":"scatter"},{"customdata":[["Maison Francis Kurkdjian",8.3,2017]],"hovertemplate":"\u003cb\u003e%{y}\u003c\u002fb\u003e\u003cbr\u003eBrand: %{customdata[0]}\u003cbr\u003eSillage: %{x:.1f}\u003cbr\u003eScent Rating: %{customdata[1]:.1f}\u003cbr\u003eRelease Year: %{customdata[2]}\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#4B1D3F","line":{"color":"white","width":1.5},"size":14},"mode":"markers","showlegend":false,"x":[8.6],"y":["Baccarat Rouge 540"],"type":"scatter"},{"hoverinfo":"skip","line":{"color":"#C9A86A","width":4},"mode":"lines","showlegend":false,"x":[0,8.7],"y":["Tony Iommi Monkey Special","Tony Iommi Monkey Special"],"type":"scatter"},{"customdata":[["Xerjoff",8.5,2021]],"hovertemplate":"\u003cb\u003e%{y}\u003c\u002fb\u003e\u003cbr\u003eBrand: %{customdata[0]}\u003cbr\u003eSillage: %{x:.1f}\u003cbr\u003eScent Rating: %{customdata[1]:.1f}\u003cbr\u003eRelease Year: %{customdata[2]}\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#C9A86A","line":{"color":"white","width":1.5},"size":14},"mode":"markers","showlegend":false,"x":[8.7],"y":["Tony Iommi Monkey Special"],"type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"font":{"size":22,"color":"#2B2B2B"},"text":"What Fragrance Gets the Most Compliments?","x":0.02,"xanchor":"left"},"font":{"color":"#2B2B2B","size":13},"margin":{"l":70,"r":40,"t":90,"b":60},"hoverlabel":{"font":{"size":12,"color":"#2B2B2B"},"bgcolor":"white"},"legend":{"bgcolor":"rgba(0,0,0,0)","orientation":"h","yanchor":"bottom","y":1.02,"xanchor":"right","x":1},"paper_bgcolor":"#F7F1EA","plot_bgcolor":"#F7F1EA","xaxis":{"showgrid":true,"gridcolor":"rgba(75, 29, 63, 0.10)","zeroline":false,"linecolor":"rgba(0,0,0,0.2)","title":{"text":"Sillage Rating"}},"yaxis":{"showgrid":false,"zeroline":false,"linecolor":"rgba(0,0,0,0.2)","title":{"text":""}}},                        {"responsive": true}                    )                };                            </script>        </div>
+        </div>
+        <div class="chart-takeaway">
+            <strong>Takeaway:</strong> The results show which recent perfumes will help generate the most compliments since these are the best-smelling and also likely to be smelled by those around you.
+        </div>
+    </section>
+    
+    <section class="chart-section">
+        <h2>🌸 Note Chemistry</h2>
+        <div class="chart-intro">
+            <p>These notes appear most often across the dataset and their average scent rating, but their positions within the fragrance pyramid differ. By stacking top, heart, and base placements, the chart reveals whether a note tends to open brightly, linger in the core, or anchor the drydown.</p>
+        </div>
+        <div class="chart-box">
+            <div>                            <div id="77ba8f31-ebb5-4410-83c0-a70565a4964e" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("77ba8f31-ebb5-4410-83c0-a70565a4964e")) {                    Plotly.newPlot(                        "77ba8f31-ebb5-4410-83c0-a70565a4964e",                        [{"customdata":[[8.051851851851852],[8.177777777777779],[8.176923076923076],[8.163333333333334],[8.13939393939394],[8.062857142857142],[8.045945945945945],[8.107142857142858],[8.051111111111112],[8.204255319148936]],"hovertemplate":"\u003cb\u003e%{y}\u003c\u002fb\u003e\u003cbr\u003eTop Notes Count: %{x}\u003cbr\u003eAvg Scent Rating: %{customdata[0]:.2f}\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#D9A6A3"},"name":"Top","orientation":"h","x":[4,14,0,1,1,0,0,2,44,2],"y":["Jasmine","Lavender","Tonka Bean","Sandalwood","Musk","Amber","Patchouli","Cedarwood","Bergamot","Vanilla"],"type":"bar"},{"customdata":[[8.051851851851852],[8.177777777777779],[8.176923076923076],[8.163333333333334],[8.13939393939394],[8.062857142857142],[8.045945945945945],[8.107142857142858],[8.051111111111112],[8.204255319148936]],"hovertemplate":"\u003cb\u003e%{y}\u003c\u002fb\u003e\u003cbr\u003eHeart Notes Count: %{x}\u003cbr\u003eAvg Scent Rating: %{customdata[0]:.2f}\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#7A284B"},"name":"Heart","orientation":"h","x":[23,13,5,4,1,3,7,6,1,5],"y":["Jasmine","Lavender","Tonka Bean","Sandalwood","Musk","Amber","Patchouli","Cedarwood","Bergamot","Vanilla"],"type":"bar"},{"customdata":[[8.051851851851852],[8.177777777777779],[8.176923076923076],[8.163333333333334],[8.13939393939394],[8.062857142857142],[8.045945945945945],[8.107142857142858],[8.051111111111112],[8.204255319148936]],"hovertemplate":"\u003cb\u003e%{y}\u003c\u002fb\u003e\u003cbr\u003eBase Notes Count: %{x}\u003cbr\u003eAvg Scent Rating: %{customdata[0]:.2f}\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#4B1D3F"},"name":"Base","orientation":"h","x":[0,0,21,25,31,32,30,34,0,40],"y":["Jasmine","Lavender","Tonka Bean","Sandalwood","Musk","Amber","Patchouli","Cedarwood","Bergamot","Vanilla"],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"font":{"size":22,"color":"#2B2B2B"},"text":"What Fragrance Notes are the Most Popular?","x":0.02,"xanchor":"left"},"font":{"color":"#2B2B2B","size":13},"margin":{"l":70,"r":40,"t":90,"b":60},"hoverlabel":{"font":{"size":12,"color":"#2B2B2B"},"bgcolor":"white"},"legend":{"bgcolor":"rgba(0,0,0,0)","orientation":"h","yanchor":"bottom","y":1.02,"xanchor":"right","x":1},"paper_bgcolor":"#F7F1EA","plot_bgcolor":"#F7F1EA","xaxis":{"showgrid":true,"gridcolor":"rgba(75, 29, 63, 0.10)","zeroline":false,"linecolor":"rgba(0,0,0,0.2)","title":{"text":"Frequency Across Fragrances"}},"yaxis":{"showgrid":false,"zeroline":false,"linecolor":"rgba(0,0,0,0.2)","title":{"text":""}},"barmode":"stack"},                        {"responsive": true}                    )                };                            </script>        </div>
+        </div>
+        <div class="chart-takeaway">
+            <strong>Takeaway:</strong> The most successful perfumes include bergamot and lavender in the opening, lavender and jasmine in the heart, and a variety of options in the drydown, including vanilla, cedarwood, amber, and musk.
+        </div>
+    </section>
+    
+    <section class="chart-section">
+        <h2>🧠 Perfumer Signatures</h2>
+        <div class="chart-intro">
+            <p>This bubble chart compares perfumers based on total output, average scent rating, and the number of houses they have worked with. By separating sheer productivity from broader influence, the data highlights which names successfully balance scale, quality, and versatility.</p>
+        </div>
+        <div class="chart-box">
+            <div>                            <div id="78958262-dccb-4399-a362-dfb41dc0f19a" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("78958262-dccb-4399-a362-dfb41dc0f19a")) {                    Plotly.newPlot(                        "78958262-dccb-4399-a362-dfb41dc0f19a",                        [{"customdata":[["Spicy, Sweet, Woody, Floral, Gourmand",2],["Spicy, Woody, Sweet, Fresh, Powdery",1],["Aquatic, Citrus, Fresh, Synthetic, Floral",4],["Spicy, Aquatic, Citrus, Fresh, Fruity",2],["Spicy, Sweet, Woody, Creamy, Gourmand",1],["Spicy, Sweet, Woody, Gourmand, Oriental",3],["Citrus, Fresh, Spicy, Aquatic, Creamy",1],["Floral, Sweet, Fresh, Fruity, Citrus",2]],"hovertemplate":"\u003cb\u003e%{hovertext}\u003c\u002fb\u003e\u003cbr\u003ePerfume Count: %{x}\u003cbr\u003eAvg Scent Rating: %{y:.2f}\u003cbr\u003eHouses Worked With: %{customdata[1]}\u003cbr\u003ePopular Accords: %{customdata[0]}\u003cextra\u003e\u003c\u002fextra\u003e","hovertext":["Francis Kurkdjian","Francois Demachy","Alberto Morillas","Jacques Cavallier-Belletrud","Hamid Merati-Kashani","Quentin Bisch","Jacques Polge","Christian Carbonnel"],"legendgroup":"","marker":{"color":[8.085714285714285,8.28,7.6,8.5,8.3,8.3,8.175,8.125],"coloraxis":"coloraxis","size":[2,1,4,2,1,3,1,2],"sizemode":"area","sizeref":0.0025,"symbol":"circle","line":{"color":"white","width":1.5}},"mode":"markers","name":"","orientation":"v","showlegend":false,"x":[7,5,5,4,4,4,4,4],"xaxis":"x","y":[8.085714285714285,8.28,7.6,8.5,8.3,8.3,8.175,8.125],"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Perfume Count"},"showgrid":true,"gridcolor":"rgba(75, 29, 63, 0.10)","zeroline":false,"linecolor":"rgba(0,0,0,0.2)"},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Average Scent Rating"},"showgrid":false,"zeroline":false,"linecolor":"rgba(0,0,0,0.2)"},"coloraxis":{"colorbar":{"title":{"text":"Avg Rating"}},"colorscale":[[0.0,"#D9A6A3"],[0.5,"#7A284B"],[1.0,"#4B1D3F"]]},"legend":{"tracegroupgap":0,"itemsizing":"constant","bgcolor":"rgba(0,0,0,0)","orientation":"h","yanchor":"bottom","y":1.02,"xanchor":"right","x":1},"margin":{"t":90,"l":70,"r":40,"b":60},"title":{"font":{"size":22,"color":"#2B2B2B"},"text":"Who Creates the Most Popular Fragrances?","x":0.02,"xanchor":"left"},"font":{"color":"#2B2B2B","size":13},"hoverlabel":{"font":{"size":12,"color":"#2B2B2B"},"bgcolor":"white"},"paper_bgcolor":"#F7F1EA","plot_bgcolor":"#F7F1EA"},                        {"responsive": true}                    )                };                            </script>        </div>
+        </div>
+        <div class="chart-takeaway">
+            <strong>Takeaway:</strong> Francis Kurkdjian leads the field with seven of the top 100 fragrances, while Jacques Cavallier-Belletrud holds the highest average scent rating at 8.5. Interestingly, their only accord overlap is in spicy fragrances, suggesting that despite their shared success, they maintain distinct creative styles.
+        </div>
+    </section>
+    
+    <section class="chart-section">
+        <h2>🕰️ Strength in the Spray</h2>
+        <div class="chart-intro">
+            <p>While concentration suggests how long a fragrance will last, perceived value ultimately determines whether it feels like a smart purchase. By comparing longevity and value ratings side by side, this analysis reveals which concentration types deliver both durability and consumer satisfaction.</p>
+        </div>
+        <div class="chart-box">
+            <div>                            <div id="85f3cf34-478f-447c-9f21-2ad6fc7ab646" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("85f3cf34-478f-447c-9f21-2ad6fc7ab646")) {                    Plotly.newPlot(                        "85f3cf34-478f-447c-9f21-2ad6fc7ab646",                        [{"customdata":[[2.0,7.6],[7.0,7.114285714285714],[6.0,7.316666666666666],[61.0,7.142622950819672],[24.0,7.841666666666666]],"hovertemplate":"\u003cb\u003e%{x}\u003c\u002fb\u003e\u003cbr\u003eAvg Longevity: %{y:.2f}\u003cbr\u003ePerfume Count: %{customdata[0]}\u003cbr\u003eAvg Value Rating: %{customdata[1]:.2f}\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#4B1D3F"},"name":"Avg Longevity","x":["Elixir","Extrait de Parfum","Parfum","Eau de Parfum","Eau de Toilette"],"y":[8.85,8.7,8.566666666666666,8.014754098360655,7.4125000000000005],"type":"bar"},{"customdata":[[2.0,8.85],[7.0,8.7],[6.0,8.566666666666666],[61.0,8.014754098360655],[24.0,7.4125000000000005]],"hovertemplate":"\u003cb\u003e%{x}\u003c\u002fb\u003e\u003cbr\u003eAvg Value Rating: %{y:.2f}\u003cbr\u003ePerfume Count: %{customdata[0]}\u003cbr\u003eAvg Longevity: %{customdata[1]:.2f}\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#C9A86A"},"name":"Avg Value","x":["Elixir","Extrait de Parfum","Parfum","Eau de Parfum","Eau de Toilette"],"y":[7.6,7.114285714285714,7.316666666666666,7.142622950819672,7.841666666666666],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"font":{"size":22,"color":"#2B2B2B"},"text":"Is the Fragrance Worth the Cost?","x":0.02,"xanchor":"left"},"font":{"color":"#2B2B2B","size":13},"margin":{"l":70,"r":40,"t":90,"b":60},"hoverlabel":{"font":{"size":12,"color":"#2B2B2B"},"bgcolor":"white"},"legend":{"bgcolor":"rgba(0,0,0,0)","orientation":"h","yanchor":"bottom","y":1.02,"xanchor":"right","x":1},"paper_bgcolor":"#F7F1EA","plot_bgcolor":"#F7F1EA","xaxis":{"showgrid":true,"gridcolor":"rgba(75, 29, 63, 0.10)","zeroline":false,"linecolor":"rgba(0,0,0,0.2)","title":{"text":"Concentration"}},"yaxis":{"showgrid":false,"zeroline":false,"linecolor":"rgba(0,0,0,0.2)","title":{"text":"Average Rating"}},"barmode":"group"},                        {"responsive": true}                    )                };                            </script>        </div>
+        </div>
+        <div class="chart-takeaway">
+            <strong>Takeaway:</strong> Although higher concentrations naturally lead in longevity, they also come with higher price points and smaller bottle sizes. Consumers actually perceive the greatest value in Eau de Toilette fragrances, while Elixirs rank second in value because their extreme performance helps justify the premium cost despite being the most expensive option.
+        </div>
+    </section>
+    
+    <section class="chart-section">
+        <h2>🎼 Accord Architecture</h2>
+        <div class="chart-intro">
+            <p>Accords form the structural identity of a fragrance. This ranking highlights the most common accord families in the dataset and pairs them with the notes most often associated with each one.</p>
+        </div>
+        <div class="chart-box">
+            <div>                            <div id="56829097-f6af-4f50-b05b-d9b9ab35283e" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("56829097-f6af-4f50-b05b-d9b9ab35283e")) {                    Plotly.newPlot(                        "56829097-f6af-4f50-b05b-d9b9ab35283e",                        [{"customdata":[["Vanilla, Bergamot, Sandalwood, Tonka Bean, Amber"],["Bergamot, Patchouli, Cedarwood, Ambroxan, Amber"],["Vanilla, Cinnamon, Tonka Bean, Lavender, Sandalwood"],["Bergamot, Cedarwood, Patchouli, Musk, Jasmine"],["Bergamot, Musk, Patchouli, Vanilla, Cedarwood"],["Vanilla, Amber, Cinnamon, Patchouli, Rose"],["Bergamot, Cedarwood, Patchouli, Vetiver, Musk"],["Cedarwood, Patchouli, Bergamot, Vanilla, Sandalwood"],["Vanilla, Cedarwood, Bergamot, Amber, Sandalwood"],["Cedarwood, Vanilla, Bergamot, Patchouli, Sandalwood"]],"hovertemplate":"\u003cb\u003e%{y}\u003c\u002fb\u003e\u003cbr\u003ePopularity: %{x}\u003cbr\u003eTop Notes: %{customdata[0]}\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":["#7A284B","#7A284B","#7A284B","#7A284B","#7A284B","#7A284B","#7A284B","#7A284B","#7A284B","#C9A86A"]},"orientation":"h","showlegend":false,"x":[17,19,26,30,31,32,42,58,68,73],"y":["Creamy","Synthetic","Gourmand","Citrus","Fruity","Oriental","Fresh","Woody","Sweet","Spicy"],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"font":{"size":22,"color":"#2B2B2B"},"text":"What Type of Fragrance is the Most Popular?","x":0.02,"xanchor":"left"},"font":{"color":"#2B2B2B","size":13},"margin":{"l":70,"r":40,"t":90,"b":60},"hoverlabel":{"font":{"size":12,"color":"#2B2B2B"},"bgcolor":"white"},"legend":{"bgcolor":"rgba(0,0,0,0)","orientation":"h","yanchor":"bottom","y":1.02,"xanchor":"right","x":1},"paper_bgcolor":"#F7F1EA","plot_bgcolor":"#F7F1EA","xaxis":{"showgrid":true,"gridcolor":"rgba(75, 29, 63, 0.10)","zeroline":false,"linecolor":"rgba(0,0,0,0.2)","title":{"text":"Number of Perfumes"}},"yaxis":{"showgrid":false,"zeroline":false,"linecolor":"rgba(0,0,0,0.2)","title":{"text":""}}},                        {"responsive": true}                    )                };                            </script>        </div>
+        </div>
+        <div class="chart-takeaway">
+            <strong>Takeaway:</strong> The most dominant accords are spicy, sweet, and woody by a considerable margin.
+        </div>
+    </section>
+    
+    <details>
+        <summary>📊 Query Result Tables</summary>
+        <div class="details-intro">
+            These tables contain the full results behind each visualization and preserve the query outputs used in the analysis.
+        </div>
+    
+    <section style="margin-bottom:32px;">
+        <h3 style="margin-bottom:10px; color:#4B1D3F;">What Fragrance Gets the Most Compliments?</h3>
+        <div class="table-wrap">
+            <table class="dataframe dataframe table table-striped">
+  <thead>
+    <tr style="text-align: right;">
+      <th>perfume_name</th>
+      <th>brand</th>
+      <th>scent_rating</th>
+      <th>sillage_rating</th>
+      <th>release_year</th>
+      <th>gender</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Tony Iommi Monkey Special</td>
+      <td>Xerjoff</td>
+      <td>8.5</td>
+      <td>8.7</td>
+      <td>2021</td>
+      <td>Unisex</td>
+    </tr>
+    <tr>
+      <td>London</td>
+      <td>Widian</td>
+      <td>9.0</td>
+      <td>8.6</td>
+      <td>2018</td>
+      <td>Unisex</td>
+    </tr>
+    <tr>
+      <td>Naxos</td>
+      <td>Xerjoff</td>
+      <td>8.9</td>
+      <td>8.6</td>
+      <td>2015</td>
+      <td>Unisex</td>
+    </tr>
+    <tr>
+      <td>Baccarat Rouge 540</td>
+      <td>Maison Francis Kurkdjian</td>
+      <td>8.3</td>
+      <td>8.6</td>
+      <td>2017</td>
+      <td>Unisex</td>
+    </tr>
+    <tr>
+      <td>Carlisle</td>
+      <td>Parfums de Marly</td>
+      <td>8.4</td>
+      <td>8.4</td>
+      <td>2015</td>
+      <td>Unisex</td>
+    </tr>
+    <tr>
+      <td>Grand Soir</td>
+      <td>Maison Francis Kurkdjian</td>
+      <td>8.6</td>
+      <td>8.3</td>
+      <td>2016</td>
+      <td>Unisex</td>
+    </tr>
+    <tr>
+      <td>Angels' Share</td>
+      <td>Killian</td>
+      <td>8.7</td>
+      <td>8.2</td>
+      <td>2020</td>
+      <td>Unisex</td>
+    </tr>
+    <tr>
+      <td>Side Effect</td>
+      <td>Initio</td>
+      <td>8.6</td>
+      <td>8.1</td>
+      <td>2016</td>
+      <td>Unisex</td>
+    </tr>
+    <tr>
+      <td>Torino21</td>
+      <td>Xerjoff</td>
+      <td>8.6</td>
+      <td>7.5</td>
+      <td>2021</td>
+      <td>Unisex</td>
+    </tr>
+    <tr>
+      <td>Afternoon Swim</td>
+      <td>Louis Vuitton</td>
+      <td>8.6</td>
+      <td>6.3</td>
+      <td>2019</td>
+      <td>Unisex</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+    </section>
+    
+    <section style="margin-bottom:32px;">
+        <h3 style="margin-bottom:10px; color:#4B1D3F;">What Fragrance Notes are the Most Popular?</h3>
+        <div class="table-wrap">
+            <table class="dataframe dataframe table table-striped">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Note_Name</th>
+      <th>Total_Count</th>
+      <th>Top_Notes_Count</th>
+      <th>Heart_Notes_Count</th>
+      <th>Base_Notes_Count</th>
+      <th>Avg_Scent_Rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Vanilla</td>
+      <td>47</td>
+      <td>2</td>
+      <td>5</td>
+      <td>40</td>
+      <td>8.204255</td>
+    </tr>
+    <tr>
+      <td>Lavender</td>
+      <td>26</td>
+      <td>14</td>
+      <td>13</td>
+      <td>0</td>
+      <td>8.177778</td>
+    </tr>
+    <tr>
+      <td>Tonka Bean</td>
+      <td>26</td>
+      <td>0</td>
+      <td>5</td>
+      <td>21</td>
+      <td>8.176923</td>
+    </tr>
+    <tr>
+      <td>Sandalwood</td>
+      <td>28</td>
+      <td>1</td>
+      <td>4</td>
+      <td>25</td>
+      <td>8.163333</td>
+    </tr>
+    <tr>
+      <td>Musk</td>
+      <td>32</td>
+      <td>1</td>
+      <td>1</td>
+      <td>31</td>
+      <td>8.139394</td>
+    </tr>
+    <tr>
+      <td>Cedarwood</td>
+      <td>37</td>
+      <td>2</td>
+      <td>6</td>
+      <td>34</td>
+      <td>8.107143</td>
+    </tr>
+    <tr>
+      <td>Amber</td>
+      <td>35</td>
+      <td>0</td>
+      <td>3</td>
+      <td>32</td>
+      <td>8.062857</td>
+    </tr>
+    <tr>
+      <td>Jasmine</td>
+      <td>25</td>
+      <td>4</td>
+      <td>23</td>
+      <td>0</td>
+      <td>8.051852</td>
+    </tr>
+    <tr>
+      <td>Bergamot</td>
+      <td>43</td>
+      <td>44</td>
+      <td>1</td>
+      <td>0</td>
+      <td>8.051111</td>
+    </tr>
+    <tr>
+      <td>Patchouli</td>
+      <td>35</td>
+      <td>0</td>
+      <td>7</td>
+      <td>30</td>
+      <td>8.045946</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+    </section>
+    
+    <section style="margin-bottom:32px;">
+        <h3 style="margin-bottom:10px; color:#4B1D3F;">Who Creates the Most Popular Fragrances?</h3>
+        <div class="table-wrap">
+            <table class="dataframe dataframe table table-striped">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Perfumer_Name</th>
+      <th>Perfume_Count</th>
+      <th>Avg_Scent_Rating</th>
+      <th>Houses_Worked_With</th>
+      <th>Popular_Accords</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Francis Kurkdjian</td>
+      <td>7</td>
+      <td>8.085714</td>
+      <td>2</td>
+      <td>Spicy, Sweet, Woody, Floral, Gourmand</td>
+    </tr>
+    <tr>
+      <td>Francois Demachy</td>
+      <td>5</td>
+      <td>8.280000</td>
+      <td>1</td>
+      <td>Spicy, Woody, Sweet, Fresh, Powdery</td>
+    </tr>
+    <tr>
+      <td>Alberto Morillas</td>
+      <td>5</td>
+      <td>7.600000</td>
+      <td>4</td>
+      <td>Aquatic, Citrus, Fresh, Synthetic, Floral</td>
+    </tr>
+    <tr>
+      <td>Jacques Cavallier-Belletrud</td>
+      <td>4</td>
+      <td>8.500000</td>
+      <td>2</td>
+      <td>Spicy, Aquatic, Citrus, Fresh, Fruity</td>
+    </tr>
+    <tr>
+      <td>Hamid Merati-Kashani</td>
+      <td>4</td>
+      <td>8.300000</td>
+      <td>1</td>
+      <td>Spicy, Sweet, Woody, Creamy, Gourmand</td>
+    </tr>
+    <tr>
+      <td>Quentin Bisch</td>
+      <td>4</td>
+      <td>8.300000</td>
+      <td>3</td>
+      <td>Spicy, Sweet, Woody, Gourmand, Oriental</td>
+    </tr>
+    <tr>
+      <td>Jacques Polge</td>
+      <td>4</td>
+      <td>8.175000</td>
+      <td>1</td>
+      <td>Citrus, Fresh, Spicy, Aquatic, Creamy</td>
+    </tr>
+    <tr>
+      <td>Christian Carbonnel</td>
+      <td>4</td>
+      <td>8.125000</td>
+      <td>2</td>
+      <td>Floral, Sweet, Fresh, Fruity, Citrus</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+    </section>
+    
+    <section style="margin-bottom:32px;">
+        <h3 style="margin-bottom:10px; color:#4B1D3F;">Is the Fragrance Worth the Cost?</h3>
+        <div class="table-wrap">
+            <table class="dataframe dataframe table table-striped">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Concentration</th>
+      <th>Avg_Longevity</th>
+      <th>Perfume_Count</th>
+      <th>Avg_Value_Rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Elixir</td>
+      <td>8.850000</td>
+      <td>2</td>
+      <td>7.600000</td>
+    </tr>
+    <tr>
+      <td>Extrait de Parfum</td>
+      <td>8.700000</td>
+      <td>7</td>
+      <td>7.114286</td>
+    </tr>
+    <tr>
+      <td>Parfum</td>
+      <td>8.566667</td>
+      <td>6</td>
+      <td>7.316667</td>
+    </tr>
+    <tr>
+      <td>Eau de Parfum</td>
+      <td>8.014754</td>
+      <td>61</td>
+      <td>7.142623</td>
+    </tr>
+    <tr>
+      <td>Eau de Toilette</td>
+      <td>7.412500</td>
+      <td>24</td>
+      <td>7.841667</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+    </section>
+    
+    <section style="margin-bottom:32px;">
+        <h3 style="margin-bottom:10px; color:#4B1D3F;">What Type of Fragrance is the Most Popular?</h3>
+        <div class="table-wrap">
+            <table class="dataframe dataframe table table-striped">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Accord_Name</th>
+      <th>Accord_Popularity</th>
+      <th>Top_Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Spicy</td>
+      <td>73</td>
+      <td>Cedarwood, Vanilla, Bergamot, Patchouli, Sandalwood</td>
+    </tr>
+    <tr>
+      <td>Sweet</td>
+      <td>68</td>
+      <td>Vanilla, Cedarwood, Bergamot, Amber, Sandalwood</td>
+    </tr>
+    <tr>
+      <td>Woody</td>
+      <td>58</td>
+      <td>Cedarwood, Patchouli, Bergamot, Vanilla, Sandalwood</td>
+    </tr>
+    <tr>
+      <td>Fresh</td>
+      <td>42</td>
+      <td>Bergamot, Cedarwood, Patchouli, Vetiver, Musk</td>
+    </tr>
+    <tr>
+      <td>Oriental</td>
+      <td>32</td>
+      <td>Vanilla, Amber, Cinnamon, Patchouli, Rose</td>
+    </tr>
+    <tr>
+      <td>Fruity</td>
+      <td>31</td>
+      <td>Bergamot, Musk, Patchouli, Vanilla, Cedarwood</td>
+    </tr>
+    <tr>
+      <td>Citrus</td>
+      <td>30</td>
+      <td>Bergamot, Cedarwood, Patchouli, Musk, Jasmine</td>
+    </tr>
+    <tr>
+      <td>Gourmand</td>
+      <td>26</td>
+      <td>Vanilla, Cinnamon, Tonka Bean, Lavender, Sandalwood</td>
+    </tr>
+    <tr>
+      <td>Synthetic</td>
+      <td>19</td>
+      <td>Bergamot, Patchouli, Cedarwood, Ambroxan, Amber</td>
+    </tr>
+    <tr>
+      <td>Creamy</td>
+      <td>17</td>
+      <td>Vanilla, Bergamot, Sandalwood, Tonka Bean, Amber</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+    </section>
+    
+    </details>
+    
+    <footer style="margin-top:60px; padding-top:20px; border-top:1px solid #E4D9D3; font-size:14px; color:#555;">
+        <p><strong>Data Source:</strong> Parfumo Top 100 Fragrances dataset (cleaned CSV).</p>
+        <p><strong>Methodology:</strong> SQL database design → analytical queries reproduced in Python (pandas) → visualizations created with Plotly → exported as a standalone HTML data story.</p>
+        <p>Project by <strong>Aadil Khan</strong></p>
+    </footer>
+    </body></html>

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ICU Outcomes Analysis | Regional Medical Center</title>
+  <style>
+    :root{
+      --bg:#f6f9fc;
+      --card:#ffffff;
+      --ink:#102033;
+      --muted:#5f7185;
+      --line:#dbe6f0;
+      --accent:#0b5cab;
+      --accent-2:#2d7fd1;
+      --accent-soft:#eaf3fc;
+      --good:#0c7a43;
+      --shadow:0 18px 45px rgba(16,32,51,.08);
+      --radius:24px;
+      --max:1160px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:linear-gradient(180deg,#f8fbfe 0%,#f3f7fb 100%);color:var(--ink);font-family:Inter,Segoe UI,Arial,sans-serif}
+    body{line-height:1.55}
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
+    .hero{
+      position:relative;
+      overflow:hidden;
+      padding:72px 0 34px;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(45,127,209,.12), transparent 26%),
+        radial-gradient(circle at 90% 0%, rgba(11,92,171,.10), transparent 24%);
+      border-bottom:1px solid var(--line);
+    }
+    .eyebrow{
+      display:inline-block;
+      padding:8px 14px;
+      border-radius:999px;
+      background:var(--accent-soft);
+      color:var(--accent);
+      font-weight:700;
+      letter-spacing:.02em;
+      font-size:13px;
+    }
+    h1{
+      font-size:clamp(38px,5.8vw,68px);
+      line-height:1.02;
+      margin:16px 0 14px;
+      letter-spacing:-.03em;
+      max-width:900px;
+    }
+    .sub{
+      max-width:830px;
+      font-size:18px;
+      color:var(--muted);
+      margin:0 0 30px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.35fr .85fr;
+      gap:22px;
+      align-items:stretch;
+    }
+    .panel{
+      background:rgba(255,255,255,.72);
+      backdrop-filter: blur(8px);
+      border:1px solid rgba(219,230,240,.9);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero-card{padding:24px}
+    .hero-meta{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      margin-top:12px;
+    }
+    .meta{
+      padding:18px;
+      border-radius:18px;
+      background:#fff;
+      border:1px solid var(--line);
+    }
+    .meta .label{
+      color:var(--muted);
+      font-size:13px;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      font-weight:700;
+      margin-bottom:8px;
+    }
+    .meta .value{
+      font-size:22px;
+      font-weight:800;
+      letter-spacing:-.02em;
+    }
+    .metrics{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+    }
+    .metric{
+      padding:22px;
+      border-radius:20px;
+      background:#fff;
+      border:1px solid var(--line);
+    }
+    .metric .k{
+      color:var(--muted);
+      font-weight:700;
+      font-size:13px;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+    .metric .v{
+      margin-top:6px;
+      font-size:40px;
+      font-weight:900;
+      letter-spacing:-.04em;
+      color:var(--accent);
+    }
+    .metric .note{
+      margin-top:4px;
+      color:var(--muted);
+      font-size:14px;
+    }
+    section{padding:34px 0}
+    .section-head{
+      display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:18px;
+    }
+    .section-head h2{
+      margin:0;
+      font-size:32px;
+      letter-spacing:-.03em;
+    }
+    .section-head p{
+      margin:0;
+      max-width:560px;
+      color:var(--muted);
+    }
+    .grid-2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:22px;
+    }
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:26px;
+    }
+    .card h3{
+      margin:0 0 12px;
+      font-size:22px;
+      letter-spacing:-.02em;
+    }
+    .card p{margin:0;color:#304153}
+    .bullets{margin:14px 0 0;padding:0;list-style:none}
+    .bullets li{
+      position:relative;
+      margin:0 0 12px;
+      padding-left:18px;
+      color:#304153;
+    }
+    .bullets li::before{
+      content:"";
+      width:8px;height:8px;border-radius:999px;background:var(--accent-2);
+      position:absolute;left:0;top:10px;
+    }
+    .story{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:22px;
+    }
+    .timeline{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
+      margin-top:14px;
+    }
+    .step{
+      padding:18px;
+      border-radius:18px;
+      background:#fff;
+      border:1px solid var(--line);
+    }
+    .step .n{
+      width:34px;height:34px;border-radius:999px;
+      display:grid;place-items:center;
+      font-weight:800;background:var(--accent-soft);color:var(--accent);
+      margin-bottom:10px;
+    }
+    .step h4{margin:0 0 6px;font-size:16px}
+    .step p{margin:0;color:var(--muted);font-size:14px}
+    .pill-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .pill{
+      padding:10px 14px;border-radius:999px;background:var(--accent-soft);
+      color:var(--accent);font-weight:700;font-size:14px;border:1px solid #d8e9fa;
+    }
+    .callout{
+      padding:22px 24px;
+      border-radius:22px;
+      background:linear-gradient(135deg,#0b5cab 0%,#2d7fd1 100%);
+      color:#fff;
+      box-shadow:var(--shadow);
+    }
+    .callout h3{margin:0 0 10px;font-size:24px}
+    .callout p{margin:0 0 14px;color:rgba(255,255,255,.9)}
+    .callout ul{margin:0;padding-left:18px}
+    .callout li{margin:0 0 8px}
+    .footer{
+      padding:34px 0 56px;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .small{
+      color:var(--muted);
+      font-size:13px;
+      margin-top:10px;
+    }
+    @media (max-width: 980px){
+      .hero-grid,.grid-2,.story,.timeline{grid-template-columns:1fr}
+      .hero-meta,.metrics{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width: 640px){
+      .wrap{padding:0 18px}
+      .hero{padding-top:56px}
+      .hero-meta,.metrics{grid-template-columns:1fr}
+      h1{font-size:40px}
+      .section-head{display:block}
+      .section-head p{margin-top:10px}
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <span class="eyebrow">Healthcare Analytics Portfolio Project</span>
+      <h1>Understanding ICU Outcomes Through Structured, Interpretable Modeling</h1>
+      <p class="sub">
+        A capstone analysis for a 36-bed intensive care unit focused on explaining variation in length of stay and mortality risk using admission context, patient characteristics, and procedural intensity.
+      </p>
+
+      <div class="hero-grid">
+        <div class="panel hero-card">
+          <h3 style="margin:0 0 8px;font-size:24px;letter-spacing:-.02em;">Project Snapshot</h3>
+          <p style="margin:0;color:var(--muted);">
+            This project applied the CRISP-DM framework to ICU stay-level data in order to move from problem framing to operational interpretation. The emphasis remained on interpretable models that could support hospital leadership and clinical stakeholders rather than black-box prediction alone.
+          </p>
+
+          <div class="hero-meta">
+            <div class="meta">
+              <div class="label">Organization</div>
+              <div class="value">Regional Medical Center</div>
+            </div>
+            <div class="meta">
+              <div class="label">Unit of Analysis</div>
+              <div class="value">ICU Stay</div>
+            </div>
+            <div class="meta">
+              <div class="label">Data Source</div>
+              <div class="value">MIMIC-IV Demo</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel hero-card">
+          <h3 style="margin:0 0 12px;font-size:24px;letter-spacing:-.02em;">Core Results</h3>
+          <div class="metrics">
+            <div class="metric">
+              <div class="k">LOS Model</div>
+              <div class="v">R² 0.50</div>
+              <div class="note">Cross-validated explanatory performance</div>
+            </div>
+            <div class="metric">
+              <div class="k">Mortality Model</div>
+              <div class="v">AUC 0.76</div>
+              <div class="note">Cross-validated discrimination performance</div>
+            </div>
+            <div class="metric">
+              <div class="k">Recall</div>
+              <div class="v">0.60</div>
+              <div class="note">Majority of high-risk patients identified</div>
+            </div>
+            <div class="metric">
+              <div class="k">Primary Drivers</div>
+              <div class="v" style="font-size:22px;line-height:1.15;">Procedures<br>Admissions<br>ICU Setting</div>
+              <div class="note">Key outcome determinants across models</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section>
+      <div class="section-head">
+        <h2>Problem and Objective</h2>
+        <p>
+          ICU outcomes vary in ways that affect both patient care and hospital operations. The project focused on identifying which measurable characteristics explain that variation most clearly.
+        </p>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Business Problem</h3>
+          <p>
+            Regional Medical Center needed a structured way to understand why some ICU stays become prolonged and why some patients face higher mortality risk. Without systematic analysis, decisions about resource planning and care variation remain heavily reliant on case-by-case judgment alone.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Analytical Objective</h3>
+          <p>
+            Build interpretable models that explain ICU length of stay and mortality using variables available from patient demographics, hospital admissions, ICU placement, and procedural activity. The goal was to support operational planning while keeping patient-centered outcomes central.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Approach</h2>
+        <p>
+          The workflow followed a disciplined progression from business understanding to model interpretation, prioritizing reproducibility, interpretability, and alignment with healthcare decision-making.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="timeline">
+          <div class="step">
+            <div class="n">1</div>
+            <h4>Business Understanding</h4>
+            <p>Defined ICU stay-level outcomes, stakeholder needs, and measurable success criteria.</p>
+          </div>
+          <div class="step">
+            <div class="n">2</div>
+            <h4>Data Understanding</h4>
+            <p>Explored distributions, validated LOS calculations, and assessed procedural burden patterns.</p>
+          </div>
+          <div class="step">
+            <div class="n">3</div>
+            <h4>Preparation + Modeling</h4>
+            <p>Built interpretable regression and classification models with cross-validation and regularization.</p>
+          </div>
+          <div class="step">
+            <div class="n">4</div>
+            <h4>Evaluation</h4>
+            <p>Translated technical results into organizational value, risks, recommendations, and lessons learned.</p>
+          </div>
+        </div>
+
+        <div class="pill-row">
+          <span class="pill">Patients</span>
+          <span class="pill">Admissions</span>
+          <span class="pill">ICU Stays</span>
+          <span class="pill">Procedure Events</span>
+          <span class="pill">Linear Regression</span>
+          <span class="pill">Logistic Regression</span>
+          <span class="pill">Regularization</span>
+          <span class="pill">Interpretability First</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>What the Models Revealed</h2>
+        <p>
+          The strongest patterns were not purely demographic. Outcome variation clustered around procedural intensity, admission pathway, and ICU environment.
+        </p>
+      </div>
+
+      <div class="story">
+        <div class="card">
+          <h3>Key Findings</h3>
+          <ul class="bullets">
+            <li><strong>Length of stay was meaningfully predictable.</strong> The final ridge model explained about half of LOS variation, which is substantial for a high-acuity clinical outcome.</li>
+            <li><strong>Mortality risk was moderately well discriminated.</strong> The tuned logistic model separated higher-risk from lower-risk patients with useful performance for decision support.</li>
+            <li><strong>Procedural intensity mattered across both tasks.</strong> Higher procedure counts tracked with longer ICU stays and greater mortality risk, likely reflecting increased care complexity.</li>
+            <li><strong>Admission context and ICU setting mattered more than age for LOS.</strong> Age added very little explanatory value for stay duration but contributed more meaningfully to mortality prediction.</li>
+          </ul>
+        </div>
+
+        <div class="callout">
+          <h3>Main Interpretation</h3>
+          <p>
+            ICU outcomes were not random. They reflected identifiable differences in how patients entered care, where they were treated, and how intensively they were managed.
+          </p>
+          <ul>
+            <li>Observation admissions and certain ICU contexts were linked to longer stays.</li>
+            <li>Urgent admissions and coronary care contexts were linked to higher mortality risk.</li>
+            <li>Age behaved differently across outcomes, which suggests LOS and mortality should not be treated as interchangeable risk concepts.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Recommendations</h2>
+        <p>
+          The project’s value lies in how the findings can improve planning and monitoring without replacing clinical expertise.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Operational Recommendations</h3>
+          <ul class="bullets">
+            <li>Develop an ICU stay flagging framework for cases likely to require prolonged resource utilization.</li>
+            <li>Use admission context, ICU setting, and procedural burden to support bed management and discharge planning.</li>
+            <li>Separate LOS planning from mortality monitoring rather than relying on one generalized concept of ICU risk.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Clinical Recommendations</h3>
+          <ul class="bullets">
+            <li>Use mortality models as early-warning decision support during rounds or handoffs.</li>
+            <li>Focus monitoring attention on higher-risk combinations such as urgent admissions and high-intensity care contexts.</li>
+            <li>Use results for quality improvement review rather than direct protocol changes without further validation.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Risks and Responsible Use</h2>
+        <p>
+          The models are useful, but only within the limits of the data and with appropriate safeguards.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Key Risks</h3>
+          <ul class="bullets">
+            <li>Small-sample instability, especially for mortality and sparse subgroups.</li>
+            <li>Procedure counts and ICU categories may partly proxy severity rather than act as independent causal drivers.</li>
+            <li>Overuse of model outputs could create alarm fatigue, misplaced efficiency pressure, or overconfidence in moderate-performance models.</li>
+            <li>Demographic and contextual variables must be interpreted carefully to avoid reinforcing biased narratives.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Mitigation Strategy</h3>
+          <ul class="bullets">
+            <li>Keep models in a <strong>decision-support</strong> role, not as automated decision systems.</li>
+            <li>Monitor performance drift and recalibrate with internal hospital data before live use.</li>
+            <li>Expand features with severity-related variables such as labs, diagnoses, and medication indicators.</li>
+            <li>Retain human oversight for high-stakes interpretation and action.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Lessons Learned</h2>
+        <p>
+          The project reinforced a broader lesson that applies across healthcare and beyond: strong data science work depends as much on disciplined framing and interpretation as it does on the models themselves.
+        </p>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Technical + Process</h3>
+          <ul class="bullets">
+            <li>Feature engineering and data understanding drove more value than algorithmic complexity.</li>
+            <li>Baseline models created a necessary reference point before regularized models were introduced.</li>
+            <li>Clear, modular workflows improved reproducibility and interpretation across iterations.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Future Applications</h3>
+          <ul class="bullets">
+            <li>The same framework can extend to readmission risk, patient flow optimization, and hospital capacity planning.</li>
+            <li>Interpretable modeling remains especially useful in high-stakes domains where explanation matters as much as performance.</li>
+            <li>Future versions would benefit from richer clinical features and real-time internal validation.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="small">
+        Built as a portfolio-ready capstone summary. Full class submission included a formal report, executive presentation, and reproducible code workflow.
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      ICU Outcomes Analysis • Capstone Project • Portfolio Presentation
+    </div>
+  </footer>
+</body>
+</html>
