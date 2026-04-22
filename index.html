@@ -1,556 +1,1155 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aadil Khan | Data Portfolio</title>
-  <style>
-    :root {
-      --bg: #f5f0e6;
-      --bg-2: #efe7d8;
-      --panel: rgba(255, 252, 246, 0.72);
-      --panel-strong: rgba(255, 252, 246, 0.9);
-      --text: #171411;
-      --muted: #6d6258;
-      --line: rgba(23, 20, 17, 0.12);
-      --shadow: 0 18px 45px rgba(50, 35, 18, 0.09);
-      --shadow-strong: 0 24px 60px rgba(50, 35, 18, 0.14);
-      --radius: 28px;
-      --radius-sm: 18px;
-      --icu: linear-gradient(135deg, #e7f4ff 0%, #c8e7ff 100%);
-      --parfumo: linear-gradient(135deg, #f7e5ef 0%, #f3cddd 100%);
-      --mta: linear-gradient(135deg, #dbe9ff 0%, #adcfff 100%);
-      --spotify: linear-gradient(135deg, #dff7e8 0%, #a8e2bb 100%);
-      --cce: linear-gradient(135deg, #f5f0d8 0%, #d8ecc4 100%);
-      --fmri: linear-gradient(135deg, #efe2ff 0%, #d6c3ff 100%);
-      --tiger: linear-gradient(135deg, #ffe6c7 0%, #ffbf80 100%);
-      --primate: linear-gradient(135deg, #e7ddd2 0%, #ccb9a7 100%);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Inter, "Segoe UI", Helvetica, Arial, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(255,255,255,0.65), transparent 26%),
-        radial-gradient(circle at bottom right, rgba(218, 193, 156, 0.25), transparent 22%),
-        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
-      line-height: 1.5;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .page {
-      max-width: 1220px;
-      margin: 0 auto;
-      padding: 30px 24px 56px;
-    }
-
-    .topbar {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      margin-bottom: 36px;
-    }
-
-    .top-links {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      padding: 10px;
-      border: 1px solid rgba(255,255,255,0.55);
-      background: rgba(255, 252, 246, 0.58);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-radius: 999px;
-      box-shadow: var(--shadow);
-    }
-
-    .top-links a {
-      padding: 10px 16px;
-      border-radius: 999px;
-      font-size: 0.95rem;
-      color: var(--muted);
-      transition: all 0.22s ease;
-    }
-
-    .top-links a:hover {
-      background: rgba(23, 20, 17, 0.92);
-      color: #fff;
-      transform: translateY(-1px);
-    }
-
-    .hero {
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.6);
-      background: linear-gradient(180deg, rgba(255,252,246,0.86) 0%, rgba(255,248,239,0.78) 100%);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-radius: 36px;
-      box-shadow: var(--shadow-strong);
-      padding: 56px 54px 46px;
-      text-align: center;
-      margin-bottom: 28px;
-    }
-
-    .hero::before,
-    .hero::after {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(10px);
-      opacity: 0.45;
-      pointer-events: none;
-    }
-
-    .hero::before {
-      width: 220px;
-      height: 220px;
-      right: -60px;
-      top: -60px;
-      background: radial-gradient(circle, rgba(255, 200, 128, 0.55), transparent 70%);
-    }
-
-    .hero::after {
-      width: 200px;
-      height: 200px;
-      left: -50px;
-      bottom: -60px;
-      background: radial-gradient(circle, rgba(179, 205, 255, 0.55), transparent 70%);
-    }
-
-    .profile-ring {
-      width: 126px;
-      height: 126px;
-      margin: 0 auto 22px;
-      border-radius: 50%;
-      padding: 5px;
-      background: linear-gradient(135deg, #fff4dd 0%, #d7e8ff 100%);
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
-    }
-
-    .profile-placeholder {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(180deg, #f8efe3 0%, #eadbc4 100%);
-      border: 1px solid rgba(23, 20, 17, 0.08);
-      font-size: 2.1rem;
-      color: #8a7867;
-      letter-spacing: -0.04em;
-      font-weight: 700;
-    }
-
-    .hero h1 {
-      margin: 0;
-      font-size: clamp(2.8rem, 6vw, 4.8rem);
-      line-height: 0.96;
-      letter-spacing: -0.055em;
-      font-weight: 700;
-    }
-
-    .subhead {
-      margin-top: 12px;
-      font-size: 1.05rem;
-      color: var(--muted);
-      letter-spacing: 0.02em;
-    }
-
-    .bio {
-      max-width: 850px;
-      margin: 24px auto 0;
-      font-size: 1.07rem;
-      color: #2c241e;
-    }
-
-    .education {
-      margin-top: 22px;
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .edu-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 11px 15px;
-      background: rgba(255,255,255,0.72);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      color: #2b221b;
-      font-size: 0.93rem;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.04);
-    }
-
-    .section-intro {
-      text-align: center;
-      margin: 22px auto 28px;
-      max-width: 760px;
-    }
-
-    .section-kicker {
-      font-size: 0.82rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
-
-    .section-intro h2 {
-      margin: 0 0 10px;
-      font-size: clamp(1.8rem, 4vw, 2.5rem);
-      letter-spacing: -0.04em;
-    }
-
-    .section-intro p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 1rem;
-    }
-
-    .tiles {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .tile {
-      position: relative;
-      min-height: 180px;
-      padding: 20px;
-      border-radius: 24px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.58);
-      box-shadow: var(--shadow);
-      transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      isolation: isolate;
-    }
-
-    .tile::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(255,255,255,0.16);
-      opacity: 0;
-      transition: opacity 0.22s ease;
-      z-index: -1;
-    }
-
-    .tile:hover {
-      transform: translateY(-6px) scale(1.01);
-      box-shadow: 0 22px 40px rgba(0,0,0,0.12);
-      filter: saturate(1.03);
-    }
-
-    .tile:hover::before {
-      opacity: 1;
-    }
-
-    .tile-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: start;
-      gap: 12px;
-    }
-
-    .tile-code {
-      font-size: 0.76rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: rgba(23, 20, 17, 0.62);
-      font-weight: 700;
-    }
-
-    .tile-emoji {
-      font-size: 2rem;
-      opacity: 0;
-      transform: translateY(8px) scale(0.92);
-      transition: all 0.25s ease;
-    }
-
-    .tile:hover .tile-emoji {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-
-    .tile-title {
-      margin: 22px 0 8px;
-      font-size: 1.5rem;
-      letter-spacing: -0.04em;
-      line-height: 1.02;
-      font-weight: 700;
-    }
-
-    .tile-desc {
-      margin: 0;
-      color: rgba(23, 20, 17, 0.72);
-      font-size: 0.95rem;
-      max-width: 95%;
-    }
-
-    .tile-foot {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 18px;
-      font-size: 0.9rem;
-      color: rgba(23, 20, 17, 0.72);
-      font-weight: 600;
-    }
-
-    .tile-arrow {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255,255,255,0.5);
-      border: 1px solid rgba(23,20,17,0.08);
-      transition: all 0.22s ease;
-    }
-
-    .tile:hover .tile-arrow {
-      background: rgba(23,20,17,0.92);
-      color: #fff;
-      transform: translateX(2px);
-    }
-
-    .icu { background: var(--icu); }
-    .parfumo { background: var(--parfumo); }
-    .mta { background: var(--mta); }
-    .spotify { background: var(--spotify); }
-    .cce { background: var(--cce); }
-    .fmri { background: var(--fmri); }
-    .tiger { background: var(--tiger); }
-    .primate { background: var(--primate); }
-
-    .footer {
-      margin-top: 28px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.94rem;
-    }
-
-    @media (max-width: 1080px) {
-      .tiles {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 760px) {
-      .page {
-        padding: 20px 14px 42px;
-      }
-
-      .topbar {
-        justify-content: center;
-        margin-bottom: 22px;
-      }
-
-      .hero {
-        padding: 34px 20px 28px;
-        border-radius: 28px;
-      }
-
-      .profile-ring {
-        width: 108px;
-        height: 108px;
-      }
-
-      .bio {
-        font-size: 1rem;
-      }
-
-      .tiles {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="page">
-    <header class="topbar">
-      <nav class="top-links">
-        <a href="https://www.linkedin.com/in/aadil815/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://aadil815.github.io/resume" target="_blank" rel="noopener noreferrer">Resume</a>
-        <a href="mailto:aadilmsds@gmail.com">Contact Me</a>
-      </nav>
-    </header>
-
-    <section class="hero">
-      <div class="profile-ring">
-        <div class="profile-placeholder">AK</div>
-      </div>
-
-      <h1>Aadil Khan, MDS</h1>
-      <div class="subhead">New York, NY</div>
-
-      <p class="bio">
-        Data science graduate student with a neuroscience background studying decision-making and experience in analyzing healthcare, behavioral, environmental, sports, and consumer trend data. Applies quantitative methods and AI to complex real-world problems, translating data into actionable insights on markets, behavior, and emerging trends.
-      </p>
-
-      <div class="education">
-        <div class="edu-pill">🎓 University of Pittsburgh Master of Data Science</div>
-        <div class="edu-pill">🧠 Adelphi University Bachelor of Science in Molecular Neuroscience</div>
-      </div>
-    </section>
-
-    <section class="section-intro">
-      <div class="section-kicker">Selected Work</div>
-      <h2>Data projects across healthcare, policy, behavior, and consumer trends</h2>
-      <p>
-        A curated portfolio of interactive HTML projects built around analysis, modeling, and visual storytelling.
-      </p>
-    </section>
-
-    <main class="tiles">
-      <a class="tile icu" href="https://aadil815.github.io/icu/" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="tile-top">
-            <div class="tile-code">Healthcare Analytics</div>
-            <div class="tile-emoji">🏥</div>
-          </div>
-          <h3 class="tile-title">ICU</h3>
-          <p class="tile-desc">ICU length of stay, mortality, and interpretable clinical modeling.</p>
-        </div>
-        <div class="tile-foot">
-          <span>Open Project</span>
-          <span class="tile-arrow">↗</span>
-        </div>
-      </a>
-
-      <a class="tile parfumo" href="https://aadil815.github.io/parfumo/" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="tile-top">
-            <div class="tile-code">Consumer Trends</div>
-            <div class="tile-emoji">🧴</div>
-          </div>
-          <h3 class="tile-title">Parfumo</h3>
-          <p class="tile-desc">Fragrance database analysis focused on notes, brands, accords, and popularity signals.</p>
-        </div>
-        <div class="tile-foot">
-          <span>Open Project</span>
-          <span class="tile-arrow">↗</span>
-        </div>
-      </a>
-
-      <a class="tile mta" href="https://aadil815.github.io/mta/" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="tile-top">
-            <div class="tile-code">Policy & Transportation</div>
-            <div class="tile-emoji">🚇</div>
-          </div>
-          <h3 class="tile-title">MTA</h3>
-          <p class="tile-desc">Transit and congestion pricing analysis through ridership and policy outcomes.</p>
-        </div>
-        <div class="tile-foot">
-          <span>Open Project</span>
-          <span class="tile-arrow">↗</span>
-        </div>
-      </a>
-
-      <a class="tile spotify" href="https://aadil815.github.io/spotify/" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="tile-top">
-            <div class="tile-code">Music & Modeling</div>
-            <div class="tile-emoji">🎧</div>
-          </div>
-          <h3 class="tile-title">Spotify</h3>
-          <p class="tile-desc">Audio features, clustering, and predictive modeling of track popularity.</p>
-        </div>
-        <div class="tile-foot">
-          <span>Open Project</span>
-          <span class="tile-arrow">↗</span>
-        </div>
-      </a>
-
-      <a class="tile cce" href="https://aadil815.github.io/cce/" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="tile-top">
-            <div class="tile-code">Environmental Policy</div>
-            <div class="tile-emoji">💧</div>
-          </div>
-          <h3 class="tile-title">CCE</h3>
-          <p class="tile-desc">Water quality, contaminant policy, and public-interest environmental analysis.</p>
-        </div>
-        <div class="tile-foot">
-          <span>Open Project</span>
-          <span class="tile-arrow">↗</span>
-        </div>
-      </a>
-
-      <a class="tile fmri" href="https://aadil815.github.io/fmri/" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="tile-top">
-            <div class="tile-code">Neuroscience Research</div>
-            <div class="tile-emoji">🧠</div>
-          </div>
-          <h3 class="tile-title">fMRI</h3>
-          <p class="tile-desc">Neural response and social reward analysis with imaging-based interpretation.</p>
-        </div>
-        <div class="tile-foot">
-          <span>Open Project</span>
-          <span class="tile-arrow">↗</span>
-        </div>
-      </a>
-
-      <a class="tile tiger" href="https://aadil815.github.io/tiger/" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="tile-top">
-            <div class="tile-code">Evolutionary Genetics</div>
-            <div class="tile-emoji">🐅</div>
-          </div>
-          <h3 class="tile-title">Tiger</h3>
-          <p class="tile-desc">Phylogenetic and genetic analysis of tiger vocal cord morphology.</p>
-        </div>
-        <div class="tile-foot">
-          <span>Open Project</span>
-          <span class="tile-arrow">↗</span>
-        </div>
-      </a>
-
-      <a class="tile primate" href="https://aadil815.github.io/primate/" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="tile-top">
-            <div class="tile-code">Comparative Biology</div>
-            <div class="tile-emoji">🐒</div>
-          </div>
-          <h3 class="tile-title">Primate</h3>
-          <p class="tile-desc">Evolutionary analysis of primate menopause and leptin selection patterns.</p>
-        </div>
-        <div class="tile-foot">
-          <span>Open Project</span>
-          <span class="tile-arrow">↗</span>
-        </div>
-      </a>
-    </main>
-
-    <div class="footer">
-      Designed as a central GitHub Pages portfolio for interactive data storytelling and analytical work.
-    </div>
-  </div>
-</body>
-</html>
+diff --git a/index.html b/index.html
+index fe88dae960ba04d63a138a6fd28a3a337c963468..ed19f40e3d7f2b1db0b010ff95503ae7133b5eae 100644
+--- a/index.html
++++ b/index.html
+@@ -1,556 +1,594 @@
+-<!DOCTYPE html>
+-<html lang="en">
+-<head>
+-  <meta charset="UTF-8" />
+-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-  <title>Aadil Khan | Data Portfolio</title>
+-  <style>
+-    :root {
+-      --bg: #f5f0e6;
+-      --bg-2: #efe7d8;
+-      --panel: rgba(255, 252, 246, 0.72);
+-      --panel-strong: rgba(255, 252, 246, 0.9);
+-      --text: #171411;
+-      --muted: #6d6258;
+-      --line: rgba(23, 20, 17, 0.12);
+-      --shadow: 0 18px 45px rgba(50, 35, 18, 0.09);
+-      --shadow-strong: 0 24px 60px rgba(50, 35, 18, 0.14);
+-      --radius: 28px;
+-      --radius-sm: 18px;
+-      --icu: linear-gradient(135deg, #e7f4ff 0%, #c8e7ff 100%);
+-      --parfumo: linear-gradient(135deg, #f7e5ef 0%, #f3cddd 100%);
+-      --mta: linear-gradient(135deg, #dbe9ff 0%, #adcfff 100%);
+-      --spotify: linear-gradient(135deg, #dff7e8 0%, #a8e2bb 100%);
+-      --cce: linear-gradient(135deg, #f5f0d8 0%, #d8ecc4 100%);
+-      --fmri: linear-gradient(135deg, #efe2ff 0%, #d6c3ff 100%);
+-      --tiger: linear-gradient(135deg, #ffe6c7 0%, #ffbf80 100%);
+-      --primate: linear-gradient(135deg, #e7ddd2 0%, #ccb9a7 100%);
+-    }
+-
+-    * {
+-      box-sizing: border-box;
+-    }
+-
+-    html {
+-      scroll-behavior: smooth;
+-    }
+-
+-    body {
+-      margin: 0;
+-      min-height: 100vh;
+-      font-family: Inter, "Segoe UI", Helvetica, Arial, sans-serif;
+-      color: var(--text);
+-      background:
+-        radial-gradient(circle at top left, rgba(255,255,255,0.65), transparent 26%),
+-        radial-gradient(circle at bottom right, rgba(218, 193, 156, 0.25), transparent 22%),
+-        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+-      line-height: 1.5;
+-    }
+-
+-    a {
+-      color: inherit;
+-      text-decoration: none;
+-    }
+-
+-    .page {
+-      max-width: 1220px;
+-      margin: 0 auto;
+-      padding: 30px 24px 56px;
+-    }
+-
+-    .topbar {
+-      display: flex;
+-      justify-content: flex-end;
+-      align-items: center;
+-      margin-bottom: 36px;
+-    }
+-
+-    .top-links {
+-      display: flex;
+-      align-items: center;
+-      gap: 12px;
+-      flex-wrap: wrap;
+-      padding: 10px;
+-      border: 1px solid rgba(255,255,255,0.55);
+-      background: rgba(255, 252, 246, 0.58);
+-      backdrop-filter: blur(16px);
+-      -webkit-backdrop-filter: blur(16px);
+-      border-radius: 999px;
+-      box-shadow: var(--shadow);
+-    }
+-
+-    .top-links a {
+-      padding: 10px 16px;
+-      border-radius: 999px;
+-      font-size: 0.95rem;
+-      color: var(--muted);
+-      transition: all 0.22s ease;
+-    }
+-
+-    .top-links a:hover {
+-      background: rgba(23, 20, 17, 0.92);
+-      color: #fff;
+-      transform: translateY(-1px);
+-    }
+-
+-    .hero {
+-      position: relative;
+-      overflow: hidden;
+-      border: 1px solid rgba(255,255,255,0.6);
+-      background: linear-gradient(180deg, rgba(255,252,246,0.86) 0%, rgba(255,248,239,0.78) 100%);
+-      backdrop-filter: blur(18px);
+-      -webkit-backdrop-filter: blur(18px);
+-      border-radius: 36px;
+-      box-shadow: var(--shadow-strong);
+-      padding: 56px 54px 46px;
+-      text-align: center;
+-      margin-bottom: 28px;
+-    }
+-
+-    .hero::before,
+-    .hero::after {
+-      content: "";
+-      position: absolute;
+-      border-radius: 50%;
+-      filter: blur(10px);
+-      opacity: 0.45;
+-      pointer-events: none;
+-    }
+-
+-    .hero::before {
+-      width: 220px;
+-      height: 220px;
+-      right: -60px;
+-      top: -60px;
+-      background: radial-gradient(circle, rgba(255, 200, 128, 0.55), transparent 70%);
+-    }
+-
+-    .hero::after {
+-      width: 200px;
+-      height: 200px;
+-      left: -50px;
+-      bottom: -60px;
+-      background: radial-gradient(circle, rgba(179, 205, 255, 0.55), transparent 70%);
+-    }
+-
+-    .profile-ring {
+-      width: 126px;
+-      height: 126px;
+-      margin: 0 auto 22px;
+-      border-radius: 50%;
+-      padding: 5px;
+-      background: linear-gradient(135deg, #fff4dd 0%, #d7e8ff 100%);
+-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+-    }
+-
+-    .profile-placeholder {
+-      width: 100%;
+-      height: 100%;
+-      border-radius: 50%;
+-      display: flex;
+-      align-items: center;
+-      justify-content: center;
+-      background: linear-gradient(180deg, #f8efe3 0%, #eadbc4 100%);
+-      border: 1px solid rgba(23, 20, 17, 0.08);
+-      font-size: 2.1rem;
+-      color: #8a7867;
+-      letter-spacing: -0.04em;
+-      font-weight: 700;
+-    }
+-
+-    .hero h1 {
+-      margin: 0;
+-      font-size: clamp(2.8rem, 6vw, 4.8rem);
+-      line-height: 0.96;
+-      letter-spacing: -0.055em;
+-      font-weight: 700;
+-    }
+-
+-    .subhead {
+-      margin-top: 12px;
+-      font-size: 1.05rem;
+-      color: var(--muted);
+-      letter-spacing: 0.02em;
+-    }
+-
+-    .bio {
+-      max-width: 850px;
+-      margin: 24px auto 0;
+-      font-size: 1.07rem;
+-      color: #2c241e;
+-    }
+-
+-    .education {
+-      margin-top: 22px;
+-      display: flex;
+-      justify-content: center;
+-      gap: 12px;
+-      flex-wrap: wrap;
+-    }
+-
+-    .edu-pill {
+-      display: inline-flex;
+-      align-items: center;
+-      gap: 8px;
+-      padding: 11px 15px;
+-      background: rgba(255,255,255,0.72);
+-      border: 1px solid var(--line);
+-      border-radius: 999px;
+-      color: #2b221b;
+-      font-size: 0.93rem;
+-      box-shadow: 0 8px 18px rgba(0,0,0,0.04);
+-    }
+-
+-    .section-intro {
+-      text-align: center;
+-      margin: 22px auto 28px;
+-      max-width: 760px;
+-    }
+-
+-    .section-kicker {
+-      font-size: 0.82rem;
+-      letter-spacing: 0.18em;
+-      text-transform: uppercase;
+-      color: var(--muted);
+-      margin-bottom: 10px;
+-    }
+-
+-    .section-intro h2 {
+-      margin: 0 0 10px;
+-      font-size: clamp(1.8rem, 4vw, 2.5rem);
+-      letter-spacing: -0.04em;
+-    }
+-
+-    .section-intro p {
+-      margin: 0;
+-      color: var(--muted);
+-      font-size: 1rem;
+-    }
+-
+-    .tiles {
+-      display: grid;
+-      grid-template-columns: repeat(4, minmax(0, 1fr));
+-      gap: 18px;
+-    }
+-
+-    .tile {
+-      position: relative;
+-      min-height: 180px;
+-      padding: 20px;
+-      border-radius: 24px;
+-      overflow: hidden;
+-      border: 1px solid rgba(255,255,255,0.58);
+-      box-shadow: var(--shadow);
+-      transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
+-      display: flex;
+-      flex-direction: column;
+-      justify-content: space-between;
+-      isolation: isolate;
+-    }
+-
+-    .tile::before {
+-      content: "";
+-      position: absolute;
+-      inset: 0;
+-      background: rgba(255,255,255,0.16);
+-      opacity: 0;
+-      transition: opacity 0.22s ease;
+-      z-index: -1;
+-    }
+-
+-    .tile:hover {
+-      transform: translateY(-6px) scale(1.01);
+-      box-shadow: 0 22px 40px rgba(0,0,0,0.12);
+-      filter: saturate(1.03);
+-    }
+-
+-    .tile:hover::before {
+-      opacity: 1;
+-    }
+-
+-    .tile-top {
+-      display: flex;
+-      justify-content: space-between;
+-      align-items: start;
+-      gap: 12px;
+-    }
+-
+-    .tile-code {
+-      font-size: 0.76rem;
+-      text-transform: uppercase;
+-      letter-spacing: 0.14em;
+-      color: rgba(23, 20, 17, 0.62);
+-      font-weight: 700;
+-    }
+-
+-    .tile-emoji {
+-      font-size: 2rem;
+-      opacity: 0;
+-      transform: translateY(8px) scale(0.92);
+-      transition: all 0.25s ease;
+-    }
+-
+-    .tile:hover .tile-emoji {
+-      opacity: 1;
+-      transform: translateY(0) scale(1);
+-    }
+-
+-    .tile-title {
+-      margin: 22px 0 8px;
+-      font-size: 1.5rem;
+-      letter-spacing: -0.04em;
+-      line-height: 1.02;
+-      font-weight: 700;
+-    }
+-
+-    .tile-desc {
+-      margin: 0;
+-      color: rgba(23, 20, 17, 0.72);
+-      font-size: 0.95rem;
+-      max-width: 95%;
+-    }
+-
+-    .tile-foot {
+-      display: flex;
+-      justify-content: space-between;
+-      align-items: center;
+-      margin-top: 18px;
+-      font-size: 0.9rem;
+-      color: rgba(23, 20, 17, 0.72);
+-      font-weight: 600;
+-    }
+-
+-    .tile-arrow {
+-      width: 34px;
+-      height: 34px;
+-      border-radius: 50%;
+-      display: inline-flex;
+-      align-items: center;
+-      justify-content: center;
+-      background: rgba(255,255,255,0.5);
+-      border: 1px solid rgba(23,20,17,0.08);
+-      transition: all 0.22s ease;
+-    }
+-
+-    .tile:hover .tile-arrow {
+-      background: rgba(23,20,17,0.92);
+-      color: #fff;
+-      transform: translateX(2px);
+-    }
+-
+-    .icu { background: var(--icu); }
+-    .parfumo { background: var(--parfumo); }
+-    .mta { background: var(--mta); }
+-    .spotify { background: var(--spotify); }
+-    .cce { background: var(--cce); }
+-    .fmri { background: var(--fmri); }
+-    .tiger { background: var(--tiger); }
+-    .primate { background: var(--primate); }
+-
+-    .footer {
+-      margin-top: 28px;
+-      text-align: center;
+-      color: var(--muted);
+-      font-size: 0.94rem;
+-    }
+-
+-    @media (max-width: 1080px) {
+-      .tiles {
+-        grid-template-columns: repeat(2, minmax(0, 1fr));
+-      }
+-    }
+-
+-    @media (max-width: 760px) {
+-      .page {
+-        padding: 20px 14px 42px;
+-      }
+-
+-      .topbar {
+-        justify-content: center;
+-        margin-bottom: 22px;
+-      }
+-
+-      .hero {
+-        padding: 34px 20px 28px;
+-        border-radius: 28px;
+-      }
+-
+-      .profile-ring {
+-        width: 108px;
+-        height: 108px;
+-      }
+-
+-      .bio {
+-        font-size: 1rem;
+-      }
+-
+-      .tiles {
+-        grid-template-columns: 1fr;
+-      }
+-    }
+-  </style>
+-</head>
+-<body>
+-  <div class="page">
+-    <header class="topbar">
+-      <nav class="top-links">
+-        <a href="https://www.linkedin.com/in/aadil815/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+-        <a href="https://aadil815.github.io/resume" target="_blank" rel="noopener noreferrer">Resume</a>
+-        <a href="mailto:aadilmsds@gmail.com">Contact Me</a>
+-      </nav>
+-    </header>
+-
+-    <section class="hero">
+-      <div class="profile-ring">
+-        <div class="profile-placeholder">AK</div>
+-      </div>
+-
+-      <h1>Aadil Khan, MDS</h1>
+-      <div class="subhead">New York, NY</div>
+-
+-      <p class="bio">
+-        Data science graduate student with a neuroscience background studying decision-making and experience in analyzing healthcare, behavioral, environmental, sports, and consumer trend data. Applies quantitative methods and AI to complex real-world problems, translating data into actionable insights on markets, behavior, and emerging trends.
+-      </p>
+-
+-      <div class="education">
+-        <div class="edu-pill">🎓 University of Pittsburgh Master of Data Science</div>
+-        <div class="edu-pill">🧠 Adelphi University Bachelor of Science in Molecular Neuroscience</div>
+-      </div>
+-    </section>
+-
+-    <section class="section-intro">
+-      <div class="section-kicker">Selected Work</div>
+-      <h2>Data projects across healthcare, policy, behavior, and consumer trends</h2>
+-      <p>
+-        A curated portfolio of interactive HTML projects built around analysis, modeling, and visual storytelling.
+-      </p>
+-    </section>
+-
+-    <main class="tiles">
+-      <a class="tile icu" href="https://aadil815.github.io/icu/" target="_blank" rel="noopener noreferrer">
+-        <div>
+-          <div class="tile-top">
+-            <div class="tile-code">Healthcare Analytics</div>
+-            <div class="tile-emoji">🏥</div>
+-          </div>
+-          <h3 class="tile-title">ICU</h3>
+-          <p class="tile-desc">ICU length of stay, mortality, and interpretable clinical modeling.</p>
+-        </div>
+-        <div class="tile-foot">
+-          <span>Open Project</span>
+-          <span class="tile-arrow">↗</span>
+-        </div>
+-      </a>
+-
+-      <a class="tile parfumo" href="https://aadil815.github.io/parfumo/" target="_blank" rel="noopener noreferrer">
+-        <div>
+-          <div class="tile-top">
+-            <div class="tile-code">Consumer Trends</div>
+-            <div class="tile-emoji">🧴</div>
+-          </div>
+-          <h3 class="tile-title">Parfumo</h3>
+-          <p class="tile-desc">Fragrance database analysis focused on notes, brands, accords, and popularity signals.</p>
+-        </div>
+-        <div class="tile-foot">
+-          <span>Open Project</span>
+-          <span class="tile-arrow">↗</span>
+-        </div>
+-      </a>
+-
+-      <a class="tile mta" href="https://aadil815.github.io/mta/" target="_blank" rel="noopener noreferrer">
+-        <div>
+-          <div class="tile-top">
+-            <div class="tile-code">Policy & Transportation</div>
+-            <div class="tile-emoji">🚇</div>
+-          </div>
+-          <h3 class="tile-title">MTA</h3>
+-          <p class="tile-desc">Transit and congestion pricing analysis through ridership and policy outcomes.</p>
+-        </div>
+-        <div class="tile-foot">
+-          <span>Open Project</span>
+-          <span class="tile-arrow">↗</span>
+-        </div>
+-      </a>
+-
+-      <a class="tile spotify" href="https://aadil815.github.io/spotify/" target="_blank" rel="noopener noreferrer">
+-        <div>
+-          <div class="tile-top">
+-            <div class="tile-code">Music & Modeling</div>
+-            <div class="tile-emoji">🎧</div>
+-          </div>
+-          <h3 class="tile-title">Spotify</h3>
+-          <p class="tile-desc">Audio features, clustering, and predictive modeling of track popularity.</p>
+-        </div>
+-        <div class="tile-foot">
+-          <span>Open Project</span>
+-          <span class="tile-arrow">↗</span>
+-        </div>
+-      </a>
+-
+-      <a class="tile cce" href="https://aadil815.github.io/cce/" target="_blank" rel="noopener noreferrer">
+-        <div>
+-          <div class="tile-top">
+-            <div class="tile-code">Environmental Policy</div>
+-            <div class="tile-emoji">💧</div>
+-          </div>
+-          <h3 class="tile-title">CCE</h3>
+-          <p class="tile-desc">Water quality, contaminant policy, and public-interest environmental analysis.</p>
+-        </div>
+-        <div class="tile-foot">
+-          <span>Open Project</span>
+-          <span class="tile-arrow">↗</span>
+-        </div>
+-      </a>
+-
+-      <a class="tile fmri" href="https://aadil815.github.io/fmri/" target="_blank" rel="noopener noreferrer">
+-        <div>
+-          <div class="tile-top">
+-            <div class="tile-code">Neuroscience Research</div>
+-            <div class="tile-emoji">🧠</div>
+-          </div>
+-          <h3 class="tile-title">fMRI</h3>
+-          <p class="tile-desc">Neural response and social reward analysis with imaging-based interpretation.</p>
+-        </div>
+-        <div class="tile-foot">
+-          <span>Open Project</span>
+-          <span class="tile-arrow">↗</span>
+-        </div>
+-      </a>
+-
+-      <a class="tile tiger" href="https://aadil815.github.io/tiger/" target="_blank" rel="noopener noreferrer">
+-        <div>
+-          <div class="tile-top">
+-            <div class="tile-code">Evolutionary Genetics</div>
+-            <div class="tile-emoji">🐅</div>
+-          </div>
+-          <h3 class="tile-title">Tiger</h3>
+-          <p class="tile-desc">Phylogenetic and genetic analysis of tiger vocal cord morphology.</p>
+-        </div>
+-        <div class="tile-foot">
+-          <span>Open Project</span>
+-          <span class="tile-arrow">↗</span>
+-        </div>
+-      </a>
+-
+-      <a class="tile primate" href="https://aadil815.github.io/primate/" target="_blank" rel="noopener noreferrer">
+-        <div>
+-          <div class="tile-top">
+-            <div class="tile-code">Comparative Biology</div>
+-            <div class="tile-emoji">🐒</div>
+-          </div>
+-          <h3 class="tile-title">Primate</h3>
+-          <p class="tile-desc">Evolutionary analysis of primate menopause and leptin selection patterns.</p>
+-        </div>
+-        <div class="tile-foot">
+-          <span>Open Project</span>
+-          <span class="tile-arrow">↗</span>
+-        </div>
+-      </a>
+-    </main>
+-
+-    <div class="footer">
+-      Designed as a central GitHub Pages portfolio for interactive data storytelling and analytical work.
+-    </div>
+-  </div>
+-</body>
+-</html>
++<!DOCTYPE html>
++<html lang="en">
++<head>
++  <meta charset="UTF-8" />
++  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
++  <title>Aadil Khan | Data Portfolio</title>
++  <style>
++    :root {
++      --bg: #f5f0e6;
++      --bg-2: #efe7d8;
++      --panel: rgba(255, 252, 246, 0.72);
++      --panel-strong: rgba(255, 252, 246, 0.9);
++      --text: #171411;
++      --muted: #6d6258;
++      --line: rgba(23, 20, 17, 0.12);
++      --shadow: 0 18px 45px rgba(50, 35, 18, 0.09);
++      --shadow-strong: 0 24px 60px rgba(50, 35, 18, 0.14);
++      --radius: 28px;
++      --radius-sm: 18px;
++      --icu: linear-gradient(135deg, #e7f4ff 0%, #c8e7ff 100%);
++      --parfumo: linear-gradient(135deg, #f7e5ef 0%, #f3cddd 100%);
++      --mta: linear-gradient(135deg, #dbe9ff 0%, #adcfff 100%);
++      --spotify: linear-gradient(135deg, #dff7e8 0%, #a8e2bb 100%);
++      --cce: linear-gradient(135deg, #f5f0d8 0%, #d8ecc4 100%);
++      --fmri: linear-gradient(135deg, #efe2ff 0%, #d6c3ff 100%);
++      --tiger: linear-gradient(135deg, #ffe6c7 0%, #ffbf80 100%);
++      --primate: linear-gradient(135deg, #e7ddd2 0%, #ccb9a7 100%);
++    }
++
++    * {
++      box-sizing: border-box;
++    }
++
++    html {
++      scroll-behavior: smooth;
++    }
++
++    body {
++      margin: 0;
++      min-height: 100vh;
++      font-family: Inter, "Segoe UI", Helvetica, Arial, sans-serif;
++      color: var(--text);
++      background:
++        radial-gradient(circle at top left, rgba(255,255,255,0.65), transparent 26%),
++        radial-gradient(circle at bottom right, rgba(218, 193, 156, 0.25), transparent 22%),
++        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
++      line-height: 1.5;
++    }
++
++    a {
++      color: inherit;
++      text-decoration: none;
++    }
++
++    .page {
++      max-width: 1220px;
++      margin: 0 auto;
++      padding: 30px 24px 56px;
++    }
++
++    .top-links {
++      position: absolute;
++      top: 20px;
++      right: 20px;
++      display: flex;
++      align-items: center;
++      gap: 10px;
++      flex-wrap: wrap;
++      padding: 9px;
++      border: 1px solid rgba(255,255,255,0.55);
++      background: rgba(255, 252, 246, 0.58);
++      backdrop-filter: blur(16px);
++      -webkit-backdrop-filter: blur(16px);
++      border-radius: 999px;
++      box-shadow: var(--shadow);
++      z-index: 2;
++    }
++
++    .top-links a {
++      padding: 10px 16px;
++      border-radius: 999px;
++      font-size: 0.95rem;
++      color: var(--muted);
++      transition: all 0.22s ease;
++    }
++
++    .top-links a:hover {
++      background: rgba(23, 20, 17, 0.92);
++      color: #fff;
++      transform: translateY(-1px);
++    }
++
++    .hero {
++      position: relative;
++      overflow: hidden;
++      border: 1px solid rgba(255,255,255,0.6);
++      background: linear-gradient(180deg, rgba(255,252,246,0.86) 0%, rgba(255,248,239,0.78) 100%);
++      backdrop-filter: blur(18px);
++      -webkit-backdrop-filter: blur(18px);
++      border-radius: 36px;
++      box-shadow: var(--shadow-strong);
++      padding: 92px 54px 46px;
++      text-align: center;
++      margin-bottom: 28px;
++    }
++
++    .hero::before,
++    .hero::after {
++      content: "";
++      position: absolute;
++      border-radius: 50%;
++      filter: blur(10px);
++      opacity: 0.45;
++      pointer-events: none;
++    }
++
++    .hero::before {
++      width: 220px;
++      height: 220px;
++      right: -60px;
++      top: -60px;
++      background: radial-gradient(circle, rgba(255, 200, 128, 0.55), transparent 70%);
++    }
++
++    .hero::after {
++      width: 200px;
++      height: 200px;
++      left: -50px;
++      bottom: -60px;
++      background: radial-gradient(circle, rgba(179, 205, 255, 0.55), transparent 70%);
++    }
++
++    .profile-ring {
++      width: 126px;
++      height: 126px;
++      margin: 0 auto 22px;
++      border-radius: 50%;
++      padding: 5px;
++      background: linear-gradient(135deg, #fff4dd 0%, #d7e8ff 100%);
++      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
++    }
++
++    .profile-placeholder {
++      width: 100%;
++      height: 100%;
++      border-radius: 50%;
++      display: flex;
++      align-items: center;
++      justify-content: center;
++      background: linear-gradient(180deg, #f8efe3 0%, #eadbc4 100%);
++      border: 1px solid rgba(23, 20, 17, 0.08);
++      font-size: 2.1rem;
++      color: #8a7867;
++      letter-spacing: -0.04em;
++      font-weight: 700;
++    }
++
++    .hero h1 {
++      margin: 0;
++      font-size: clamp(2.8rem, 6vw, 4.8rem);
++      line-height: 0.96;
++      letter-spacing: -0.055em;
++      font-weight: 700;
++    }
++
++    .subhead {
++      margin-top: 12px;
++      font-size: 1.05rem;
++      color: var(--muted);
++      letter-spacing: 0.02em;
++    }
++
++    .bio {
++      max-width: 850px;
++      margin: 24px auto 0;
++      font-size: 1.07rem;
++      color: #2c241e;
++    }
++
++    .education {
++      margin-top: 22px;
++      display: flex;
++      justify-content: center;
++      gap: 12px;
++      flex-wrap: wrap;
++    }
++
++    .edu-pill {
++      display: grid;
++      grid-template-columns: auto 1fr;
++      align-items: center;
++      column-gap: 10px;
++      padding: 12px 16px;
++      min-width: 320px;
++      background: rgba(255,255,255,0.72);
++      border: 1px solid var(--line);
++      border-radius: 20px;
++      color: #2b221b;
++      box-shadow: 0 8px 18px rgba(0,0,0,0.04);
++      text-align: left;
++    }
++
++    .edu-emoji {
++      font-size: 1.1rem;
++      align-self: center;
++    }
++
++    .edu-text {
++      display: flex;
++      flex-direction: column;
++      line-height: 1.2;
++      gap: 2px;
++    }
++
++    .edu-school {
++      font-size: 0.95rem;
++      font-weight: 600;
++    }
++
++    .edu-degree {
++      font-size: 0.84rem;
++      color: var(--muted);
++      font-weight: 500;
++    }
++
++    .section-intro {
++      text-align: center;
++      margin: 22px auto 28px;
++      max-width: 760px;
++    }
++
++    .section-kicker {
++      font-size: 0.82rem;
++      letter-spacing: 0.18em;
++      text-transform: uppercase;
++      color: var(--muted);
++      margin-bottom: 10px;
++    }
++
++    .section-intro h2 {
++      margin: 0 0 10px;
++      font-size: clamp(1.8rem, 4vw, 2.5rem);
++      letter-spacing: -0.04em;
++    }
++
++    .section-intro p {
++      margin: 0;
++      color: var(--muted);
++      font-size: 1rem;
++    }
++
++    .tiles {
++      display: grid;
++      grid-template-columns: repeat(4, minmax(0, 1fr));
++      gap: 18px;
++    }
++
++    .tile {
++      position: relative;
++      min-height: 180px;
++      padding: 20px;
++      border-radius: 24px;
++      overflow: hidden;
++      border: 1px solid rgba(255,255,255,0.58);
++      box-shadow: var(--shadow);
++      transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
++      display: flex;
++      flex-direction: column;
++      justify-content: space-between;
++      isolation: isolate;
++    }
++
++    .tile::before {
++      content: "";
++      position: absolute;
++      inset: 0;
++      background: rgba(255,255,255,0.16);
++      opacity: 0;
++      transition: opacity 0.22s ease;
++      z-index: -1;
++    }
++
++    .tile:hover {
++      transform: translateY(-6px) scale(1.01);
++      box-shadow: 0 22px 40px rgba(0,0,0,0.12);
++      filter: saturate(1.03);
++    }
++
++    .tile:hover::before {
++      opacity: 1;
++    }
++
++    .tile-top {
++      display: flex;
++      justify-content: space-between;
++      align-items: start;
++      gap: 12px;
++    }
++
++    .tile-code {
++      font-size: 0.76rem;
++      text-transform: uppercase;
++      letter-spacing: 0.14em;
++      color: rgba(23, 20, 17, 0.62);
++      font-weight: 700;
++    }
++
++    .tile-emoji {
++      font-size: 2rem;
++      opacity: 0;
++      transform: translateY(8px) scale(0.92);
++      transition: all 0.25s ease;
++    }
++
++    .tile:hover .tile-emoji {
++      opacity: 1;
++      transform: translateY(0) scale(1);
++    }
++
++    .tile-title {
++      margin: 22px 0 8px;
++      font-size: 1.5rem;
++      letter-spacing: -0.04em;
++      line-height: 1.02;
++      font-weight: 700;
++    }
++
++    .tile-desc {
++      margin: 0;
++      color: rgba(23, 20, 17, 0.72);
++      font-size: 0.95rem;
++      max-width: 95%;
++    }
++
++    .tile-foot {
++      display: flex;
++      justify-content: space-between;
++      align-items: center;
++      margin-top: 18px;
++      font-size: 0.9rem;
++      color: rgba(23, 20, 17, 0.72);
++      font-weight: 600;
++    }
++
++    .tile-arrow {
++      width: 34px;
++      height: 34px;
++      border-radius: 50%;
++      display: inline-flex;
++      align-items: center;
++      justify-content: center;
++      background: rgba(255,255,255,0.5);
++      border: 1px solid rgba(23,20,17,0.08);
++      transition: all 0.22s ease;
++    }
++
++    .tile:hover .tile-arrow {
++      background: rgba(23,20,17,0.92);
++      color: #fff;
++      transform: translateX(2px);
++    }
++
++    .icu { background: var(--icu); }
++    .parfumo { background: var(--parfumo); }
++    .mta { background: var(--mta); }
++    .spotify { background: var(--spotify); }
++    .cce { background: var(--cce); }
++    .fmri { background: var(--fmri); }
++    .tiger { background: var(--tiger); }
++    .primate { background: var(--primate); }
++
++    .footer {
++      margin-top: 28px;
++      text-align: center;
++      color: var(--muted);
++      font-size: 0.94rem;
++    }
++
++    @media (max-width: 1080px) {
++      .tiles {
++        grid-template-columns: repeat(2, minmax(0, 1fr));
++      }
++    }
++
++    @media (max-width: 760px) {
++      .page {
++        padding: 20px 14px 42px;
++      }
++
++      .hero {
++        padding: 86px 20px 28px;
++        border-radius: 28px;
++      }
++
++      .top-links {
++        top: 14px;
++        right: 14px;
++        left: 14px;
++        justify-content: center;
++      }
++
++      .edu-pill {
++        min-width: 0;
++        width: 100%;
++      }
++
++      .profile-ring {
++        width: 108px;
++        height: 108px;
++      }
++
++      .bio {
++        font-size: 1rem;
++      }
++
++      .tiles {
++        grid-template-columns: 1fr;
++      }
++    }
++  </style>
++</head>
++<body>
++  <div class="page">
++    <section class="hero">
++      <nav class="top-links">
++        <a href="https://www.linkedin.com/in/aadil815/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
++        <a href="https://aadil815.github.io/resume" target="_blank" rel="noopener noreferrer">Resume</a>
++        <a href="mailto:aadilmsds@gmail.com">Contact Me</a>
++      </nav>
++      <div class="profile-ring">
++        <div class="profile-placeholder">AK</div>
++      </div>
++
++      <h1>Aadil Khan, MDS</h1>
++      <div class="subhead">New York, NY</div>
++
++      <p class="bio">
++        Data science graduate student with a neuroscience background studying decision-making and experience in analyzing healthcare, behavioral, environmental, sports, and consumer trend data. Applies quantitative methods and AI to complex real-world problems, translating data into actionable insights on markets, behavior, and emerging trends.
++      </p>
++
++      <div class="education">
++        <div class="edu-pill">
++          <span class="edu-emoji">🎓</span>
++          <div class="edu-text">
++            <span class="edu-school">University of Pittsburgh</span>
++            <span class="edu-degree">Master of Data Science</span>
++          </div>
++        </div>
++        <div class="edu-pill">
++          <span class="edu-emoji">🧠</span>
++          <div class="edu-text">
++            <span class="edu-school">Adelphi University</span>
++            <span class="edu-degree">Bachelor of Science in Molecular Neuroscience</span>
++          </div>
++        </div>
++      </div>
++    </section>
++
++    <section class="section-intro">
++      <div class="section-kicker">Selected Work</div>
++      <h2>Data projects across healthcare, policy, behavior, and consumer trends</h2>
++      <p>
++        A curated portfolio of interactive HTML projects built around analysis, modeling, and visual storytelling.
++      </p>
++    </section>
++
++    <main class="tiles">
++      <a class="tile icu" href="https://aadil815.github.io/icu/" target="_blank" rel="noopener noreferrer">
++        <div>
++          <div class="tile-top">
++            <div class="tile-code">Healthcare Analytics</div>
++            <div class="tile-emoji">🏥</div>
++          </div>
++          <h3 class="tile-title">ICU</h3>
++          <p class="tile-desc">ICU length of stay, mortality, and interpretable clinical modeling.</p>
++        </div>
++        <div class="tile-foot">
++          <span>Open Project</span>
++          <span class="tile-arrow">↗</span>
++        </div>
++      </a>
++
++      <a class="tile parfumo" href="https://aadil815.github.io/parfumo/" target="_blank" rel="noopener noreferrer">
++        <div>
++          <div class="tile-top">
++            <div class="tile-code">Consumer Trends</div>
++            <div class="tile-emoji">🧴</div>
++          </div>
++          <h3 class="tile-title">Parfumo</h3>
++          <p class="tile-desc">Fragrance database analysis focused on notes, brands, accords, and popularity signals.</p>
++        </div>
++        <div class="tile-foot">
++          <span>Open Project</span>
++          <span class="tile-arrow">↗</span>
++        </div>
++      </a>
++
++      <a class="tile mta" href="https://aadil815.github.io/mta/" target="_blank" rel="noopener noreferrer">
++        <div>
++          <div class="tile-top">
++            <div class="tile-code">Policy & Transportation</div>
++            <div class="tile-emoji">🚇</div>
++          </div>
++          <h3 class="tile-title">MTA</h3>
++          <p class="tile-desc">Transit and congestion pricing analysis through ridership and policy outcomes.</p>
++        </div>
++        <div class="tile-foot">
++          <span>Open Project</span>
++          <span class="tile-arrow">↗</span>
++        </div>
++      </a>
++
++      <a class="tile spotify" href="https://aadil815.github.io/spotify/" target="_blank" rel="noopener noreferrer">
++        <div>
++          <div class="tile-top">
++            <div class="tile-code">Music & Modeling</div>
++            <div class="tile-emoji">🎧</div>
++          </div>
++          <h3 class="tile-title">Spotify</h3>
++          <p class="tile-desc">Audio features, clustering, and predictive modeling of track popularity.</p>
++        </div>
++        <div class="tile-foot">
++          <span>Open Project</span>
++          <span class="tile-arrow">↗</span>
++        </div>
++      </a>
++
++      <a class="tile cce" href="https://aadil815.github.io/cce/" target="_blank" rel="noopener noreferrer">
++        <div>
++          <div class="tile-top">
++            <div class="tile-code">Environmental Policy</div>
++            <div class="tile-emoji">💧</div>
++          </div>
++          <h3 class="tile-title">CCE</h3>
++          <p class="tile-desc">Water quality, contaminant policy, and public-interest environmental analysis.</p>
++        </div>
++        <div class="tile-foot">
++          <span>Open Project</span>
++          <span class="tile-arrow">↗</span>
++        </div>
++      </a>
++
++      <a class="tile fmri" href="https://aadil815.github.io/fmri/" target="_blank" rel="noopener noreferrer">
++        <div>
++          <div class="tile-top">
++            <div class="tile-code">Neuroscience Research</div>
++            <div class="tile-emoji">🧠</div>
++          </div>
++          <h3 class="tile-title">fMRI</h3>
++          <p class="tile-desc">Neural response and social reward analysis with imaging-based interpretation.</p>
++        </div>
++        <div class="tile-foot">
++          <span>Open Project</span>
++          <span class="tile-arrow">↗</span>
++        </div>
++      </a>
++
++      <a class="tile tiger" href="https://aadil815.github.io/tiger/" target="_blank" rel="noopener noreferrer">
++        <div>
++          <div class="tile-top">
++            <div class="tile-code">Evolutionary Genetics</div>
++            <div class="tile-emoji">🐅</div>
++          </div>
++          <h3 class="tile-title">Tiger</h3>
++          <p class="tile-desc">Phylogenetic and genetic analysis of tiger vocal cord morphology.</p>
++        </div>
++        <div class="tile-foot">
++          <span>Open Project</span>
++          <span class="tile-arrow">↗</span>
++        </div>
++      </a>
++
++      <a class="tile primate" href="https://aadil815.github.io/primate/" target="_blank" rel="noopener noreferrer">
++        <div>
++          <div class="tile-top">
++            <div class="tile-code">Comparative Biology</div>
++            <div class="tile-emoji">🐒</div>
++          </div>
++          <h3 class="tile-title">Primate</h3>
++          <p class="tile-desc">Evolutionary analysis of primate menopause and leptin selection patterns.</p>
++        </div>
++        <div class="tile-foot">
++          <span>Open Project</span>
++          <span class="tile-arrow">↗</span>
++        </div>
++      </a>
++    </main>
++
++    <div class="footer">
++      Designed as a central GitHub Pages portfolio for interactive data storytelling and analytical work.
++    </div>
++  </div>
++</body>
++</html>
