@@ -64,9 +64,8 @@
       right: 20px;
       display: flex;
       align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      padding: 7px;
+      gap: 6px;
+      padding: 7px 12px;
       border: 1px solid rgba(255,255,255,0.55);
       background: rgba(255, 252, 246, 0.58);
       backdrop-filter: blur(16px);
@@ -76,37 +75,11 @@
       z-index: 2;
     }
 
-    .top-links a {
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 0.84rem;
-      color: var(--muted);
-      transition: all 0.22s ease;
-    }
-
-    .hero-badge {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.58);
-      background: rgba(255, 252, 246, 0.58);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      box-shadow: var(--shadow);
+    .top-links .ny-chip {
       font-size: 0.82rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
       color: var(--muted);
       font-weight: 600;
-      z-index: 2;
-    }
-
-    .top-links a:hover {
-      background: rgba(23, 20, 17, 0.92);
-      color: #fff;
-      transform: translateY(-1px);
+      letter-spacing: 0.03em;
     }
 
     .hero {
@@ -189,6 +162,35 @@
       margin: 24px auto 0;
       font-size: 1.07rem;
       color: #2c241e;
+    }
+
+    .hero-actions {
+      margin-top: 18px;
+      display: inline-flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 6px;
+      border: 1px solid rgba(255,255,255,0.55);
+      background: rgba(255, 252, 246, 0.58);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 999px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-actions a {
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      color: var(--muted);
+      transition: all 0.22s ease;
+    }
+
+    .hero-actions a:hover {
+      background: rgba(23, 20, 17, 0.92);
+      color: #fff;
+      transform: translateY(-1px);
     }
 
     .education {
@@ -374,6 +376,15 @@
       transition: all 0.22s ease;
     }
 
+    .tile-tag {
+      font-size: 0.74rem;
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(23,20,17,0.14);
+      background: rgba(255,255,255,0.42);
+      letter-spacing: 0.02em;
+    }
+
     .tile:hover .tile-arrow {
       background: rgba(23,20,17,0.92);
       color: #fff;
@@ -408,14 +419,7 @@
       .top-links {
         top: 14px;
         right: 14px;
-        left: 14px;
-        justify-content: center;
-      }
-
-      .hero-badge {
-        position: static;
-        display: inline-flex;
-        margin: 0 auto 10px;
+        left: auto;
       }
 
       .edu-pill {
@@ -441,22 +445,25 @@
 <body>
   <div class="page">
     <section class="hero">
-      <div class="hero-badge">Aadil Khan · Portfolio</div>
       <nav class="top-links">
-        <a href="https://www.linkedin.com/in/aadil815/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://aadil815.github.io/resume" target="_blank" rel="noopener noreferrer">Resume</a>
-        <a href="mailto:aadilmsds@gmail.com">Contact Me</a>
+        <span class="ny-chip">🗽 New York</span>
       </nav>
       <div class="profile-ring">
         <img class="profile-photo" src="assets/profile-photo.png" alt="Portrait of Aadil Khan" />
       </div>
 
       <h1>Aadil Khan, MDS</h1>
-      <div class="subhead">New York, NY</div>
+      <div class="subhead">Data Analyst</div>
 
       <p class="bio">
         Recent data science graduate with a neuroscience background studying decision-making and experience in analyzing healthcare, behavioral, environmental, sports, and consumer trend data. Applies quantitative methods and AI to complex real-world problems, translating data into actionable insights on markets, behavior, and emerging trends.
       </p>
+
+      <nav class="hero-actions">
+        <a href="https://www.linkedin.com/in/aadil815/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://aadil815.github.io/resume" target="_blank" rel="noopener noreferrer">Resume</a>
+        <a href="mailto:aadilmsds@gmail.com">Contact Me</a>
+      </nav>
 
       <div class="education">
         <div class="edu-pill">
@@ -469,9 +476,9 @@
         <div class="edu-pill">
           <span class="edu-emoji">🧠</span>
           <div class="edu-text">
-            <span class="edu-school">Adelphi University</span>
+            <span class="edu-school">Adelphi University · Honors College</span>
             <span class="edu-degree">B.S. in Molecular Neuroscience</span>
-            <span class="edu-extra">Honors College • Minors: Biology, Psychology</span>
+            <span class="edu-extra">Minors: Biology, Psychology</span>
           </div>
         </div>
       </div>
@@ -495,7 +502,7 @@
           <p class="tile-desc">ICU length of stay, mortality, and interpretable clinical modeling.</p>
         </div>
         <div class="tile-foot">
-          <span>Open Project</span>
+          <span class="tile-tag">Python · Clinical ML</span>
           <span class="tile-arrow">↗</span>
         </div>
       </a>
@@ -510,7 +517,7 @@
           <p class="tile-desc">Fragrance database analysis focused on notes, brands, accords, and popularity signals.</p>
         </div>
         <div class="tile-foot">
-          <span>Open Project</span>
+          <span class="tile-tag">NLP · Trend Mining</span>
           <span class="tile-arrow">↗</span>
         </div>
       </a>
@@ -525,7 +532,7 @@
           <p class="tile-desc">Transit and congestion pricing analysis through ridership and policy outcomes.</p>
         </div>
         <div class="tile-foot">
-          <span>Open Project</span>
+          <span class="tile-tag">Policy · Time Series</span>
           <span class="tile-arrow">↗</span>
         </div>
       </a>
@@ -540,7 +547,7 @@
           <p class="tile-desc">Audio features, clustering, and predictive modeling of track popularity.</p>
         </div>
         <div class="tile-foot">
-          <span>Open Project</span>
+          <span class="tile-tag">Clustering · XGBoost</span>
           <span class="tile-arrow">↗</span>
         </div>
       </a>
@@ -555,7 +562,7 @@
           <p class="tile-desc">Water quality, contaminant policy, and public-interest environmental analysis.</p>
         </div>
         <div class="tile-foot">
-          <span>Open Project</span>
+          <span class="tile-tag">GIS · Public Health</span>
           <span class="tile-arrow">↗</span>
         </div>
       </a>
@@ -570,7 +577,7 @@
           <p class="tile-desc">Neural response and social reward analysis with imaging-based interpretation.</p>
         </div>
         <div class="tile-foot">
-          <span>Open Project</span>
+          <span class="tile-tag">fMRI · Behavioral</span>
           <span class="tile-arrow">↗</span>
         </div>
       </a>
@@ -585,7 +592,7 @@
           <p class="tile-desc">Phylogenetic and genetic analysis of tiger vocal cord morphology.</p>
         </div>
         <div class="tile-foot">
-          <span>Open Project</span>
+          <span class="tile-tag">Phylogenetics · R</span>
           <span class="tile-arrow">↗</span>
         </div>
       </a>
@@ -600,7 +607,7 @@
           <p class="tile-desc">Evolutionary analysis of primate menopause and leptin selection patterns.</p>
         </div>
         <div class="tile-foot">
-          <span>Open Project</span>
+          <span class="tile-tag">Evolution · Genomics</span>
           <span class="tile-arrow">↗</span>
         </div>
       </a>
