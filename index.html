@@ -96,7 +96,8 @@
       -webkit-backdrop-filter: blur(16px);
       box-shadow: var(--shadow);
       font-size: 0.82rem;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
       color: var(--muted);
       font-weight: 600;
       z-index: 2;
@@ -149,8 +150,8 @@
     }
 
     .profile-ring {
-      width: 126px;
-      height: 126px;
+      width: 152px;
+      height: 152px;
       margin: 0 auto 22px;
       border-radius: 50%;
       padding: 5px;
@@ -170,7 +171,7 @@
 
     .hero h1 {
       margin: 0;
-      font-size: clamp(2.8rem, 6vw, 4.8rem);
+      font-size: clamp(2.3rem, 5vw, 4rem);
       line-height: 0.96;
       letter-spacing: -0.055em;
       font-weight: 700;
@@ -373,15 +374,6 @@
       transition: all 0.22s ease;
     }
 
-    .tile-tag {
-      font-size: 0.74rem;
-      padding: 5px 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(23,20,17,0.14);
-      background: rgba(255,255,255,0.42);
-      letter-spacing: 0.02em;
-    }
-
     .tile:hover .tile-arrow {
       background: rgba(23,20,17,0.92);
       color: #fff;
@@ -432,8 +424,8 @@
       }
 
       .profile-ring {
-        width: 108px;
-        height: 108px;
+        width: 126px;
+        height: 126px;
       }
 
       .bio {
@@ -449,7 +441,7 @@
 <body>
   <div class="page">
     <section class="hero">
-      <div class="hero-badge">📍 New York, NY</div>
+      <div class="hero-badge">Aadil Khan · Portfolio</div>
       <nav class="top-links">
         <a href="https://www.linkedin.com/in/aadil815/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href="https://aadil815.github.io/resume" target="_blank" rel="noopener noreferrer">Resume</a>
@@ -460,7 +452,7 @@
       </div>
 
       <h1>Aadil Khan, MDS</h1>
-      <div class="subhead">Data Analyst</div>
+      <div class="subhead">New York, NY</div>
 
       <p class="bio">
         Recent data science graduate with a neuroscience background studying decision-making and experience in analyzing healthcare, behavioral, environmental, sports, and consumer trend data. Applies quantitative methods and AI to complex real-world problems, translating data into actionable insights on markets, behavior, and emerging trends.
@@ -479,6 +471,7 @@
           <div class="edu-text">
             <span class="edu-school">Adelphi University</span>
             <span class="edu-degree">B.S. in Molecular Neuroscience</span>
+            <span class="edu-extra">Honors College • Minors: Biology, Psychology</span>
           </div>
         </div>
       </div>
@@ -502,7 +495,7 @@
           <p class="tile-desc">ICU length of stay, mortality, and interpretable clinical modeling.</p>
         </div>
         <div class="tile-foot">
-          <span class="tile-tag">Python · Clinical ML</span>
+          <span>Open Project</span>
           <span class="tile-arrow">↗</span>
         </div>
       </a>
@@ -517,7 +510,7 @@
           <p class="tile-desc">Fragrance database analysis focused on notes, brands, accords, and popularity signals.</p>
         </div>
         <div class="tile-foot">
-          <span class="tile-tag">NLP · Trend Mining</span>
+          <span>Open Project</span>
           <span class="tile-arrow">↗</span>
         </div>
       </a>
@@ -532,7 +525,7 @@
           <p class="tile-desc">Transit and congestion pricing analysis through ridership and policy outcomes.</p>
         </div>
         <div class="tile-foot">
-          <span class="tile-tag">Policy · Time Series</span>
+          <span>Open Project</span>
           <span class="tile-arrow">↗</span>
         </div>
       </a>
@@ -547,7 +540,7 @@
           <p class="tile-desc">Audio features, clustering, and predictive modeling of track popularity.</p>
         </div>
         <div class="tile-foot">
-          <span class="tile-tag">Clustering · XGBoost</span>
+          <span>Open Project</span>
           <span class="tile-arrow">↗</span>
         </div>
       </a>
@@ -562,7 +555,7 @@
           <p class="tile-desc">Water quality, contaminant policy, and public-interest environmental analysis.</p>
         </div>
         <div class="tile-foot">
-          <span class="tile-tag">GIS · Public Health</span>
+          <span>Open Project</span>
           <span class="tile-arrow">↗</span>
         </div>
       </a>
@@ -577,7 +570,7 @@
           <p class="tile-desc">Neural response and social reward analysis with imaging-based interpretation.</p>
         </div>
         <div class="tile-foot">
-          <span class="tile-tag">fMRI · Behavioral</span>
+          <span>Open Project</span>
           <span class="tile-arrow">↗</span>
         </div>
       </a>
@@ -592,7 +585,7 @@
           <p class="tile-desc">Phylogenetic and genetic analysis of tiger vocal cord morphology.</p>
         </div>
         <div class="tile-foot">
-          <span class="tile-tag">Phylogenetics · R</span>
+          <span>Open Project</span>
           <span class="tile-arrow">↗</span>
         </div>
       </a>
@@ -607,7 +600,7 @@
           <p class="tile-desc">Evolutionary analysis of primate menopause and leptin selection patterns.</p>
         </div>
         <div class="tile-foot">
-          <span class="tile-tag">Evolution · Genomics</span>
+          <span>Open Project</span>
           <span class="tile-arrow">↗</span>
         </div>
       </a>
