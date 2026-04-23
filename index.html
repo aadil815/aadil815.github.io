@@ -64,9 +64,9 @@
       right: 20px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
-      padding: 9px;
+      padding: 7px;
       border: 1px solid rgba(255,255,255,0.55);
       background: rgba(255, 252, 246, 0.58);
       backdrop-filter: blur(16px);
@@ -77,11 +77,30 @@
     }
 
     .top-links a {
-      padding: 10px 16px;
+      padding: 8px 12px;
       border-radius: 999px;
-      font-size: 0.95rem;
+      font-size: 0.84rem;
       color: var(--muted);
       transition: all 0.22s ease;
+    }
+
+    .hero-badge {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.58);
+      background: rgba(255, 252, 246, 0.58);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+      z-index: 2;
     }
 
     .top-links a:hover {
@@ -140,19 +159,14 @@
       box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
     }
 
-    .profile-placeholder {
+    .profile-photo {
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(180deg, #f8efe3 0%, #eadbc4 100%);
       border: 1px solid rgba(23, 20, 17, 0.08);
-      font-size: 2.1rem;
-      color: #8a7867;
-      letter-spacing: -0.04em;
-      font-weight: 700;
+      object-fit: cover;
+      object-position: center 25%;
+      display: block;
     }
 
     .hero h1 {
@@ -221,6 +235,12 @@
       font-size: 0.84rem;
       color: var(--muted);
       font-weight: 500;
+    }
+
+    .edu-extra {
+      font-size: 0.76rem;
+      color: #7d7164;
+      letter-spacing: 0.01em;
     }
 
     .section-intro {
@@ -392,6 +412,12 @@
         justify-content: center;
       }
 
+      .hero-badge {
+        position: static;
+        display: inline-flex;
+        margin: 0 auto 10px;
+      }
+
       .edu-pill {
         min-width: 0;
         width: 100%;
@@ -415,20 +441,21 @@
 <body>
   <div class="page">
     <section class="hero">
+      <div class="hero-badge">Aadil Khan · Portfolio</div>
       <nav class="top-links">
         <a href="https://www.linkedin.com/in/aadil815/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href="https://aadil815.github.io/resume" target="_blank" rel="noopener noreferrer">Resume</a>
         <a href="mailto:aadilmsds@gmail.com">Contact Me</a>
       </nav>
       <div class="profile-ring">
-        <div class="profile-placeholder">AK</div>
+        <img class="profile-photo" src="assets/profile-photo.png" alt="Portrait of Aadil Khan" />
       </div>
 
       <h1>Aadil Khan, MDS</h1>
       <div class="subhead">New York, NY</div>
 
       <p class="bio">
-        Data science graduate student with a neuroscience background studying decision-making and experience in analyzing healthcare, behavioral, environmental, sports, and consumer trend data. Applies quantitative methods and AI to complex real-world problems, translating data into actionable insights on markets, behavior, and emerging trends.
+        Recent data science graduate with a neuroscience background studying decision-making and experience in analyzing healthcare, behavioral, environmental, sports, and consumer trend data. Applies quantitative methods and AI to complex real-world problems, translating data into actionable insights on markets, behavior, and emerging trends.
       </p>
 
       <div class="education">
@@ -444,6 +471,7 @@
           <div class="edu-text">
             <span class="edu-school">Adelphi University</span>
             <span class="edu-degree">B.S. in Molecular Neuroscience</span>
+            <span class="edu-extra">Honors College • Minors: Biology, Psychology</span>
           </div>
         </div>
       </div>
