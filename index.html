@@ -64,8 +64,9 @@
       right: 20px;
       display: flex;
       align-items: center;
-      gap: 6px;
-      padding: 7px 12px;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 7px;
       border: 1px solid rgba(255,255,255,0.55);
       background: rgba(255, 252, 246, 0.58);
       backdrop-filter: blur(16px);
@@ -75,11 +76,36 @@
       z-index: 2;
     }
 
-    .top-links .ny-chip {
+    .top-links a {
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      color: var(--muted);
+      transition: all 0.22s ease;
+    }
+
+    .hero-badge {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.58);
+      background: rgba(255, 252, 246, 0.58);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
       font-size: 0.82rem;
+      letter-spacing: 0.03em;
       color: var(--muted);
       font-weight: 600;
-      letter-spacing: 0.03em;
+      z-index: 2;
+    }
+
+    .top-links a:hover {
+      background: rgba(23, 20, 17, 0.92);
+      color: #fff;
+      transform: translateY(-1px);
     }
 
     .hero {
@@ -162,35 +188,6 @@
       margin: 24px auto 0;
       font-size: 1.07rem;
       color: #2c241e;
-    }
-
-    .hero-actions {
-      margin-top: 18px;
-      display: inline-flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 6px;
-      border: 1px solid rgba(255,255,255,0.55);
-      background: rgba(255, 252, 246, 0.58);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-radius: 999px;
-      box-shadow: var(--shadow);
-    }
-
-    .hero-actions a {
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 0.84rem;
-      color: var(--muted);
-      transition: all 0.22s ease;
-    }
-
-    .hero-actions a:hover {
-      background: rgba(23, 20, 17, 0.92);
-      color: #fff;
-      transform: translateY(-1px);
     }
 
     .education {
@@ -419,7 +416,14 @@
       .top-links {
         top: 14px;
         right: 14px;
-        left: auto;
+        left: 14px;
+        justify-content: center;
+      }
+
+      .hero-badge {
+        position: static;
+        display: inline-flex;
+        margin: 0 auto 10px;
       }
 
       .edu-pill {
@@ -445,8 +449,11 @@
 <body>
   <div class="page">
     <section class="hero">
+      <div class="hero-badge">📍 New York, NY</div>
       <nav class="top-links">
-        <span class="ny-chip">🗽 New York</span>
+        <a href="https://www.linkedin.com/in/aadil815/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://aadil815.github.io/resume" target="_blank" rel="noopener noreferrer">Resume</a>
+        <a href="mailto:aadilmsds@gmail.com">Contact Me</a>
       </nav>
       <div class="profile-ring">
         <img class="profile-photo" src="assets/profile-photo.png" alt="Portrait of Aadil Khan" />
@@ -459,12 +466,6 @@
         Recent data science graduate with a neuroscience background studying decision-making and experience in analyzing healthcare, behavioral, environmental, sports, and consumer trend data. Applies quantitative methods and AI to complex real-world problems, translating data into actionable insights on markets, behavior, and emerging trends.
       </p>
 
-      <nav class="hero-actions">
-        <a href="https://www.linkedin.com/in/aadil815/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://aadil815.github.io/resume" target="_blank" rel="noopener noreferrer">Resume</a>
-        <a href="mailto:aadilmsds@gmail.com">Contact Me</a>
-      </nav>
-
       <div class="education">
         <div class="edu-pill">
           <span class="edu-emoji">🎓</span>
@@ -476,9 +477,8 @@
         <div class="edu-pill">
           <span class="edu-emoji">🧠</span>
           <div class="edu-text">
-            <span class="edu-school">Adelphi University · Honors College</span>
+            <span class="edu-school">Adelphi University</span>
             <span class="edu-degree">B.S. in Molecular Neuroscience</span>
-            <span class="edu-extra">Minors: Biology, Psychology</span>
           </div>
         </div>
       </div>
