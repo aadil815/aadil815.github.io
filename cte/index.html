@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chronic Traumatic Encephalopathy | Neuroscience Research Project</title>
+  <style>
+    :root{
+      --bg:#2f241f;
+      --bg-2:#453129;
+      --panel:#574036;
+      --panel-2:#654a3e;
+      --text:#fffaf5;
+      --muted:#e4d3c7;
+      --soft:#bfa99b;
+      --line:rgba(244,225,212,.17);
+      --sage:#a9b18d;
+      --clay:#c88d72;
+      --oat:#ead6c4;
+      --rose:#b77b70;
+      --shadow:0 20px 52px rgba(22,13,10,.22);
+      --radius:24px;
+      --max:1180px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 10% 8%,rgba(200,141,114,.13),transparent 28%),
+        radial-gradient(circle at 88% 5%,rgba(169,177,141,.10),transparent 24%),
+        linear-gradient(180deg,#2f241f 0%,#3a2923 48%,#2a201c 100%);
+      line-height:1.62;
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(var(--max),calc(100% - 36px));margin:0 auto}
+    .hero{padding:70px 0 38px;position:relative;overflow:hidden}
+    .hero::after{
+      content:"";position:absolute;right:-120px;top:0;width:460px;height:460px;
+      border-radius:50%;background:radial-gradient(circle,rgba(169,177,141,.14),transparent 66%);
+      pointer-events:none
+    }
+    .eyebrow,.tag,.source-tag{
+      display:inline-flex;align-items:center;gap:8px;border-radius:999px;
+      font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase
+    }
+    .eyebrow{padding:9px 14px;color:#eef0dc;background:rgba(169,177,141,.12);border:1px solid rgba(169,177,141,.34)}
+    h1{margin:18px 0 14px;max-width:950px;font-size:clamp(2.8rem,7vw,6.1rem);line-height:.98;letter-spacing:-.065em}
+    h1,h2,h3,p,li,.value{overflow-wrap:anywhere}
+    .hero-copy{max-width:880px;margin:0;color:var(--muted);font-size:1.08rem}
+    .tag-row{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+    .tag{padding:8px 11px;color:#f1dfd3;background:rgba(255,255,255,.045);border:1px solid var(--line);letter-spacing:.05em;text-transform:none}
+    .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;margin-top:28px}
+    .card,.metric,.stage,.source-card{
+      border:1px solid var(--line);background:linear-gradient(180deg,rgba(87,64,54,.96),rgba(69,49,41,.98));
+      min-width:0;border-radius:var(--radius);box-shadow:var(--shadow)
+    }
+    .card{padding:25px}
+    .card h3{margin:0 0 10px;font-size:1.27rem;letter-spacing:-.02em}
+    .card p{margin:0;color:var(--muted)}
+    .metric-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .metric{padding:20px;min-height:144px}
+    .metric .label{color:var(--soft);font-size:.75rem;font-weight:850;letter-spacing:.1em;text-transform:uppercase}
+    .metric .value{margin-top:8px;color:var(--oat);font-size:2.35rem;font-weight:900;letter-spacing:-.07em;line-height:1}
+    .metric .note{margin-top:9px;color:var(--muted);font-size:.87rem;line-height:1.42}
+    section{padding:38px 0}
+    .divider{height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent)}
+    .section-head{display:grid;grid-template-columns:.68fr 1fr;gap:22px;align-items:end;margin-bottom:20px}
+    .kicker{color:var(--sage);font-size:.78rem;font-weight:850;letter-spacing:.13em;text-transform:uppercase}
+    h2{margin:7px 0 0;font-size:clamp(1.9rem,4vw,3.2rem);line-height:1.06;letter-spacing:-.05em}
+    .section-copy{margin:0;color:var(--muted)}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .feature{display:grid;grid-template-columns:1.02fr .98fr;gap:18px;align-items:stretch}
+    .media-card{margin:0;overflow:hidden;border:1px solid var(--line);border-radius:var(--radius);background:#453129;box-shadow:var(--shadow)}
+    .media-card img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+    .media-card.contain img{object-fit:contain;padding:12px;background:#eee1d5}
+    figcaption{padding:14px 17px;color:var(--muted);font-size:.85rem;background:rgba(69,49,41,.98);border-top:1px solid var(--line)}
+    .bullets{list-style:none;margin:15px 0 0;padding:0}
+    .bullets li{position:relative;margin:0 0 10px;padding-left:18px;color:var(--muted)}
+    .bullets li::before{content:"";position:absolute;left:0;top:.68em;width:7px;height:7px;border-radius:50%;background:var(--sage)}
+    .stage-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+    .stage{padding:19px;position:relative;overflow:hidden}
+    .stage::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--stage)}
+    .stage-no{color:var(--stage);font-size:.77rem;font-weight:850;letter-spacing:.12em;text-transform:uppercase}
+    .stage h3{margin:7px 0 7px;font-size:1.04rem}
+    .stage p{margin:0;color:var(--muted);font-size:.88rem}
+    .stage:nth-child(1){--stage:var(--sage)}
+    .stage:nth-child(2){--stage:var(--oat)}
+    .stage:nth-child(3){--stage:var(--clay)}
+    .stage:nth-child(4){--stage:var(--rose)}
+    .timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+    .time{padding:18px;border-top:2px solid var(--sage);background:rgba(255,255,255,.045);border-radius:0 0 16px 16px}
+    .time strong{display:block;color:var(--sage);font-size:1.17rem}
+    .time span{display:block;margin-top:6px;color:var(--muted);font-size:.9rem}
+    .case{
+      background:
+        radial-gradient(circle at 85% 0,rgba(200,141,114,.16),transparent 30%),
+        linear-gradient(180deg,rgba(83,56,47,.99),rgba(50,36,31,.99));
+      border-top:1px solid rgba(200,141,114,.28);border-bottom:1px solid rgba(200,141,114,.28)
+    }
+    .case .kicker{color:#d9aa91}
+    .caution{margin-top:15px;padding:15px 17px;border-left:3px solid var(--clay);background:rgba(200,141,114,.10);color:#fff3ea;border-radius:0 14px 14px 0}
+    .source-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .source-card{padding:17px}
+    .source-tag{padding:6px 9px;color:#eef0dc;background:rgba(169,177,141,.11);border:1px solid rgba(169,177,141,.26)}
+    .source-card h3{margin:10px 0 6px;font-size:1rem}
+    .source-card p{margin:0;color:var(--muted);font-size:.86rem}
+    .source-card a{color:#fff0e6;text-decoration:underline;text-underline-offset:3px}
+    .footer{padding:30px 0 62px;color:var(--soft);font-size:.86rem}
+    @media(max-width:900px){
+      .hero-grid,.section-head,.feature,.grid-2{grid-template-columns:1fr}
+      .stage-grid,.timeline{grid-template-columns:repeat(2,1fr)}
+      .grid-3{grid-template-columns:1fr}
+    }
+    @media(max-width:590px){
+      .wrap{width:min(var(--max),calc(100% - 22px))}
+      .hero{padding-top:48px}
+      h1{font-size:3.3rem}
+      .metric-grid,.stage-grid,.timeline,.source-grid{grid-template-columns:1fr}
+      .card{padding:20px}
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <span class="eyebrow">Neuroscience Research Project</span>
+      <h1>Chronic Traumatic Encephalopathy</h1>
+      <p class="hero-copy">
+        A research synthesis on repetitive head impacts, phosphorylated tau pathology, and the progression of CTE. The project consolidates coursework developed from 2018 to 2020 and updates its framing with current neuropathology research.
+      </p>
+      <div class="tag-row">
+        <span class="tag">Neurodegeneration</span>
+        <span class="tag">Repetitive head impacts</span>
+        <span class="tag">Tau pathology</span>
+        <span class="tag">Postmortem diagnosis</span>
+      </div>
+      <div class="hero-grid">
+        <article class="card">
+          <h3>Research Focus</h3>
+          <p>
+            CTE is a neurodegenerative tauopathy associated with exposure to repetitive head impacts, including concussive and nonconcussive impacts. Its defining lesion is a distinctive accumulation of phosphorylated tau around small blood vessels at the depths of cortical sulci.
+          </p>
+          <div class="caution">CTE can currently be definitively diagnosed only through postmortem neuropathological examination. Clinical symptoms in living patients require careful differential diagnosis.</div>
+        </article>
+        <div class="metric-grid">
+          <article class="metric"><div class="label">Pathology stages</div><div class="value">4</div><div class="note">McKee staging describes an ordered spread of p-tau pathology.</div></article>
+          <article class="metric"><div class="label">NFL brains studied</div><div class="value">110/111</div><div class="note">CTE diagnoses in a 2017 convenience sample of donated NFL-player brains.</div></article>
+          <article class="metric"><div class="label">Historic milestone</div><div class="value">1928</div><div class="note">Harrison Martland described the “punch-drunk” syndrome in boxers.</div></article>
+          <article class="metric"><div class="label">Exposure pattern</div><div class="value">RHI</div><div class="note">Risk is linked to repetitive head impacts, not concussions alone.</div></article>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="divider"></div>
+
+  <main>
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">01 / Background</div><h2>From boxing observations to a modern neuropathology</h2></div>
+          <p class="section-copy">The source papers traced a century of growing attention to long-term brain injury in athletes. Modern consensus criteria now distinguish CTE from other tauopathies through the location and distribution of its pathology.</p>
+        </div>
+        <div class="timeline">
+          <article class="time"><strong>1928</strong><span>Martland reports a “punch-drunk” syndrome among prizefighters.</span></article>
+          <article class="time"><strong>2005</strong><span>Omalu and colleagues publish evidence of CTE in Mike Webster.</span></article>
+          <article class="time"><strong>2016</strong><span>NINDS-NIBIB consensus criteria formalize the diagnostic lesion.</span></article>
+          <article class="time"><strong>2021+</strong><span>Refined criteria clarify the minimum threshold and research direction.</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">02 / Mechanism</div><h2>Why tau matters</h2></div>
+          <p class="section-copy">Tau normally supports the microtubule structure of neurons. In CTE, abnormal phosphorylated tau aggregates appear in a characteristic perivascular and sulcal pattern that differs from other neurodegenerative diseases.</p>
+        </div>
+        <div class="feature">
+          <figure class="media-card contain">
+            <img src="./assets/image9.png" alt="Illustration of microtubules and tau protein aggregation" />
+            <figcaption>Microtubules provide structural support within neurons. Abnormal tau aggregation is central to the disease process.</figcaption>
+          </figure>
+          <article class="card">
+            <h3>A distinct diagnostic pattern</h3>
+            <p>The critical finding is not simply the presence of tau. It is the lesion pattern: p-tau aggregates in neurons, with or without glial p-tau, around a small blood vessel at the depth of a cortical sulcus.</p>
+            <ul class="bullets">
+              <li>Exposure can include repeated subconcussive impacts.</li>
+              <li>Pathology frequently involves frontal and temporal regions as disease severity increases.</li>
+              <li>CTE remains a pathological diagnosis; the corresponding clinical research syndrome is called traumatic encephalopathy syndrome (TES).</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">03 / Neuropathology</div><h2>Progression across the brain</h2></div>
+          <p class="section-copy">The original presentations emphasized a four-stage model. The stages describe increasing anatomical distribution and burden of p-tau pathology, not a simple symptom checklist for diagnosing a living person.</p>
+        </div>
+        <div class="stage-grid">
+          <article class="stage"><div class="stage-no">Stage I</div><h3>Focal lesions</h3><p>Isolated perivascular lesions typically emerge at sulcal depths in frontal or temporal cortex.</p></article>
+          <article class="stage"><div class="stage-no">Stage II</div><h3>Multiple cortical sites</h3><p>Additional lesions appear across frontal, temporal, and parietal cortices with early spread.</p></article>
+          <article class="stage"><div class="stage-no">Stage III</div><h3>Widespread involvement</h3><p>Pathology extends across cortical and medial temporal structures, including the hippocampus and amygdala.</p></article>
+          <article class="stage"><div class="stage-no">Stage IV</div><h3>Severe distribution</h3><p>Dense cortical pathology and neurodegeneration affect additional deep brain and brainstem structures.</p></article>
+        </div>
+        <div class="grid-2" style="margin-top:18px">
+          <figure class="media-card contain">
+            <img src="./assets/image16.png" alt="Brain tissue sections illustrating progression of CTE pathology" />
+            <figcaption>Illustrative pathology progression embedded in the source presentation.</figcaption>
+          </figure>
+          <figure class="media-card contain">
+            <img src="./assets/image15.png" alt="Comparison of a normal brain and a brain with advanced CTE" />
+            <figcaption>Normal brain and advanced CTE comparison embedded in the source presentation.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">04 / Exposure & symptoms</div><h2>The clinical picture is variable</h2></div>
+          <p class="section-copy">The papers described mood, behavior, cognition, and motor changes. Current research remains careful: these symptoms are not specific to CTE, and symptoms alone cannot confirm the underlying pathology.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card"><h3>Exposure context</h3><p>CTE has been reported among people with repeated head-impact exposure, including participants in contact sports and military activities.</p></article>
+          <article class="card"><h3>Possible presentation</h3><p>Research descriptions include problems with mood, behavior, memory, executive function, and later-life cognition, with substantial individual variation.</p></article>
+          <article class="card"><h3>Living-patient research</h3><p>Researchers are studying biomarkers, neuroimaging, and TES criteria. These tools do not yet replace neuropathological confirmation.</p></article>
+        </div>
+        <div class="grid-2" style="margin-top:18px">
+          <figure class="media-card">
+            <img src="./assets/image7.png" alt="Football players during a tackle football play" />
+            <figcaption>Tackle football is one prominent setting for repeated head-impact exposure.</figcaption>
+          </figure>
+          <figure class="media-card contain">
+            <img src="./assets/image3.png" alt="Medical brain imaging comparison labeled normal and NFL player" />
+            <figcaption>Neuroimaging remains an active research area; it is not a standalone definitive test for CTE.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">05 / Evidence</div><h2>Interpreting the 2017 football study</h2></div>
+          <p class="section-copy">The presentation highlighted the striking 110-of-111 result. That statistic is important, but it must be interpreted within the design of the study.</p>
+        </div>
+        <div class="grid-2">
+          <article class="card">
+            <h3>What the study found</h3>
+            <p>In a 2017 JAMA case series of donated brains from deceased football players, researchers diagnosed CTE in 177 of 202 players overall, including 110 of 111 former NFL players.</p>
+          </article>
+          <article class="card">
+            <h3>What it does not establish</h3>
+            <p>The brain-bank sample was not designed to estimate CTE prevalence in all football players. Donation and selection factors mean the result should not be read as “99% of NFL players develop CTE.”</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="case">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">Separate case study</div><h2>Aaron Hernandez</h2></div>
+          <p class="section-copy">The 2020 papers developed this material most fully through a review of <em>Killer Inside: The Mind of Aaron Hernandez</em>. It is presented separately because an individual case should not be treated as the definition of CTE.</p>
+        </div>
+        <div class="feature">
+          <article class="card">
+            <h3>Neuropathological finding</h3>
+            <p>After Hernandez died at age 27, Boston University researchers reported Stage III CTE. The findings included substantial disease burden for his age and damage affecting regions associated with memory, judgment, and behavior.</p>
+            <ul class="bullets">
+              <li>The source papers connect the case to a history of football exposure from youth through the NFL.</li>
+              <li>The case illustrates why young-age exposure and cumulative impacts remain important research questions.</li>
+              <li>The diagnosis was made postmortem, after brain donation and examination.</li>
+            </ul>
+            <div class="caution">CTE is relevant clinical context, but neuropathology alone cannot explain or excuse a person’s actions. The Hernandez case also involves psychosocial history, substance use, and other factors that should not be collapsed into a single cause.</div>
+          </article>
+          <figure class="media-card contain">
+            <img src="./assets/image13.png" alt="Aaron Hernandez beside an annotated brain section showing ventricular enlargement and atrophy of the fornix" />
+            <figcaption>Source-presentation image illustrating reported ventricular enlargement and atrophy of the fornix in Hernandez’s brain.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">06 / Research direction</div><h2>What comes next</h2></div>
+          <p class="section-copy">The consistent question across the papers is how to identify risk earlier and reduce exposure before irreversible pathology develops.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card"><h3>Prevention</h3><p>Reduce unnecessary repetitive head impacts and improve recognition, reporting, and management of head injury.</p></article>
+          <article class="card"><h3>Biomarkers</h3><p>Develop and validate imaging and fluid biomarkers that can support research in living participants.</p></article>
+          <article class="card"><h3>Clinical precision</h3><p>Distinguish pathology, clinical syndrome, and co-occurring conditions so that symptoms receive appropriate care.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">Selected sources</div><h2>Research foundation</h2></div>
+          <p class="section-copy">The report consolidates the supplied essays and presentations while using current primary and institutional sources for the scientific framing.</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card"><span class="source-tag">Consensus criteria</span><h3>NINDS-NIBIB neuropathology criteria</h3><p>McKee et al. defined the pathognomonic perivascular p-tau lesion. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4698281/" target="_blank" rel="noopener noreferrer">Read source</a></p></article>
+          <article class="source-card"><span class="source-tag">Review</span><h3>Criteria and repetitive head impacts</h3><p>McKee et al. review diagnostic refinements, staging, and the evidence relationship with RHI. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10020327/" target="_blank" rel="noopener noreferrer">Read source</a></p></article>
+          <article class="source-card"><span class="source-tag">Case series</span><h3>Football-player brain bank study</h3><p>Boston University summarizes the 2017 JAMA study and its 110-of-111 NFL result. <a href="https://www.bu.edu/articles/2017/cte-former-nfl-players/" target="_blank" rel="noopener noreferrer">Read source</a></p></article>
+          <article class="source-card"><span class="source-tag">Clinical research</span><h3>DIAGNOSE CTE Research Project</h3><p>NINDS outlines work on biomarkers and methods for studying CTE risk in living people. <a href="https://www.ninds.nih.gov/health-information/clinical-trials/diagnose-cte-research-project" target="_blank" rel="noopener noreferrer">Read source</a></p></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="divider"></div>
+  <footer class="footer">
+    <div class="wrap">Portfolio research project by Aadil Khan. Educational synthesis based on coursework developed from 2018 to 2020; not medical advice.</div>
+  </footer>
+</body>
+</html>

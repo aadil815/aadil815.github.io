@@ -1,472 +1,391 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Long Island Water, Cost, and 1,4-Dioxane Reform</title>
-  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0d2f3a">
+   <meta name="description" content="A source-backed summary of Long Island drinking water, 1,4-dioxane, PFAS, water costs, and New York policy.">
+   <title>Long Island Drinking Water | Contamination, Cost, and Policy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #08141a;
-      --panel: #10242c;
-      --panel-2: #14333d;
-      --text: #ecf7f6;
-      --muted: #b8d0cf;
-      --accent: #56c7c0;
-      --accent-2: #8be28c;
-      --accent-3: #ffd166;
-      --danger: #ff7f7f;
-      --line: rgba(255,255,255,0.10);
-      --shadow: 0 18px 50px rgba(0,0,0,.28);
-      --radius: 24px;
-      --maxw: 1180px;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(86,199,192,.13), transparent 30%),
-        radial-gradient(circle at top right, rgba(139,226,140,.10), transparent 26%),
-        linear-gradient(180deg, #08141a 0%, #0a1d24 100%);
-      color: var(--text);
-      line-height: 1.6;
-    }
-    .wrap {
-      width: min(var(--maxw), calc(100% - 32px));
-      margin: 0 auto;
-    }
-    .hero { padding: 72px 0 32px; }
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 14px;
-      background: rgba(86,199,192,.12);
-      border: 1px solid rgba(86,199,192,.22);
-      border-radius: 999px;
-      color: var(--accent);
-      font-weight: 700;
-      letter-spacing: .02em;
-      font-size: .9rem;
-    }
-    h1 {
-      font-size: clamp(2.6rem, 6vw, 5rem);
-      line-height: .98;
-      margin: 18px 0 16px;
-      letter-spacing: -0.04em;
-      max-width: 900px;
-    }
-    .subhead {
-      max-width: 860px;
-      font-size: 1.08rem;
-      color: var(--muted);
-    }
-    .meta-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-top: 34px;
-    }
-    .stat {
-      background: rgba(16,36,44,.72);
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 18px 18px 16px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
-    }
-    .stat .k {
-      font-size: 1.75rem;
-      font-weight: 800;
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-    .stat .l {
-      color: var(--muted);
-      font-size: .95rem;
-    }
-    section { padding: 26px 0 10px; }
-    .section-card {
-      background: linear-gradient(180deg, rgba(16,36,44,.92), rgba(16,36,44,.82));
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 28px;
-      box-shadow: var(--shadow);
-    }
-    h2 {
-      margin: 0 0 14px;
-      font-size: clamp(1.7rem, 3vw, 2.5rem);
-      line-height: 1.05;
-      letter-spacing: -.03em;
-    }
-    p { margin: 0 0 14px; }
-    .lede {
-      font-size: 1.05rem;
-      color: var(--muted);
-      max-width: 860px;
-    }
-    .split {
-      display: grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 22px;
-      align-items: start;
-    }
-    .callout {
-      background: linear-gradient(180deg, rgba(86,199,192,.11), rgba(139,226,140,.07));
-      border: 1px solid rgba(86,199,192,.20);
-      border-radius: 18px;
-      padding: 18px;
-    }
-    .callout h3 { margin: 0 0 10px; font-size: 1.05rem; }
-    .keyline { height: 1px; background: var(--line); margin: 18px 0; }
-    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
-    .viz-card {
-      background: rgba(20,51,61,.72);
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 18px;
-      overflow: hidden;
-    }
-    .viz-title { margin: 0 0 10px; font-size: 1.05rem; font-weight: 800; }
-    .viz-note { color: var(--muted); font-size: .93rem; margin-bottom: 12px; }
-    .plot { width: 100%; height: 420px; }
-    .long-plot { width: 100%; height: 560px; }
-    .takeaways { margin: 0; padding-left: 20px; color: var(--muted); }
-    .mini { font-size: .92rem; color: var(--muted); }
-    .pill-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
-    .pill {
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      font-size: .9rem;
-      color: var(--muted);
-    }
-    table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: .95rem; }
-    th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; }
-    th { color: var(--accent); font-weight: 800; }
-    .footer { padding: 22px 0 50px; color: var(--muted); font-size: .92rem; }
-    .source-box {
-      margin-top: 16px;
-      border-top: 1px solid var(--line);
-      padding-top: 14px;
-      color: var(--muted);
-      font-size: .92rem;
-    }
-    @media (max-width: 960px) {
-      .meta-grid, .split, .grid-2 { grid-template-columns: 1fr; }
-      .plot, .long-plot { height: 360px; }
-      h1 { max-width: 100%; }
-    }
+:root{--ink:#0d2f3a;--ink-2:#174652;--deep:#08242d;--aqua:#75d5ce;--aqua-2:#b4eee2;--cream:#f4f0e7;--paper:#fffdf8;--gold:#efbd62;--coral:#ee806d;--text:#153944;--muted:#67818a;--line:rgba(21,57,68,.15);--white-line:rgba(255,255,255,.14);--serif:"Newsreader",Georgia,serif;--sans:"DM Sans",Arial,sans-serif;--shadow:0 18px 50px rgba(8,36,45,.12);--radius:20px;--max:1160px}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--text);font-family:var(--sans);line-height:1.62;font-size:16px}a{color:inherit}button{font:inherit}.skip-link{position:absolute;left:16px;top:-60px;z-index:100;padding:10px 14px;background:var(--gold);color:var(--deep);border-radius:8px;font-weight:700}.skip-link:focus{top:16px}.container{width:min(var(--max),calc(100% - 40px));margin:0 auto}.site-header{position:sticky;top:0;z-index:50;background:rgba(244,240,231,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.header-inner{height:74px;display:flex;align-items:center;justify-content:space-between;gap:26px}.brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink)}.brand strong{display:block;font-size:14px;letter-spacing:.02em}.brand small{display:block;color:var(--muted);font-size:11px;margin-top:-2px}.brand-mark{position:relative;display:block;width:30px;height:30px;border:1px solid var(--ink);border-radius:50%;overflow:hidden}.brand-mark:after{content:"";position:absolute;left:-2px;right:-2px;bottom:6px;height:1px;background:var(--ink);transform:rotate(-9deg)}.brand-mark i{position:absolute;bottom:6px;width:4px;height:4px;border:1px solid var(--ink);border-radius:50%}.brand-mark i:nth-child(1){left:7px;bottom:12px}.brand-mark i:nth-child(2){left:14px;bottom:9px}.brand-mark i:nth-child(3){left:20px;bottom:14px}.site-nav{display:flex;align-items:center;gap:22px;font-size:13px;font-weight:600;color:var(--muted)}.site-nav a{text-decoration:none}.site-nav a:hover,.site-nav a:focus{color:var(--ink)}.menu-toggle{display:none;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:8px;padding:8px 11px}.progress-shell{position:fixed;top:74px;left:0;right:0;height:3px;background:rgba(21,57,68,.05);z-index:49}.progress-shell span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--aqua),var(--gold));transition:width .1s linear}.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#e9f1ec 0%,#d9eee8 52%,#f6ead1 100%);padding:98px 0 64px}.hero:before{content:"";position:absolute;width:480px;height:480px;right:-150px;top:-200px;border-radius:50%;background:rgba(117,213,206,.22);filter:blur(2px)}.hero-grid{position:relative;display:grid;grid-template-columns:1.04fr .96fr;gap:56px;align-items:center}.eyebrow,.section-kicker{margin:0 0 15px;color:var(--ink-2);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}.eyebrow{display:flex;align-items:center;gap:8px}.eyebrow-dot{width:8px;height:8px;border-radius:50%;background:var(--coral);box-shadow:0 0 0 5px rgba(238,128,109,.16)}h1,h2,h3,p{margin-top:0}h1,h2{font-family:var(--serif);font-weight:600;letter-spacing:-.04em}h1{max-width:690px;margin-bottom:22px;color:var(--ink);font-size:clamp(3.4rem,7vw,6.7rem);line-height:.91}.hero-lede{max-width:610px;color:#456873;font-size:18px}.hero-actions{display:flex;align-items:center;gap:24px;margin-top:30px}.button{display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:12px 17px;border-radius:999px;text-decoration:none;font-size:13px;font-weight:700;transition:transform .2s ease,box-shadow .2s ease,background .2s ease}.button:hover,.button:focus{transform:translateY(-2px)}.button-primary{background:var(--ink);color:#fff;box-shadow:0 8px 18px rgba(13,47,58,.18)}.button-light{background:var(--cream);color:var(--ink)}.button-ghost{border:1px solid rgba(255,255,255,.35);color:#fff}.text-link,.inline-source,.source-pill{font-size:13px;font-weight:700;text-decoration:none}.text-link{color:var(--ink)}.text-link:hover,.inline-source:hover,.source-pill:hover{text-decoration:underline;text-underline-offset:4px}.hero-art{position:relative;min-height:440px;border-radius:38% 62% 50% 50%/48% 45% 55% 52%;background:linear-gradient(170deg,rgba(255,253,248,.58),rgba(117,213,206,.25));border:1px solid rgba(13,47,58,.14);overflow:hidden;box-shadow:var(--shadow)}.art-label{position:absolute;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#55717b;font-weight:700}.art-label-top{top:35px;left:35px}.art-label-bottom{bottom:42px;left:38px}.product-cluster{position:absolute;top:88px;left:50%;transform:translateX(-50%);width:230px;height:90px}.product-label{position:absolute;right:-5px;top:7px;text-align:left;color:var(--ink);font-size:12px;line-height:1.25;font-weight:700}.bottle{position:absolute;bottom:9px;width:35px;border:2px solid var(--ink);border-radius:8px 8px 7px 7px;background:rgba(255,253,248,.55)}.bottle:before{content:"";position:absolute;left:7px;top:-14px;width:16px;height:13px;border:2px solid var(--ink);border-bottom:0;border-radius:5px 5px 0 0}.bottle:after{content:"";position:absolute;left:6px;right:6px;top:27px;height:9px;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}.bottle-one{height:62px;left:15px;transform:rotate(-7deg)}.bottle-two{height:75px;left:60px;background:rgba(239,189,98,.46)}.bottle-three{height:54px;left:104px;transform:rotate(8deg);background:rgba(238,128,109,.3)}.flow-line{position:absolute;top:188px;left:50%;width:210px;transform:translateX(-50%);display:flex;justify-content:space-between}.flow-line span{width:8px;height:8px;border:1px solid var(--ink-2);border-radius:50%;animation:drift 2.8s ease-in-out infinite}.flow-line span:nth-child(2){animation-delay:.8s}.flow-line span:nth-child(3){animation-delay:1.5s}@keyframes drift{0%,100%{transform:translateY(0);opacity:.35}50%{transform:translateY(7px);opacity:1}}.aquifer{position:absolute;left:0;right:0;bottom:0;height:210px;background:linear-gradient(180deg,rgba(117,213,206,.18),rgba(23,70,82,.26));border-top:1px solid rgba(13,47,58,.14)}.aquifer:before,.aquifer:after{content:"";position:absolute;left:-10%;right:-10%;height:30px;border-top:1px solid rgba(13,47,58,.16);border-radius:50%}.aquifer:before{top:25px;transform:rotate(-5deg)}.aquifer:after{top:85px;transform:rotate(4deg)}.aquifer-line{position:absolute;left:6%;right:5%;height:1px;background:rgba(13,47,58,.13);border-radius:50%}.line-one{top:46px;transform:rotate(5deg)}.line-two{top:112px;transform:rotate(-4deg)}.line-three{top:165px;transform:rotate(3deg)}.well-ring{position:absolute;right:105px;top:37px;width:58px;height:28px;border:2px solid var(--ink);border-radius:50%;background:rgba(255,253,248,.24)}.well-stem{position:absolute;right:130px;top:50px;width:8px;height:95px;border-left:2px solid var(--ink);border-right:2px solid var(--ink)}.tap-mark{position:absolute;right:42px;top:43px;width:55px;height:100px;color:var(--ink)}.tap-handle{position:absolute;top:0;left:16px;width:24px;height:11px;border:2px solid var(--ink);border-radius:8px}.tap-spout{position:absolute;top:9px;left:18px;width:17px;height:44px;border:2px solid var(--ink);border-left:0;border-radius:0 20px 0 0}.tap-drop{position:absolute;top:56px;left:26px;width:10px;height:15px;border:2px solid var(--ink);border-radius:60% 60% 60% 0;transform:rotate(-45deg);background:rgba(117,213,206,.5)}.stat-grid{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px}.stat-card{padding:18px;border:1px solid rgba(13,47,58,.14);border-radius:14px;background:rgba(255,253,248,.47)}.stat-card strong{display:block;color:var(--ink);font-family:var(--serif);font-size:29px;line-height:1;margin-bottom:8px}.stat-card span{display:block;color:#55717b;font-size:12px;line-height:1.45}.stat-card-accent{background:var(--ink);border-color:var(--ink)}.stat-card-accent strong,.stat-card-accent span{color:#fff}.intro-band{padding:82px 0 78px;background:var(--paper)}.intro-grid{display:grid;grid-template-columns:170px 1fr;gap:45px}.intro-statement{max-width:800px;margin-bottom:33px;color:var(--ink);font-family:var(--serif);font-size:clamp(2rem,4vw,3.8rem);line-height:1.02;letter-spacing:-.04em}.three-step{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}.three-step>div{border-top:1px solid var(--line);padding-top:14px}.three-step span{display:block;margin-bottom:16px;color:var(--coral);font-size:11px;font-weight:700;letter-spacing:.12em}.three-step strong{display:block;color:var(--ink);margin-bottom:6px;font-size:15px}.three-step p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}.story-section{padding:110px 0}.section-dark{background:var(--deep);color:#eaf6f1}.section-cream{background:var(--cream)}.section-blue{background:var(--ink);color:#edf7f3}.section-heading{max-width:820px;margin-bottom:60px}.section-heading h2{margin-bottom:17px;color:inherit;font-size:clamp(2.5rem,5.2vw,5rem);line-height:.98}.section-heading>p:last-child{max-width:750px;color:var(--muted);font-size:16px}.section-dark .section-kicker{color:var(--aqua)}.section-blue .section-kicker,.section-heading-light .section-kicker{color:var(--aqua-2)}.section-blue .section-heading>p:last-child{color:#b7cdd0}.pathway-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px;align-items:start}.pathway-copy{color:#b7cdd0;font-size:15px}.pathway-copy>p{max-width:480px}.quote-card{position:relative;margin-bottom:30px;padding:25px 25px 21px;border:1px solid var(--white-line);border-radius:14px;background:rgba(117,213,206,.08)}.quote-mark{position:absolute;left:18px;top:8px;color:var(--aqua);font-family:var(--serif);font-size:55px;line-height:1}.quote-card p{position:relative;padding-left:25px;color:#eff8f4;font-family:var(--serif);font-size:21px;line-height:1.18}.quote-card small{color:#8eabb2;font-size:11px}.inline-source{color:var(--aqua-2)}.flow-card{padding:25px 28px;border:1px solid var(--white-line);border-radius:18px;background:rgba(255,255,255,.04)}.flow-step{display:grid;grid-template-columns:43px 1fr;gap:14px;align-items:center}.flow-step strong{display:block;color:#fff;font-size:15px}.flow-step small{display:block;color:#8eabb2;font-size:12px;line-height:1.4}.flow-icon{display:grid;place-items:center;width:43px;height:43px;border:1px solid var(--coral);border-radius:50%;color:var(--coral);font-size:11px;font-weight:700}.flow-icon-aqua{border-color:var(--aqua);color:var(--aqua)}.flow-icon-gold{border-color:var(--gold);color:var(--gold)}.flow-arrow{margin:7px 0 7px 18px;color:#54747d;font-size:17px}.evidence-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:80px;align-items:center;margin-top:100px;padding-top:32px;border-top:1px solid var(--white-line)}.evidence-intro h3{max-width:390px;margin-bottom:14px;color:#fff;font-family:var(--serif);font-size:30px;line-height:1.04}.evidence-intro p:last-child{max-width:440px;color:#a8c1c5;font-size:14px}.evidence-intro .section-kicker{color:var(--aqua)}.product-bars{padding:7px 0}.product-bar-row{margin:20px 0}.product-bar-row>div:first-child{display:flex;justify-content:space-between;gap:15px;color:#d9e9e6;font-size:12px}.product-bar-row b{color:var(--aqua-2);font-weight:600}.bar-track{height:11px;margin-top:8px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden}.bar-track i{display:block;width:var(--bar);height:100%;border-radius:99px;background:linear-gradient(90deg,var(--aqua),#d4f2d5)}.bar-track-alert i{background:linear-gradient(90deg,var(--coral),var(--gold))}.chart-note,.map-footnote{color:#8eabb2;font-size:11px;line-height:1.45}.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:75px}.compare-card{padding:27px;border-radius:17px;border:1px solid var(--white-line)}.compare-card h3{margin:10px 0 7px;font-family:var(--serif);font-size:30px}.compare-card p{color:#b7cdd0;font-size:14px}.compare-card a{font-size:12px;font-weight:700;text-decoration:none}.compare-dioxane{background:linear-gradient(135deg,rgba(238,128,109,.16),rgba(255,255,255,.03))}.compare-pfas{background:linear-gradient(135deg,rgba(117,213,206,.14),rgba(255,255,255,.03))}.compare-dioxane a{color:#ffc0ad}.compare-pfas a{color:var(--aqua-2)}.compare-tag{font-size:10px;font-weight:700;letter-spacing:.14em}.cost-hero{display:grid;grid-template-columns:1fr 1.2fr 1fr;gap:25px;align-items:center;margin:12px 0 68px;padding:33px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.cost-hero>div:last-child{text-align:right}.big-number{display:block;color:var(--ink);font-family:var(--serif);font-size:clamp(2.6rem,5vw,5.5rem);line-height:.9;letter-spacing:-.06em}.cost-hero small{display:block;margin-top:9px;color:var(--muted);font-size:12px}.range-line{position:relative;height:11px;background:var(--ink);border-radius:99px}.range-line:after{content:"";position:absolute;left:0;right:0;top:5px;height:1px;background:var(--gold);transform:rotate(-4deg)}.range-line span,.range-line i,.range-line b{position:absolute;z-index:1;width:13px;height:13px;border:3px solid var(--ink);border-radius:50%;background:var(--gold);top:-1px}.range-line span{left:0}.range-line i{left:17%;background:var(--aqua);border-color:var(--ink)}.range-line b{right:0;background:var(--coral)}.cost-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}.cost-panel{padding:28px;border:1px solid var(--line);border-radius:17px;background:var(--paper)}.cost-panel-dark{background:var(--ink);border-color:var(--ink);color:#fff}.panel-label{margin-bottom:15px;color:var(--coral);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}.cost-panel h3{max-width:450px;margin-bottom:25px;color:var(--ink);font-family:var(--serif);font-size:30px;line-height:1.04}.cost-panel-dark h3{color:#fff}.district-row{display:grid;grid-template-columns:1.2fr 1fr auto;gap:12px;align-items:center;margin:14px 0;color:var(--muted);font-size:12px}.district-row>div{height:8px;background:#e3e3d9;border-radius:99px;overflow:hidden}.district-row i{display:block;width:var(--bar);height:100%;border-radius:99px;background:var(--coral)}.district-row i.bar-cool{background:var(--aqua)}.district-row b{color:var(--ink);font-size:12px}.cost-panel-dark .tax-list{margin:20px 0 25px}.tax-list div{display:flex;justify-content:space-between;gap:15px;padding:11px 0;border-bottom:1px solid var(--white-line);font-size:12px}.tax-list strong{color:var(--gold);font-weight:600}.cost-panel-dark .chart-note{color:#9bb5b7}.bridge-note{display:flex;gap:15px;align-items:flex-start;max-width:700px;margin:42px 0 26px;color:var(--muted);font-family:var(--serif);font-size:23px;line-height:1.1}.bridge-note span{color:var(--coral);font-family:var(--sans);font-size:30px}.source-pill{display:inline-flex;gap:8px;align-items:center;padding-bottom:4px;color:var(--ink);border-bottom:1px solid var(--ink)}.map-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.map-card{overflow:hidden;border:1px solid var(--white-line);border-radius:15px;background:rgba(255,255,255,.06)}.map-thumb{position:relative;height:160px;overflow:hidden;background:linear-gradient(150deg,#c4e6df,#6bb4b7 60%,#246276)}.map-thumb:before,.map-thumb:after{content:"";position:absolute;border:1px solid rgba(8,36,45,.2);border-radius:45%;transform:rotate(25deg)}.map-thumb:before{left:-15%;top:20%;width:140%;height:35%}.map-thumb:after{left:-10%;top:47%;width:130%;height:30%;transform:rotate(-15deg)}.map-water{position:absolute;left:0;right:0;bottom:0;height:45%;background:rgba(8,36,45,.16);clip-path:polygon(0 22%,25% 4%,48% 32%,75% 10%,100% 28%,100% 100%,0 100%)}.map-pin{position:absolute;z-index:2;width:13px;height:13px;border:3px solid var(--ink);border-radius:50%;background:var(--coral);box-shadow:0 0 0 5px rgba(238,128,109,.22)}.pin-a{left:24%;top:35%}.pin-b{left:52%;top:55%;background:var(--gold)}.pin-c{left:75%;top:30%;background:var(--aqua)}.pin-d{left:35%;top:67%;background:var(--gold)}.pin-e{left:70%;top:64%;background:var(--coral)}.pin-f{left:84%;top:48%;background:var(--aqua)}.map-thumb em{position:absolute;z-index:3;right:12px;bottom:11px;color:rgba(255,255,255,.8);font-style:normal;font-size:10px;letter-spacing:.12em;font-weight:700}.map-body{padding:18px}.map-kicker{margin-bottom:7px;color:var(--aqua-2);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.map-body h3{margin-bottom:7px;color:#fff;font-family:var(--serif);font-size:22px;line-height:1.05}.map-body p:not(.map-kicker){min-height:63px;margin-bottom:16px;color:#a8c1c5;font-size:12px;line-height:1.45}.map-actions{display:flex;flex-wrap:wrap;gap:12px}.map-actions a{color:#fff;font-size:11px;font-weight:700;text-decoration:none}.map-actions a:first-child{color:var(--aqua-2)}.map-footnote{margin:25px 0 0;color:#8eb0b5}.laws-section{padding-bottom:95px}.filter-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:42px}.filter-button{cursor:pointer;padding:9px 14px;border:1px solid var(--white-line);border-radius:999px;background:transparent;color:#a8c1c5;font-size:12px}.filter-button:hover,.filter-button:focus,.filter-button.is-active{background:var(--aqua);border-color:var(--aqua);color:var(--ink)}.timeline{position:relative;margin-left:96px}.timeline:before{content:"";position:absolute;left:0;top:5px;bottom:0;width:1px;background:linear-gradient(var(--aqua),rgba(117,213,206,.1))}.timeline-item{position:relative;display:grid;grid-template-columns:85px 1fr;gap:37px;padding-bottom:36px;transition:opacity .25s ease,transform .25s ease}.timeline-item.is-hidden{display:none}.timeline-year{padding-top:5px;color:var(--aqua-2);font-size:12px;font-weight:700;letter-spacing:.04em;text-align:right}.timeline-dot{position:absolute;left:-5px;top:5px;width:11px;height:11px;border:3px solid var(--deep);border-radius:50%;background:var(--aqua)}.timeline-dot.dot-proposed{background:var(--gold)}.timeline-card{padding:23px 26px;border:1px solid var(--white-line);border-radius:15px;background:rgba(255,255,255,.045)}.law-status{display:inline-block;margin-bottom:9px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}.status-enacted{color:var(--aqua-2)}.status-proposed{color:var(--gold)}.timeline-card h3{margin-bottom:8px;color:#fff;font-family:var(--serif);font-size:27px;line-height:1.08}.timeline-card p{max-width:760px;margin-bottom:12px;color:#a8c1c5;font-size:14px}.timeline-card a{color:var(--aqua-2);font-size:12px;font-weight:700;text-decoration:none}.timeline-card a:hover{text-decoration:underline}.card-links{display:flex;gap:18px}.nassau-callout{display:grid;grid-template-columns:53px 1fr;gap:19px;margin:35px 0 0 133px;padding:24px;border:1px solid rgba(239,189,98,.4);border-radius:15px;background:rgba(239,189,98,.08)}.nassau-seal{display:grid;place-items:center;width:53px;height:53px;border:1px solid var(--gold);border-radius:50%;color:var(--gold);font-family:var(--serif);font-size:28px}.nassau-callout h3{margin-bottom:7px;color:#fff;font-family:var(--serif);font-size:27px;line-height:1.05}.nassau-callout p{max-width:700px;margin-bottom:10px;color:#b7cdd0;font-size:13px}.nassau-callout a{color:var(--gold);font-size:12px;font-weight:700;text-decoration:none}.results-section{padding-top:105px}.result-table{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.result-row{display:grid;grid-template-columns:1.45fr 1fr 1fr .7fr;gap:16px;align-items:center;padding:17px 0;border-top:1px solid var(--line);font-size:13px}.result-row:first-child{border-top:0}.result-head{color:var(--muted);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.old-value{color:var(--coral);font-weight:700}.new-value{color:#328b80;font-weight:700}.reduction{color:var(--ink);font-weight:700}.result-bottom{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;margin-top:35px}.result-callout,.result-caveat{display:flex;gap:20px;align-items:flex-start;padding:26px;border-radius:15px}.result-callout{background:var(--ink);color:#fff}.result-caveat{border:1px solid var(--line);background:var(--paper)}.result-number{color:var(--aqua);font-family:var(--serif);font-size:46px;line-height:.9;white-space:nowrap}.result-callout strong,.result-caveat strong{display:block;margin-bottom:6px}.result-callout p,.result-caveat p{margin:0;color:inherit;font-size:13px;line-height:1.5}.result-caveat p{color:var(--muted)}.results-section .source-pill{margin-top:30px}.next-section{padding:90px 0;color:#eef8f3}.next-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:70px;align-items:center}.next-copy h2{max-width:700px;margin-bottom:18px;color:#fff;font-family:var(--serif);font-size:clamp(2.5rem,5vw,4.8rem);line-height:.98}.next-copy>p:not(.section-kicker){max-width:580px;color:#b7cdd0}.next-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}.next-card{position:relative;padding:30px 32px;border:1px solid var(--white-line);border-radius:18px;background:rgba(255,255,255,.05)}.next-card-line{display:block;width:50px;height:3px;margin-bottom:20px;background:var(--gold)}.next-card p{max-width:330px;color:#fff;font-family:var(--serif);font-size:27px;line-height:1.05}.next-card ul{margin:22px 0 0;padding:0;list-style:none;color:#b7cdd0;font-size:13px}.next-card li{padding:8px 0;border-top:1px solid var(--white-line)}.sources-section{padding:92px 0 74px;background:var(--paper)}.sources-heading{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:end;margin-bottom:35px}.sources-heading h2{margin:0;color:var(--ink);font-size:clamp(2.5rem,4vw,4rem);line-height:1}.sources-heading>p{margin:0;color:var(--muted);font-size:13px}.source-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}.source-card{position:relative;display:block;min-height:135px;padding:20px;border:1px solid var(--line);border-radius:13px;background:var(--cream);text-decoration:none;transition:transform .2s ease,box-shadow .2s ease}.source-card:hover,.source-card:focus{transform:translateY(-3px);box-shadow:var(--shadow)}.source-year{display:block;margin-bottom:18px;color:var(--coral);font-size:10px;font-weight:700;letter-spacing:.12em}.source-card strong{display:block;max-width:230px;color:var(--ink);font-family:var(--serif);font-size:21px;line-height:1.02}.source-card small{display:block;margin-top:8px;color:var(--muted);font-size:11px}.source-arrow{position:absolute;right:18px;top:17px;color:var(--ink);font-size:16px}.source-footer{display:flex;justify-content:space-between;gap:30px;margin-top:35px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:11px}.source-footer p{max-width:520px;margin:0}.site-footer{padding:19px 0;background:var(--deep);color:#9db6b9;font-size:11px}.site-footer .container{display:flex;justify-content:space-between;gap:20px}.site-footer a{color:var(--aqua-2);text-decoration:none}.reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}.reveal.is-visible{opacity:1;transform:none}@media(max-width:1000px){.hero-grid{gap:30px}.hero-art{min-height:390px}.map-grid{grid-template-columns:repeat(2,1fr)}.timeline{margin-left:50px}.nassau-callout{margin-left:87px}}@media(max-width:760px){body{font-size:15px}.container{width:min(var(--max),calc(100% - 28px))}.header-inner{height:64px}.progress-shell{top:64px}.menu-toggle{display:block}.site-nav{position:absolute;left:14px;right:14px;top:72px;display:grid;gap:0;padding:7px;border:1px solid var(--line);border-radius:12px;background:rgba(255,253,248,.98);box-shadow:var(--shadow);opacity:0;pointer-events:none;transform:translateY(-6px);transition:.2s ease}.site-nav.is-open{opacity:1;pointer-events:auto;transform:none}.site-nav a{padding:11px 12px;border-radius:7px}.site-nav a:hover{background:var(--cream)}.hero{padding:68px 0 40px}.hero-grid{grid-template-columns:1fr}.hero-art{min-height:335px;margin-top:4px}.stat-grid{grid-template-columns:repeat(2,1fr);margin-top:17px}.stat-card{padding:14px}.stat-card strong{font-size:24px}.stat-card span{font-size:11px}.intro-band{padding:58px 0}.intro-grid{grid-template-columns:1fr;gap:16px}.three-step{grid-template-columns:1fr;gap:20px}.three-step>div{display:grid;grid-template-columns:35px 1fr;column-gap:10px}.three-step span{grid-row:span 2;margin:0}.three-step p{grid-column:2}.story-section{padding:72px 0}.section-heading{margin-bottom:40px}.section-heading h2{font-size:clamp(2.5rem,12vw,4rem)}.pathway-grid,.evidence-grid,.cost-grid,.next-grid,.result-bottom,.sources-heading{grid-template-columns:1fr;gap:31px}.evidence-grid{margin-top:65px;gap:24px}.compare-grid{grid-template-columns:1fr;margin-top:50px}.cost-hero{grid-template-columns:1fr;gap:20px;margin-bottom:45px}.cost-hero>div:last-child{text-align:left}.range-line{order:2}.cost-hero .cost-high{order:3}.district-row{grid-template-columns:1.1fr 1fr auto;font-size:10px}.district-row b{font-size:10px}.map-grid{grid-template-columns:1fr}.map-body p:not(.map-kicker){min-height:0}.timeline{margin-left:0}.timeline:before{left:53px}.timeline-item{grid-template-columns:43px 1fr;gap:32px}.timeline-year{font-size:11px;text-align:left}.timeline-dot{left:48px}.timeline-card{padding:19px}.timeline-card h3{font-size:24px}.nassau-callout{margin-left:0;grid-template-columns:43px 1fr;padding:20px 17px}.nassau-seal{width:43px;height:43px;font-size:22px}.nassau-callout h3{font-size:23px}.result-row{grid-template-columns:1.3fr 1fr 1fr}.result-row span:last-child{grid-column:2 / -1}.result-head span:last-child{display:none}.result-number{font-size:40px}.result-callout{display:block}.result-callout .result-number{display:block;margin-bottom:17px}.source-grid{grid-template-columns:1fr}.source-footer,.site-footer .container{display:grid;gap:12px}.source-footer{grid-template-columns:1fr}.site-footer{padding:22px 0}.hero-actions{flex-wrap:wrap;gap:17px}.big-number{font-size:4.2rem}h1{font-size:clamp(3.5rem,16vw,5.4rem)}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}.flow-line span{animation:none}.button,.source-card{transition:none}}
+
+ 
+    /* Clear, self-explanatory hero diagram */
+    .clear-diagram{min-height:440px;padding:29px 30px;border-radius:28px;background:linear-gradient(155deg,rgba(255,253,248,.82),rgba(180,238,226,.42));border:1px solid rgba(13,47,58,.16);box-shadow:var(--shadow);overflow:hidden}
+    .diagram-title{margin:0;color:var(--ink);font-family:var(--serif);font-size:28px;line-height:1.02;letter-spacing:-.03em}
+    .diagram-subtitle{margin:7px 0 15px;color:#55717b;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+    .diagram-route{position:relative;display:flex;flex-direction:column;gap:8px}
+    .diagram-node{position:relative;display:grid;grid-template-columns:32px 1fr;gap:10px;align-items:start;padding:12px 13px;border:1px solid rgba(13,47,58,.16);border-radius:13px;background:rgba(255,253,248,.62)}
+    .diagram-node strong{display:block;color:var(--ink);font-size:14px;line-height:1.2}
+    .diagram-node small{display:block;margin-top:3px;color:#55717b;font-size:11px;line-height:1.35}
+    .diagram-number{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;color:var(--deep);font-size:12px;font-weight:700;background:var(--coral)}
+    .diagram-node:nth-child(3) .diagram-number{background:var(--gold)}
+    .diagram-node:nth-child(5) .diagram-number{background:var(--aqua)}
+    .diagram-arrow{align-self:center;color:var(--ink-2);font-size:20px;line-height:1}
+    .diagram-node-aquifer{background:rgba(117,213,206,.2)}
+    .diagram-node-well{background:rgba(8,36,45,.92)}
+    .diagram-node-well strong{color:#fff}
+    .diagram-node-well small{color:#b7cdd0}
+    .diagram-node-well .diagram-number{color:var(--ink);background:var(--aqua)}
+    .diagram-note{margin:15px 0 0;padding-top:13px;border-top:1px solid rgba(13,47,58,.14);color:#456873;font-size:12px;line-height:1.4}
+    @media(max-width:760px){.clear-diagram{min-height:335px;padding:22px 20px}.diagram-title{font-size:25px}.diagram-subtitle{margin-bottom:10px}.diagram-node{padding:9px 10px}.diagram-node strong{font-size:12px}.diagram-node small{font-size:10px}.diagram-number{width:25px;height:25px;font-size:11px}.diagram-note{margin-top:10px;padding-top:9px;font-size:10px}}
+ 
+   /* Editorial revisions: compact source-led sections and a horizontal policy grid. */
+   .maps-section{padding:76px 0 70px}
+   .maps-section .section-heading{max-width:720px;margin-bottom:34px}
+   .maps-section .map-thumb{height:128px}
+   .maps-section .map-body{padding:15px}
+   .maps-section .map-body p:not(.map-kicker){min-height:46px}
+   .intro-band{padding:62px 0 60px}
+   .intro-statement{font-size:clamp(1.9rem,3.2vw,3.1rem);max-width:720px;margin-bottom:25px}
+   .intro-band .three-step{gap:18px}
+   .laws-section{padding:78px 0 72px}
+   .laws-section .section-heading{max-width:760px;margin-bottom:32px}
+   .laws-section .timeline{margin-left:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+   .laws-section .timeline:before{display:none}
+   .laws-section .timeline-item{display:block;padding-bottom:0}
+   .laws-section .timeline-year{padding-top:0;margin-bottom:8px;text-align:left}
+   .laws-section .timeline-dot{position:static;margin-bottom:10px}
+   .laws-section .timeline-card{height:100%;padding:18px}
+   .laws-section .timeline-card h3{font-size:23px}
+   .laws-section .timeline-card p{font-size:13px}
+   .laws-section .nassau-callout{grid-column:1/-1;margin:0}
+   @media(max-width:1000px){
+     .laws-section .timeline{grid-template-columns:repeat(3,minmax(0,1fr))}
+     .laws-section .nassau-callout{margin:0}
+   }
+   @media(max-width:760px){
+     .intro-band{padding:50px 0}
+     .intro-statement{font-size:clamp(1.9rem,8vw,3rem)}
+     .maps-section{padding:60px 0}
+     .laws-section{padding:64px 0}
+     .laws-section .timeline{display:grid;grid-template-columns:1fr;gap:12px}
+     .laws-section .timeline:before{display:block;left:21px;top:5px;bottom:0}
+     .laws-section .timeline-item{display:grid;grid-template-columns:43px 1fr;gap:32px;padding-bottom:0}
+     .laws-section .timeline-year{text-align:left;margin:0}
+     .laws-section .timeline-dot{position:absolute;left:16px;top:5px;margin:0}
+     .laws-section .timeline-card{height:auto}
+   }
+ 
+   /* Final layout pass: compact navigation, scrollable policy row, and clearer status cues. */
+   .brand small{display:none}
+   .laws-section .filter-row{margin-bottom:24px}
+   .filter-button[data-filter="cce"]{display:none}
+   .laws-section .timeline{display:flex;gap:14px;overflow-x:auto;margin:0;padding:0 0 18px;scroll-snap-type:x mandatory;scrollbar-color:var(--aqua) rgba(255,255,255,.08)}
+   .laws-section .timeline:before{display:none}
+   .laws-section .timeline-item{display:block;flex:0 0 285px;padding:0;scroll-snap-align:start}
+   .laws-section .timeline-year{padding:0;margin:0 0 8px;text-align:left}
+   .laws-section .timeline-dot{position:static;display:block;margin:0 0 10px}
+   .laws-section .timeline-card{height:100%;min-height:320px;padding:18px}
+   .laws-section .timeline-card h3{font-size:22px}
+   .laws-section .timeline-card p{font-size:13px}
+   .laws-section .nassau-callout{clear:both;position:relative;z-index:1;margin:28px 0 0!important}
+   .status-law{color:var(--aqua-2)}
+   .status-bill{color:var(--gold)}
+   .status-result{color:#f0b8a7}
+   .victory-mark{display:inline-block;margin:0 0 9px 8px;color:var(--aqua);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+   .maps-section .map-card{border-top:3px solid var(--aqua)}
+   .maps-section .map-card:nth-child(2){border-top-color:var(--gold)}
+   .maps-section .map-card:nth-child(3){border-top-color:var(--coral)}
+   .maps-section .map-card:nth-child(4){border-top-color:#b9a6df}
+   .maps-section .map-thumb{display:none}
+   .maps-section .map-body{padding:20px}
+   .maps-section .map-body p:not(.map-kicker){min-height:72px}
+   .result-caveat{display:grid;grid-template-columns:minmax(150px,.5fr) 1fr;gap:18px;align-items:start}
+   .result-caveat strong{line-height:1.2}
+   .sources-heading h2{font-size:clamp(2.3rem,4vw,4rem)}
+   @media(max-width:760px){
+     .laws-section .timeline{display:flex;gap:12px}
+     .laws-section .timeline-item{flex-basis:min(285px,84vw)}
+     .laws-section .timeline-card{min-height:340px}
+     .result-caveat{grid-template-columns:minmax(125px,.55fr) 1fr;gap:14px}
+   }
+ 
+   .hero{padding-top:76px}
+   .hero-copy .eyebrow{margin-bottom:19px}
+   .laws-section .timeline{overflow-x:hidden;scrollbar-width:none;overscroll-behavior:contain;scroll-behavior:smooth}
+   .laws-section .timeline::-webkit-scrollbar{display:none}
+   .laws-section .timeline-year{display:inline-flex;align-items:center;min-height:28px;padding:5px 9px;border:1px solid rgba(180,238,226,.38);border-radius:999px;background:rgba(117,213,206,.07);color:var(--aqua-2);font-size:13px;line-height:1;letter-spacing:.08em;text-align:left}
+   .laws-section .timeline-dot{display:none}
+   .laws-section .timeline-card{min-height:0}
+   .timeline-controls{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 12px;color:#b7cdd0;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+   .timeline-control-buttons{display:flex;gap:7px}
+   .timeline-control-buttons button{display:grid;place-items:center;width:34px;height:30px;padding:0;border:1px solid rgba(180,238,226,.35);border-radius:999px;background:rgba(117,213,206,.08);color:var(--aqua-2);cursor:pointer;font-size:17px;line-height:1}
+   .timeline-control-buttons button:hover,.timeline-control-buttons button:focus{background:var(--aqua);color:var(--ink)}
+   .timeline-control-buttons button:disabled{opacity:.32;cursor:default}
+   .laws-section .nassau-callout{display:none}
+   .result-bottom{margin-top:24px}
+   .result-caveat{display:block;padding:22px 24px}
+   .result-caveat strong{display:block;margin-bottom:8px}
+   .result-caveat p{margin-bottom:0}
+   .source-footer{display:block}
+   .source-footer p{margin:0;line-height:1.55}
+   .source-footer p:last-child{color:var(--ink)}
+   .report-scope{margin:13px 0 0;color:#55717b;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+   .timeline-legend{display:flex;flex-wrap:wrap;gap:14px;margin:0 0 11px;color:#8eabb2;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+   .timeline-legend span{display:inline-flex;align-items:center;gap:6px}
+   .legend-swatch{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--aqua)}
+   .legend-bill{background:var(--gold)}
+   .legend-victory{display:grid;place-items:center;width:14px;height:14px;border:1px solid var(--aqua);border-radius:50%;color:var(--aqua);font-size:9px;line-height:1}
+   .glossary-section{padding:64px 0;background:var(--paper)}
+   .glossary-heading{display:grid;grid-template-columns:.65fr 1.35fr;gap:40px;align-items:end;margin-bottom:25px}
+   .glossary-heading h2{margin:0;color:var(--ink);font-size:clamp(2.2rem,4vw,3.8rem);line-height:1}
+   .glossary-heading p{margin:0;color:var(--muted);font-size:13px}
+   .glossary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
+   .glossary-card{padding:18px;border:1px solid var(--line);border-radius:13px;background:var(--cream)}
+   .glossary-card strong{display:block;margin-bottom:6px;color:var(--ink);font-family:var(--serif);font-size:21px;line-height:1}
+   .glossary-card p{margin:0;color:var(--muted);font-size:12px;line-height:1.45}
+   @media print{
+     body{background:#fff;color:#111}
+     .site-header,.progress-shell,.hero-art,.hero-actions,.filter-row,.timeline-controls,.map-actions,.source-pill,.site-footer{display:none!important}
+     .hero,.intro-band,.story-section,.sources-section,.glossary-section{padding:25px 0;background:#fff;color:#111;break-inside:avoid}
+     .section-dark,.section-blue{background:#fff;color:#111}
+     .section-heading h2,.section-dark .timeline-card h3,.section-blue .map-body h3,.glossary-heading h2{color:#111}
+     .section-heading>p:last-child,.timeline-card p,.map-body p:not(.map-kicker),.glossary-card p{color:#333}
+     .timeline{display:grid!important;grid-template-columns:1fr 1fr!important;overflow:visible!important;margin:0!important}
+     .timeline-item{display:block!important;flex:none!important;padding:0!important;break-inside:avoid}
+     .timeline-card{min-height:0!important;background:#fff;border:1px solid #bbb}
+     .map-grid,.glossary-grid{grid-template-columns:1fr 1fr}
+     .source-footer{display:block!important}
+   }
+   @media(max-width:760px){
+     .hero{padding-top:52px}
+     .timeline-controls{margin-bottom:10px}
+     .source-footer{grid-template-columns:1fr;gap:18px}
+     .source-footer p:last-child{padding:0;border:0}
+     .glossary-section{padding:50px 0}
+     .glossary-heading{grid-template-columns:1fr;gap:10px}
+     .glossary-grid{grid-template-columns:1fr 1fr}
+   }
   </style>
-</head>
+ </head>
 <body>
-  <div class="wrap hero">
-    <div class="eyebrow">💧 Portfolio Project · Long Island Water Justice</div>
-    <h1>From hidden contamination to uneven water bills to measurable reform.</h1>
-    <p class="subhead">
-      This project connects three linked stories on Long Island and in New York State:
-      the discovery of widespread 1,4-dioxane contamination in consumer products,
-      the unequal and often opaque cost of residential water across Long Island,
-      and the measurable results of state intervention a few years later.
-    </p>
 
-    <div class="meta-grid">
-      <div class="stat"><div class="k">80%+</div><div class="l">of personal care products in CCE's 2018 testing contained 1,4-dioxane</div></div>
-      <div class="stat"><div class="k">48</div><div class="l">water districts analyzed across Nassau and Suffolk in the 2019 water cost report</div></div>
-      <div class="stat"><div class="k">$148 → $1,124.52</div><div class="l">range between the least and most expensive annual residential water costs identified</div></div>
-      <div class="stat"><div class="k">95.8%</div><div class="l">average reduction across five laundry detergents re-tested after the NY law took effect</div></div>
+  <a class="skip-link" href="#main">Skip to story</a>
+  <header class="site-header">
+    <div class="container header-inner">
+       <a class="brand" href="#top" aria-label="Long Island Drinking Water home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span><strong>Long Island Drinking Water</strong></span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="site-nav" aria-label="Main navigation">
+         <a href="#pathway">Pathway</a><a href="#cost">Cost</a><a href="#maps">Maps</a><a href="#laws">Laws</a><a href="#results">Results</a><a href="#sources">Reports</a>
+      </nav>
     </div>
-  </div>
-
-  <section class="wrap">
-    <div class="section-card">
-      <h2>1. The problem: contamination was hidden, widespread, and flowing back into the water supply.</h2>
-      <div class="split">
-        <div>
-          <p class="lede">
-            In 2018, Citizens Campaign for the Environment found 1,4-dioxane in more than 80% of tested personal care products.
-            The contaminant was especially concerning because it was not intentionally added, was not listed on labels,
-            and could enter Long Island's aquifer system through wastewater and septic systems after everyday household use.
-          </p>
-          <p>
-            That made this more than a consumer safety issue. It was also a drinking water issue. New York later responded
-            with a first-of-its-kind law that limited 1,4-dioxane in cleaning, cosmetic, and personal care products,
-            alongside an aggressive drinking water standard.
-          </p>
-        </div>
-        <div class="callout">
-          <h3>🧪 2018 signal examples</h3>
-          <p><strong>Tide Original:</strong> 14,000 ppb</p>
-          <p><strong>Gain Original:</strong> 10,000 ppb</p>
-          <p><strong>Dreft Stage 1/Newborn:</strong> 10,000 ppb</p>
-          <p><strong>Victoria's Secret Bombshell Fragrance Wash:</strong> 17,000 ppb</p>
-          <p class="mini">The proposed NY drinking water standard referenced in the report was 1 ppb.</p>
-        </div>
+  </header>
+  <div class="progress-shell" aria-hidden="true"><span id="progress-bar"></span></div>
+  <main id="main">
+    <section id="top" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal"><p class="eyebrow"><span class="eyebrow-dot"></span>A Long Island water story</p><h1>The water beneath us remembers what we put down the drain.</h1><p class="hero-lede">Everyday products and historic industrial pollution can affect the same groundwater that Long Island communities rely on; treatment and infrastructure decisions can make protection more expensive. This is the story of what was found, what it costs residents, and how public pressure helped turn evidence into policy.</p><div class="hero-actions"><a class="button button-primary" href="#pathway">Follow the story <span aria-hidden="true">↓</span></a><a class="text-link" href="#sources">See the sources <span aria-hidden="true">↗</span></a></div></div>
+          <div class="hero-art clear-diagram reveal" role="img" aria-label="Three-step diagram showing household products entering wastewater, moving through soil into Long Island's aquifer, and reaching a drinking-water well"><h2 class="diagram-title">From product to public water</h2><p class="diagram-subtitle">How contamination can travel</p><div class="diagram-route"><div class="diagram-node"><span class="diagram-number">1</span><div><strong>Products used at home</strong><small>Detergents · shampoos · cleaners</small></div></div><span class="diagram-arrow" aria-hidden="true">↓</span><div class="diagram-node diagram-node-aquifer"><span class="diagram-number">2</span><div><strong>Wastewater and septic systems carry residues</strong><small>Some contaminants can move through soil and persist in groundwater</small></div></div><span class="diagram-arrow" aria-hidden="true">↓</span><div class="diagram-node diagram-node-well"><span class="diagram-number">3</span><div><strong>Drinking-water wells draw from it</strong><small>Long Island communities depend on this sole-source aquifer</small></div></div></div><p class="diagram-note"><strong>Why source control matters:</strong> preventing product-related pollution starts before it reaches groundwater.</p></div>
       </div>
-      <div class="pill-row">
-        <div class="pill">Hidden byproduct of ethoxylation</div>
-        <div class="pill">Long Island relies on a sole source aquifer</div>
-        <div class="pill">Consumer products became a policy lever</div>
+      <div class="container stat-grid" aria-label="Key findings">
+        <div class="stat-card reveal"><strong>65 / 80</strong><span>products with 1,4-dioxane in CCE's 2019 80-product testing</span></div><div class="stat-card reveal"><strong>48</strong><span>Long Island water districts compared in the 2019 cost report</span></div><div class="stat-card reveal"><strong>$148–$1,124</strong><span>annual residential water-cost range in that report</span></div><div class="stat-card stat-card-accent reveal"><strong>95.8%</strong><span>combined measured reduction across five detergents re-tested in 2024</span></div>
       </div>
-    </div>
-  </section>
-
-  <section class="wrap">
-    <div class="section-card">
-      <h2>2. The body of the story: what water cost on Long Island in 2019, and why that mattered.</h2>
-      <p class="lede">
-        The 2019 report asked a deceptively simple question: what does water cost on Long Island? The answer turned out to be highly uneven.
-        CCE compared 48 districts and found that consumers faced a confusing mix of rate systems, taxes, service charges, privatized service areas,
-        and billing structures that made apples-to-apples comparisons unusually hard. The result was not just variation, but opacity.
-      </p>
-
-      <div class="grid-2" style="margin-top:18px;">
-        <div class="viz-card">
-          <div class="viz-title">📊 Most expensive vs least expensive districts</div>
-          <div class="viz-note">Annual residential cost estimates based on a family of four using 10,000 gallons per month.</div>
-          <div id="plot1" class="plot"></div>
-        </div>
-        <div class="viz-card">
-          <div class="viz-title">🏷️ Where hidden taxes drove the bill</div>
-          <div class="viz-note">In several districts, taxes formed a very large share of total annual water cost even when they were not obvious on the bill.</div>
-          <div id="plot2" class="plot"></div>
-        </div>
-      </div>
-
-      <div class="grid-2" style="margin-top:18px;">
-        <div class="viz-card">
-          <div class="viz-title">🌐 Population size did not guarantee affordability</div>
-          <div class="viz-note">Smaller districts often looked vulnerable, but population alone did not explain price. Structure, taxes, and administration mattered too.</div>
-          <div id="plot3" class="long-plot"></div>
-        </div>
-        <div class="viz-card">
-          <div class="viz-title">🔎 What the report revealed</div>
-          <ul class="takeaways">
-            <li>The most expensive district in the report was NY American Water Area 2 in North Shore–Sea Cliff at <strong>$1,124.52</strong> annually, while Greenlawn was the least expensive at <strong>$148.00</strong>.</li>
-            <li>Several districts had large tax burdens layered on top of rates, including Albertson, Bethpage, Garden City Park, Carle Place, Roslyn, and Hicksville.</li>
-            <li>The report flagged multiple waterless districts and fifteen districts serving fewer than 10,000 people, strengthening the argument for consolidation.</li>
-            <li>CCE also criticized confusing pricing systems such as daily rate structures, cubic-feet billing, and hard-to-find fee schedules.</li>
-            <li>Privatization was directly tied to cost concerns, especially in New York American Water service areas that appeared repeatedly among the most expensive districts.</li>
-          </ul>
-
-          <div class="keyline"></div>
-
-          <div class="viz-title">💡 Portfolio takeaway</div>
-          <p class="mini">
-            This middle section is not just about price. It shows how environmental risk, infrastructure governance,
-            and consumer transparency intersect. Clean water is a public health issue, but it is also a pricing and access issue.
-          </p>
-
-          <table>
-            <thead>
-              <tr><th>District</th><th>Annual Cost</th><th>Tax Share</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Carle Place</td><td>$520.00</td><td>76.9%</td></tr><tr><td>Garden City Park</td><td>$568.25</td><td>75.4%</td></tr><tr><td>Hicksville</td><td>$444.65</td><td>73.9%</td></tr><tr><td>Roslyn</td><td>$457.09</td><td>73.2%</td></tr><tr><td>Bethpage</td><td>$605.39</td><td>67.8%</td></tr><tr><td>Westbury</td><td>$424.94</td><td>64.7%</td></tr><tr><td>Albertson</td><td>$658.05</td><td>62.8%</td></tr><tr><td>NY American Water Area 2 (North Shore–Sea Cliff)</td><td>$1124.52</td><td>59%</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="wrap">
-    <div class="section-card">
-      <h2>3. The result: New York's law changed product chemistry, and the follow-up data shows it.</h2>
-      <div class="split">
-        <div>
-          <p class="lede">
-            By 2024, CCE's follow-up testing showed clear evidence that the law worked. New York had already set a 1 ppb drinking water standard,
-            then required products sold in the state to reduce 1,4-dioxane to 2,000 ppb in 2023 and 1,000 ppb in 2024.
-            The five detergents re-tested by CCE all fell below the 1,000 ppb threshold.
-          </p>
-          <p>
-            That matters because these products were not marginal cases. They had been among the highest-contaminant products in the original dataset and were part of the evidence used to justify regulation.
-          </p>
-        </div>
-        <div class="callout">
-          <h3>✅ Policy outcome</h3>
-          <p><strong>Average 2019 level:</strong> 9,680.0 ppb</p>
-          <p><strong>Average 2024 level:</strong> 403.0 ppb</p>
-          <p><strong>Average reduction:</strong> 95.8%</p>
-          <p class="mini">All five re-tested detergents came in below the 2024 product limit of 1,000 ppb.</p>
-        </div>
-      </div>
-
-      <div class="grid-2" style="margin-top:18px;">
-        <div class="viz-card">
-          <div class="viz-title">🧼 Before vs after the law</div>
-          <div class="viz-note">Independent testing from the original 2019 product data compared with 2024 re-testing.</div>
-          <div id="plot4" class="plot"></div>
-        </div>
-        <div class="viz-card">
-          <div class="viz-title">📉 Percent reduction by detergent</div>
-          <div class="viz-note">Every tested detergent posted a very large reduction, indicating manufacturers could reformulate and still comply.</div>
-          <div id="plot5" class="plot"></div>
-        </div>
-      </div>
-
-      <div class="source-box">
-        <strong>Project framing:</strong> This portfolio page is structured as a policy narrative:
-        consumer contamination evidence → uneven public water costs → measurable regulatory results.
-        It is designed to show how data storytelling can connect environmental exposure, affordability, and policy outcomes in one coherent arc.
-      </div>
-    </div>
-  </section>
-
-  <div class="wrap footer">
-    Source basis for this page: Citizens Campaign for the Environment's 2018 consumer shopping report, 2019 Long Island water cost report, and 2024 update on New York's 1,4-dioxane legislation results.
-  </div>
-
+    </section>
+    <section class="intro-band"><div class="container intro-grid"><p class="section-kicker">The short version</p><div><p class="intro-statement">The problem was hidden in the products, carried by the water cycle, paid for by residents, and changed by policy.</p><div class="three-step"><div><span>01</span><strong>Find the source</strong><p>Testing connected ordinary products to a preventable pathway into wastewater and groundwater.</p></div><div><span>02</span><strong>Show the burden</strong><p>Water bills were not just uneven; their rates, taxes, and fees were hard to compare.</p></div><div><span>03</span><strong>Measure the change</strong><p>New York set limits, manufacturers reformulated, and follow-up testing showed the difference.</p></div></div></div></div></section>
+     <section id="pathway" class="story-section section-dark"><div class="container"><div class="section-heading reveal"><p class="section-kicker">01 / The hidden pathway</p><h2>The label tells you what a product is for. It may not tell you what it leaves behind.</h2><p>1,4-dioxane is often an unwanted manufacturing byproduct, not an ingredient intentionally added to make a product work. When products are washed down the drain, that byproduct can become part of the water story.</p></div><div class="pathway-grid"><div class="pathway-copy reveal"><div class="quote-card"><span class="quote-mark">“</span><p>Long Island's groundwater is its drinking-water supply. That makes source control personal: the things that leave our homes can eventually meet the aquifer.</p><small>Research synthesis from CCE reports and Doherty et al. (2022)</small></div><p>There is no single source for every detection. Historic industrial releases, wastewater, septic systems, and consumer products can all matter. The important distinction is that product contamination is a source that can be reduced before it enters the water cycle.</p><a class="inline-source" href="https://www.citizenscampaign.org/reports">Read the research review ↗</a></div><div class="flow-card reveal" aria-label="Flow diagram from product to drinking water"><div class="flow-step"><span class="flow-icon">01</span><div><strong>Use the product</strong><small>Soap, shampoo, detergent, or other household product</small></div></div><div class="flow-arrow" aria-hidden="true">↓</div><div class="flow-step"><span class="flow-icon">02</span><div><strong>Send it down the drain</strong><small>Wastewater or septic systems receive the residue</small></div></div><div class="flow-arrow" aria-hidden="true">↓</div><div class="flow-step"><span class="flow-icon flow-icon-aqua">03</span><div><strong>Reach the groundwater</strong><small>Long Island's aquifer is the source of drinking water</small></div></div><div class="flow-arrow" aria-hidden="true">↓</div><div class="flow-step"><span class="flow-icon flow-icon-gold">04</span><div><strong>Pay to protect the tap</strong><small>Water districts monitor and treat; funding can come through rates, taxes, grants, or combinations.</small></div></div></div></div><div class="evidence-grid"><div class="evidence-intro reveal"><p class="section-kicker">What testing found</p><h3>Some ordinary products carried surprisingly high levels.</h3><p>The 2019 Shopping Safe guide tested 80 products across laundry, baby care, soaps, body washes, and shampoos. It found 1,4-dioxane in 65 products, with results as high as 17,000 ppb.</p></div><div class="product-bars reveal" aria-label="Selected product testing results"><div class="product-bar-row"><div><span>Tide Original</span><b>14,000 ppb</b></div><div class="bar-track"><i style="--bar:100%"></i></div></div><div class="product-bar-row"><div><span>Gain Original</span><b>10,000 ppb</b></div><div class="bar-track"><i style="--bar:71.4%"></i></div></div><div class="product-bar-row"><div><span>Dreft Stage 1 / Newborn</span><b>10,000 ppb</b></div><div class="bar-track"><i style="--bar:71.4%"></i></div></div><div class="product-bar-row"><div><span>Victoria's Secret Bombshell</span><b>17,000 ppb</b></div><div class="bar-track bar-track-alert"><i style="--bar:100%"></i></div></div><p class="chart-note">Selected examples from CCE's original testing. A product result is not a direct measurement of a person's exposure.</p></div></div><div class="compare-grid"><div class="compare-card compare-dioxane reveal"><span class="compare-tag">1,4-DIOXANE</span><h3>Hidden byproduct</h3><p>A synthetic organic compound associated with certain manufacturing processes. New York's public-water limit is <strong>1 ppb</strong>.</p><a href="https://dec.ny.gov/environmental-protection/pollution-prevention/household-personal-cosmetic-dioxane-limits" target="_blank" rel="noopener">NYSDEC product-law explainer ↗</a></div><div class="compare-card compare-pfas reveal"><span class="compare-tag">PFAS / PFOS</span><h3>Persistent chemical family</h3><p>PFAS is a broad class. PFOS and PFOA are two members. New York's 2020 public-water limits are <strong>10 ppt each</strong>.</p><a href="https://www.health.ny.gov/environmental/water/drinking/emerging_pfas_publicwater.htm" target="_blank" rel="noopener">NYS DOH standards ↗</a></div></div></div></section>
+    <section id="cost" class="story-section section-cream"><div class="container"><div class="section-heading reveal"><p class="section-kicker">02 / The household cost</p><h2>Clean water is a public necessity. The bill is not the same everywhere.</h2><p>CCE's 2019 comparison of 48 Nassau and Suffolk water districts found a confusing mix of rates, taxes, minimum charges, billing cycles, and service structures. The report compared a family of four using 10,000 gallons per month.</p></div><div class="cost-hero reveal"><div><span class="big-number">$148</span><small>Greenlawn annual estimate</small></div><div class="range-line"><span></span><i></i><b></b></div><div class="cost-high"><span class="big-number">$1,124.52</span><small>NY American Water Area 2 annual estimate</small></div></div><div class="cost-grid"><div class="cost-panel reveal"><div class="panel-label">Annual residential estimate</div><h3>Water cost varied by more than 7×.</h3><div class="district-bars"><div class="district-row"><span>North Shore–Sea Cliff</span><div><i style="--bar:100%"></i></div><b>$1,124.52</b></div><div class="district-row"><span>Shelter Island</span><div><i style="--bar:96.9%"></i></div><b>$1,090.00</b></div><div class="district-row"><span>East Williston</span><div><i style="--bar:72.5%"></i></div><b>$814.80</b></div><div class="district-row"><span>Jericho</span><div><i class="bar-cool" style="--bar:17.4%"></i></div><b>$195.89</b></div><div class="district-row"><span>Greenlawn</span><div><i class="bar-cool" style="--bar:13.1%"></i></div><b>$148.00</b></div></div><p class="chart-note">Report estimates, not current universal bills. Taxes were included in the comparison where applicable.</p></div><div class="cost-panel cost-panel-dark reveal"><div class="panel-label">Why the bill was hard to read</div><h3>Some districts put the cost in more than one place.</h3><div class="tax-list"><div><span>Carle Place</span><strong>76.9% tax share</strong></div><div><span>Garden City Park</span><strong>75.4% tax share</strong></div><div><span>Hicksville</span><strong>73.9% tax share</strong></div><div><span>Roslyn</span><strong>73.2% tax share</strong></div><div><span>Bethpage</span><strong>67.8% tax share</strong></div></div><p class="chart-note">Residents need transparent, comparable public information about the price of clean water.</p></div></div><div class="bridge-note reveal"><span>↳</span><p>The cost chapter connects contamination to governance: treatment has a price, but so do fragmented systems, confusing billing, and delayed infrastructure decisions.</p></div><a class="source-pill reveal" href="https://static1.squarespace.com/static/5b72eb5b8ab7222baffc8dbb/t/5d68179b2c2b550001788633/1567102877721/What%2BDoes%2BYour%2BWater%2BCost_%2B2019%2BCCE%2BNEW.pdf">Read the complete 2019 water-cost report ↗</a></div></section>
+    <section id="maps" class="story-section section-blue"><div class="container"><div class="section-heading section-heading-light reveal"><p class="section-kicker">03 / See the water</p><h2>Maps turn a regional problem into a place you can recognize.</h2><p>Open the interactive map for the district, then check the water supplier's current annual report.</p></div><div class="map-grid">
+      <article class="map-card reveal"><div class="map-thumb map-dioxane"><span class="map-water"></span><span class="map-pin pin-a"></span><span class="map-pin pin-b"></span><span class="map-pin pin-c"></span><em>1,4-DIOXANE</em></div><div class="map-body"><p class="map-kicker">Recent map · 2025 map / 2024 data</p><h3>Highest 1,4-dioxane values</h3><p>District-level map based on 2024 water-quality data.</p><div class="map-actions"><a href="https://www.google.com/maps/d/u/0/viewer?mid=13Rfz3QhaMRyT0rwME2qR-fdM8rM_D1w" target="_blank" rel="noopener">Open map ↗</a></div></div></article>
+      <article class="map-card reveal"><div class="map-thumb map-pfas"><span class="map-water"></span><span class="map-pin pin-a"></span><span class="map-pin pin-d"></span><span class="map-pin pin-e"></span><em>PFAS / PFOS</em></div><div class="map-body"><p class="map-kicker">Recent map · 2025 map / 2024 data</p><h3>PFOS and PFOA detections</h3><p>District-level map based on 2024 water-quality data.</p><div class="map-actions"><a href="https://www.google.com/maps/d/u/0/viewer?mid=1oVRePDiujZP7fiynDK2dko5SQBCa2v4" target="_blank" rel="noopener">Open map ↗</a></div></div></article>
+      <article class="map-card reveal"><div class="map-thumb map-older"><span class="map-water"></span><span class="map-pin pin-b"></span><span class="map-pin pin-f"></span><span class="map-pin pin-c"></span><em>1,4-DIOXANE</em></div><div class="map-body"><p class="map-kicker">Earlier map · 2023 data / published 2024</p><h3>Water district dioxane data</h3><p>District-level map based on 2023 annual water-quality reports.</p><div class="map-actions"><a href="https://www.google.com/maps/d/u/0/viewer?mid=1Nt-Zz4ULkNuop26Iw3AdWX730HiBnWs" target="_blank" rel="noopener">Open map ↗</a></div></div></article>
+      <article class="map-card reveal"><div class="map-thumb map-pfas map-older"><span class="map-water"></span><span class="map-pin pin-d"></span><span class="map-pin pin-e"></span><span class="map-pin pin-f"></span><em>PFAS</em></div><div class="map-body"><p class="map-kicker">Earlier map · 2023 data / published 2024</p><h3>Long Island PFAS map</h3><p>District-level PFAS map based on 2023 annual water-quality reports.</p><div class="map-actions"><a href="https://www.google.com/maps/d/u/0/viewer?mid=1bJkQUac0zMFv16m3Zj7_RMopr6yM21U" target="_blank" rel="noopener">Open map ↗</a></div></div></article>
+    </div><p class="map-footnote">Map labels follow the supplied map metadata. PFAS is a family; PFOS and PFOA are individual chemicals within that family.</p></div></section>
+    <section id="laws" class="story-section section-dark laws-section"><div class="container"><div class="section-heading reveal"><p class="section-kicker">04 / From evidence to law</p><h2>Policy moved in layers: product rules, water standards, waste reduction, and money for infrastructure.</h2><p>Research helped open several doors, and each addresses a different part of the problem.</p></div><div class="filter-row" role="group" aria-label="Filter policy timeline"><button class="filter-button is-active" data-filter="all">All milestones</button><button class="filter-button" data-filter="enacted">Enacted</button><button class="filter-button" data-filter="proposed">Proposed</button><button class="filter-button" data-filter="cce">CCE connection</button></div><div class="timeline">
+      <article class="timeline-item reveal" data-status="cce enacted"><div class="timeline-year">2019–25</div><div class="timeline-dot"></div><div class="timeline-card"><span class="law-status status-enacted">Enacted · CCE campaign</span><h3>Senate Bill S4389B: 1,4-dioxane product limits</h3><p>Signed by the Governor in 2019, the law limits 1,4-dioxane in household cleansing, personal-care, and cosmetic products. The product standard phased down to 2,000 ppb in 2023 and 1,000 ppb in 2024; CCE's 2026 case study describes full implementation in 2025.</p><a href="https://www.nysenate.gov/legislation/bills/2019/S4389" target="_blank" rel="noopener">Read the bill ↗</a></div></article>
+      <article class="timeline-item reveal" data-status="enacted"><div class="timeline-year">2020</div><div class="timeline-dot"></div><div class="timeline-card"><span class="law-status status-enacted">Enacted · PFAS source control</span><h3>S8817 / A4739-C: PFAS in food packaging</h3><p>New York banned intentionally added PFAS in certain direct-contact food packaging. It took effect December 31, 2022.</p><a href="https://www.nysenate.gov/legislation/bills/2019/S8817" target="_blank" rel="noopener">Read the bill ↗</a></div></article>
+      <article class="timeline-item reveal" data-status="enacted"><div class="timeline-year">2020</div><div class="timeline-dot"></div><div class="timeline-card"><span class="law-status status-enacted">Enacted · statewide waste reduction</span><h3>New York State Bag Waste Reduction Act</h3><p>Officially called the New York State Bag Waste Reduction Act (ECL Article 27, Title 28), this law took effect March 1, 2020 and prohibits people required to collect New York State sales tax from distributing plastic carryout bags, subject to statutory exemptions. It addresses bag waste, not 1,4-dioxane or PFAS.</p><a href="https://dec.ny.gov/environmental-protection/recycling-composting/plastic-bag-waste-reduction" target="_blank" rel="noopener">See NYSDEC guidance ↗</a></div></article>
+      <article class="timeline-item reveal" data-status="cce enacted"><div class="timeline-year">2020</div><div class="timeline-dot"></div><div class="timeline-card"><span class="law-status status-enacted">Enacted · drinking-water standards</span><h3>New York sets limits for emerging contaminants</h3><p>New York established public-water maximum contaminant levels of 1 ppb for 1,4-dioxane and 10 ppt each for PFOA and PFOS.</p><a href="https://www.health.ny.gov/environmental/water/drinking/emerging_pfas_publicwater.htm" target="_blank" rel="noopener">Read the DOH standards ↗</a></div></article>
+      <article class="timeline-item reveal" data-status="cce enacted"><div class="timeline-year">2022</div><div class="timeline-dot"></div><div class="timeline-card"><span class="law-status status-enacted">Enacted · funding</span><h3>S8008C and the $4.2 billion Environmental Bond Act</h3><p>The signed budget bill included the Environmental Bond Act. Voters approved it, including at least $650 million for water-quality improvement and resilient infrastructure. CCE supported the campaign.</p><div class="card-links"><a href="https://www.nysenate.gov/legislation/bills/2021/S8008" target="_blank" rel="noopener">S8008C ↗</a><a href="https://www.citizenscampaign.org/whats-new-at-cce/2022/11/10/new-yorkers-vote-in-favor-of-the-environmental-bond-act" target="_blank" rel="noopener">CCE campaign ↗</a></div></div></article>
+      <article class="timeline-item reveal" data-status="enacted"><div class="timeline-year">2022</div><div class="timeline-dot"></div><div class="timeline-card"><span class="law-status status-enacted">Enacted · packaging and waste</span><h3>Expanded polystyrene ban begins</h3><p>New York's statewide ban on covered expanded-polystyrene food containers and loose-fill packaging began January 1, 2022.</p><a href="https://www.nysenate.gov/legislation/laws/ENV/27-3003" target="_blank" rel="noopener">Read the law ↗</a></div></article>
+      <article class="timeline-item reveal" data-status="proposed"><div class="timeline-year">2021–24</div><div class="timeline-dot dot-proposed"></div><div class="timeline-card"><span class="law-status status-proposed">Proposed · not enacted</span><h3>S8364A: PFAS in cosmetics and personal-care products</h3><p>This proposal would prohibit intentionally added PFAS in cosmetics and personal-care products. It remains proposed, not enacted.</p><a href="https://www.nysenate.gov/legislation/bills/2021/S8364" target="_blank" rel="noopener">Read the proposal ↗</a></div></article>
+      <article class="timeline-item reveal" data-status="enacted"><div class="timeline-year">2025</div><div class="timeline-dot"></div><div class="timeline-card"><span class="law-status status-enacted">Enacted · phased implementation</span><h3>PFAS restrictions in apparel begin</h3><p>New York's PFAS-in-apparel law prohibits intentionally added PFAS in new apparel after January 1, 2025; outdoor apparel for severe wet conditions has a later January 1, 2028 phase-in.</p><a href="https://dec.ny.gov/environmental-protection/pollution-prevention/pfas-in-apparel-law" target="_blank" rel="noopener">See NYSDEC guidance ↗</a></div></article>
+      <article class="timeline-item reveal" data-status="cce enacted"><div class="timeline-year">2024–26</div><div class="timeline-dot"></div><div class="timeline-card"><span class="law-status status-enacted">Implementation · CCE follow-up</span><h3>Testing shows reformulation can work</h3><p>NYSDEC adopted final 1,4-dioxane product regulations in September 2024. CCE's January 2024 follow-up testing showed major reductions in five re-tested detergents, and its 2026 case study reports that the product law was fully implemented in 2025.</p><a href="https://dec.ny.gov/news/environmental-notice-bulletin/2024-09-18/statewide-notice-of-adoption-6-nycrr-part-352-subpart-352-1-14-dioxane-limits-in-household-cleansing-personal-care-and-cosmetic-products-rule" target="_blank" rel="noopener">Read the regulation notice ↗</a></div></article>
+    </div><div class="nassau-callout reveal"><div class="nassau-seal">N</div><div><span class="section-kicker">Local context</span><h3>Nassau County acted before the statewide bag law.</h3><p>Local Law No. 4-2008 created Nassau's Plastic Bag Reduction and Recycling Law for covered stores and chains, taking effect November 27, 2008.</p><a href="https://www.nassaucountyny.gov/DocumentCenter/View/37580/Miscellaneous-Laws-1122" target="_blank" rel="noopener">Read Title 68 of Nassau County law ↗</a></div></div></div></section>
+    <section id="results" class="story-section section-cream results-section"><div class="container"><div class="section-heading reveal"><p class="section-kicker">05 / The measurable result</p><h2>The most hopeful part of this story is that the chemistry changed.</h2><p>CCE re-tested five detergents that had appeared among the higher results in the original product testing.</p></div><div class="result-table reveal"><div class="result-row result-head"><span>Product</span><span>Earlier result</span><span>2024 result</span><span>Reduction</span></div><div class="result-row"><span><strong>Tide Original</strong></span><span class="old-value">14,000 ppb</span><span class="new-value">205 ppb</span><span class="reduction">98.5%</span></div><div class="result-row"><span><strong>Persil</strong></span><span class="old-value">6,100 ppb</span><span class="new-value">928 ppb</span><span class="reduction">84.8%</span></div><div class="result-row"><span><strong>Tide Simply Oxi</strong></span><span class="old-value">8,300 ppb</span><span class="new-value">567 ppb</span><span class="reduction">93.2%</span></div><div class="result-row"><span><strong>Gain Original</strong></span><span class="old-value">10,000 ppb</span><span class="new-value">188 ppb</span><span class="reduction">98.1%</span></div><div class="result-row"><span><strong>Dreft Stage 1 / Newborn</strong></span><span class="old-value">10,000 ppb</span><span class="new-value">127 ppb</span><span class="reduction">98.7%</span></div></div><div class="result-bottom"><div class="result-callout reveal"><span class="result-number">95.8%</span><div><strong>combined measured reduction</strong><p>Calculated from the combined before-and-after concentrations for the five detergents re-tested by CCE: 48,400 ppb combined earlier results versus 2,015 ppb in 2024. Manufacturers could reformulate while continuing to sell effective products.</p></div></div><div class="result-caveat reveal"><strong>What this does not mean</strong><p>Product reformulation can reduce new product-related contamination; it does not erase historic groundwater plumes or eliminate PFAS. Water suppliers still need monitoring, treatment, and infrastructure funding.</p></div></div><a class="source-pill reveal" href="https://www.citizenscampaign.org/s/CCE_14-Dioxane-Report-2026_SPREADS_WEB.pdf">Read the CCE case study ↗</a></div></section>
+    <section id="sources" class="sources-section"><div class="container"><div class="sources-heading"><div><p class="section-kicker">Project library</p><h2>Start with the reports.</h2></div><p>The page uses the reports as evidence, not decoration. Open the original documents for complete tables, methodology, and recommendations.</p></div><div class="source-grid">
+      <a class="source-card" href="https://www.citizenscampaign.org/s/FINAL319_-The-2019-Consumer-Shopping-Guide-3jyj.pdf" target="_blank" rel="noopener"><span class="source-year">2019</span><strong>Shopping Safe: 1,4-Dioxane Exposure</strong><small>Product testing and consumer guide</small><span class="source-arrow">↗</span></a>
+      <a class="source-card" href="https://static1.squarespace.com/static/5b72eb5b8ab7222baffc8dbb/t/5d68179b2c2b550001788633/1567102877721/What%2BDoes%2BYour%2BWater%2BCost_%2B2019%2BCCE%2BNEW.pdf" target="_blank" rel="noopener"><span class="source-year">2019</span><strong>What Does Your Water Cost?</strong><small>48-district residential cost analysis</small><span class="source-arrow">↗</span></a>
+      <a class="source-card" href="https://static1.squarespace.com/static/5b72eb5b8ab7222baffc8dbb/t/605a1b2f12c4521db00bfe89/1616517936188/4%2Bpager%2BMCL%2Bdeferrals%2Bfinal.pdf" target="_blank" rel="noopener"><span class="source-year">2021</span><strong>What's In Your Water?</strong><small>Deferrals, PFAS, and public notice</small><span class="source-arrow">↗</span></a>
+      <a class="source-card" href="https://static1.squarespace.com/static/5b72eb5b8ab7222baffc8dbb/t/66d8c2f5236c58175c3a22a8/1725481718018/CCE_What%27s%2BIn%2BOur%2BWater_8-Pager_2024_PRINT_2.pdf" target="_blank" rel="noopener"><span class="source-year">2024</span><strong>What's In Our Water?</strong><small>2023 Long Island water results</small><span class="source-arrow">↗</span></a>
+      <a class="source-card" href="https://static1.squarespace.com/static/5b72eb5b8ab7222baffc8dbb/t/632caa3b9c0d67295e525028/1663871548944/Final_Bond%2BAct%2B4pg_Statewide_0822.pdf" target="_blank" rel="noopener"><span class="source-year">2022</span><strong>Environmental Bond Act</strong><small>Clean water, air, and resilient infrastructure</small><span class="source-arrow">↗</span></a>
+      <a class="source-card" href="https://www.citizenscampaign.org/s/CCE_14-Dioxane-Report-2026_SPREADS_WEB.pdf" target="_blank" rel="noopener"><span class="source-year">2026</span><strong>Protecting New Yorkers</strong><small>Case study on the 1,4-dioxane campaign</small><span class="source-arrow">↗</span></a>
+    </div><div class="source-footer"><p><strong>Project:</strong> Long Island Water, Products, and Policy · Research and synthesis by Aadil Khan · Source reports by Citizens Campaign for the Environment</p></div></div></section>
+  </main>
+   <footer class="site-footer"><div class="container"><span>Long Island Drinking Water</span><span>Long Island, NY</span><a href="#top">Back to top ↑</a></div></footer>
   <script>
-    const expensive = [["NY American Water\nArea 2 (North Shore\u2013Sea Cliff)", 1124.52], ["Shelter Island Heights", 1090.0], ["NY American Water\nArea 1", 936.12], ["East Williston", 814.8], ["City of Long Beach", 765.78]];
-    const least = [["Greenlawn", 148.0], ["Jericho", 195.89], ["Riverhead", 224.92], ["Village of Sands Point", 234.0], ["Freeport Village", 249.6]];
-    const taxShare = [{"district": "Carle Place", "population": 9005, "annual_total": 520.0, "annual_taxes": 400.0, "tax_share_pct": 76.9}, {"district": "Garden City Park", "population": 18000, "annual_total": 568.25, "annual_taxes": 428.25, "tax_share_pct": 75.4}, {"district": "Hicksville", "population": 42000, "annual_total": 444.65, "annual_taxes": 328.65, "tax_share_pct": 73.9}, {"district": "Roslyn", "population": 17900, "annual_total": 457.09, "annual_taxes": 334.45, "tax_share_pct": 73.2}, {"district": "Bethpage", "population": 35000, "annual_total": 605.39, "annual_taxes": 410.39, "tax_share_pct": 67.8}, {"district": "Westbury", "population": 20500, "annual_total": 424.94, "annual_taxes": 274.94, "tax_share_pct": 64.7}, {"district": "Albertson", "population": 13500, "annual_total": 658.05, "annual_taxes": 413.09, "tax_share_pct": 62.8}, {"district": "NY American Water Area 2 (North Shore\u2013Sea Cliff)", "population": 135000, "annual_total": 1124.52, "annual_taxes": null, "tax_share_pct": 59}, {"district": "Locust Valley (inside district)", "population": 7500, "annual_total": 638.98, "annual_taxes": 366.98, "tax_share_pct": 57.4}, {"district": "Plainview", "population": 34000, "annual_total": 530.78, "annual_taxes": 291.67, "tax_share_pct": 55.0}];
-    const popData = [{"district": "NY American Water Area 2 (North Shore\u2013Sea Cliff)", "population": 135000, "annual_total": 1124.52, "annual_taxes": null, "tax_share_pct": 59}, {"district": "NY American Water Area 1", "population": 135000, "annual_total": 936.12, "annual_taxes": null, "tax_share_pct": 33}, {"district": "East Williston", "population": 2500, "annual_total": 814.8, "annual_taxes": 0.0, "tax_share_pct": 0.0}, {"district": "City of Long Beach", "population": 35000, "annual_total": 765.78, "annual_taxes": 0.0, "tax_share_pct": 0.0}, {"district": "NY American Water Area 2 (Merrick)", "population": 135000, "annual_total": 719.28, "annual_taxes": null, "tax_share_pct": 35}, {"district": "Village of Plandome", "population": 1350, "annual_total": 680.4, "annual_taxes": 0.0, "tax_share_pct": 0.0}, {"district": "Albertson", "population": 13500, "annual_total": 658.05, "annual_taxes": 413.09, "tax_share_pct": 62.8}, {"district": "Locust Valley (inside district)", "population": 7500, "annual_total": 638.98, "annual_taxes": 366.98, "tax_share_pct": 57.4}, {"district": "Water Authority of Western Nassau County", "population": 120000, "annual_total": 617.36, "annual_taxes": 0.0, "tax_share_pct": 0.0}, {"district": "Williston Park", "population": 7500, "annual_total": 616.8, "annual_taxes": 0.0, "tax_share_pct": 0.0}, {"district": "Bethpage", "population": 35000, "annual_total": 605.39, "annual_taxes": 410.39, "tax_share_pct": 67.8}, {"district": "Glenwood", "population": 1000, "annual_total": 596.1, "annual_taxes": 194.1, "tax_share_pct": 32.6}, {"district": "Great Neck North", "population": 32400, "annual_total": 570.77, "annual_taxes": 0.0, "tax_share_pct": 0.0}, {"district": "Garden City Park", "population": 18000, "annual_total": 568.25, "annual_taxes": 428.25, "tax_share_pct": 75.4}, {"district": "West Hempstead\u2013Hempstead Gardens", "population": 32000, "annual_total": 534.81, "annual_taxes": 216.85, "tax_share_pct": 40.5}, {"district": "Plainview", "population": 34000, "annual_total": 530.78, "annual_taxes": 291.67, "tax_share_pct": 55.0}, {"district": "Carle Place", "population": 9005, "annual_total": 520.0, "annual_taxes": 400.0, "tax_share_pct": 76.9}, {"district": "Franklin Square", "population": 20000, "annual_total": 497.6, "annual_taxes": 200.0, "tax_share_pct": 40.2}, {"district": "Roslyn", "population": 17900, "annual_total": 457.09, "annual_taxes": 334.45, "tax_share_pct": 73.2}, {"district": "Rockville Centre Village", "population": 24568, "annual_total": 457.06, "annual_taxes": 0.0, "tax_share_pct": 0.0}, {"district": "Hicksville", "population": 42000, "annual_total": 444.65, "annual_taxes": 328.65, "tax_share_pct": 73.9}, {"district": "South Farmingdale", "population": 44700, "annual_total": 443.88, "annual_taxes": 243.88, "tax_share_pct": 54.9}, {"district": "Westbury", "population": 20500, "annual_total": 424.94, "annual_taxes": 274.94, "tax_share_pct": 64.7}, {"district": "Oyster Bay", "population": 8000, "annual_total": 423.5, "annual_taxes": 217.5, "tax_share_pct": 51.4}, {"district": "Manhasset\u2013Lakeville", "population": 45000, "annual_total": 420.26, "annual_taxes": 216.26, "tax_share_pct": 51.5}, {"district": "Port Washington", "population": 30000, "annual_total": 420.04, "annual_taxes": 134.86, "tax_share_pct": 32.1}, {"district": "Village of Garden City", "population": 22371, "annual_total": 381.4, "annual_taxes": 0.0, "tax_share_pct": 0.0}, {"district": "Village of Farmingdale", "population": 9254, "annual_total": 366.0, "annual_taxes": 0.0, "tax_share_pct": 0.0}, {"district": "Village of Hempstead", "population": 53891, "annual_total": 354.0, "annual_taxes": 0.0, "tax_share_pct": 0.0}, {"district": "Jericho", "population": 58000, "annual_total": 195.89, "annual_taxes": 71.89, "tax_share_pct": 36.7}];
-    const detergentRows = [{"name": "Tide Original", "old": 14000, "new": 205, "reduction_pct": 98.5}, {"name": "Persil", "old": 6100, "new": 928, "reduction_pct": 84.8}, {"name": "Tide Simply Oxi", "old": 8300, "new": 567, "reduction_pct": 93.2}, {"name": "Gain Original", "old": 10000, "new": 188, "reduction_pct": 98.1}, {"name": "Dreft Stage 1 Newborn", "old": 10000, "new": 127, "reduction_pct": 98.7}];
 
-    const layoutBase = {
-      paper_bgcolor: 'rgba(0,0,0,0)',
-      plot_bgcolor: 'rgba(0,0,0,0)',
-      font: {color: '#ecf7f6', family: 'Inter, Segoe UI, sans-serif'},
-      margin: {l: 60, r: 18, t: 10, b: 55},
-      xaxis: {
-        gridcolor: 'rgba(255,255,255,0.10)',
-        zerolinecolor: 'rgba(255,255,255,0.10)',
-        tickfont: {color: '#b8d0cf'}
-      },
-      yaxis: {
-        gridcolor: 'rgba(255,255,255,0.10)',
-        zerolinecolor: 'rgba(255,255,255,0.10)',
-        tickfont: {color: '#b8d0cf'}
-      },
-      legend: {
-        orientation: 'h',
-        yanchor: 'bottom',
-        y: 1.02,
-        xanchor: 'left',
-        x: 0
-      }
-    };
+(() => {
+  const menuButton = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('.site-nav');
+  const progress = document.querySelector('#progress-bar');
+  const sections = [...document.querySelectorAll('main section[id]')];
+  const navLinks = [...document.querySelectorAll('.site-nav a')];
 
-    Plotly.newPlot('plot1', [
-      {
-        type: 'bar',
-        orientation: 'h',
-        x: expensive.map(d => d[1]).reverse(),
-        y: expensive.map(d => d[0]).reverse(),
-        name: 'Most expensive',
-        marker: {color: '#56c7c0'},
-        hovertemplate: '%{y}<br>$%{x:.2f}<extra></extra>'
-      },
-      {
-        type: 'bar',
-        orientation: 'h',
-        x: least.map(d => d[1]).reverse(),
-        y: least.map(d => d[0]).reverse(),
-        name: 'Least expensive',
-        marker: {color: '#8be28c'},
-        hovertemplate: '%{y}<br>$%{x:.2f}<extra></extra>'
-      }
-    ], {
-      ...layoutBase,
-      barmode: 'group',
-      xaxis: {...layoutBase.xaxis, title: 'Annual residential cost ($)'},
-      yaxis: {...layoutBase.yaxis, automargin: true},
-      margin: {l: 150, r: 18, t: 10, b: 55}
-    }, {responsive: true, displayModeBar: false});
+  menuButton?.addEventListener('click', () => {
+    const open = nav.classList.toggle('is-open');
+    menuButton.setAttribute('aria-expanded', String(open));
+  });
 
-    Plotly.newPlot('plot2', [
-      {
-        type: 'bar',
-        x: taxShare.slice(0,10).map(d => d.district),
-        y: taxShare.slice(0,10).map(d => d.tax_share_pct),
-        marker: {color: '#ffd166'},
-        hovertemplate: '%{x}<br>%{y}% tax share<extra></extra>'
-      }
-    ], {
-      ...layoutBase,
-      xaxis: {...layoutBase.xaxis, tickangle: -30},
-      yaxis: {...layoutBase.yaxis, title: 'Tax share of annual cost (%)', range: [0, 65]}
-    }, {responsive: true, displayModeBar: false});
+  navLinks.forEach((link) => link.addEventListener('click', () => {
+    nav.classList.remove('is-open');
+    menuButton?.setAttribute('aria-expanded', 'false');
+  }));
 
-    Plotly.newPlot('plot3', [
-      {
-        type: 'scatter',
-        mode: 'markers+text',
-        x: popData.map(d => d.population),
-        y: popData.map(d => d.annual_total),
-        text: popData.map(d => d.district),
-        textposition: 'top center',
-        marker: {
-          size: popData.map(d => Math.max(10, Math.min(24, d.tax_share_pct / 2 + 10))),
-          color: popData.map(d => d.tax_share_pct),
-          colorscale: [
-            [0, '#56c7c0'],
-            [0.5, '#ffd166'],
-            [1, '#ff7f7f']
-          ],
-          cmin: 0,
-          cmax: 60,
-          line: {color: 'rgba(255,255,255,0.35)', width: 1},
-          showscale: true,
-          colorbar: {title: 'Tax %', tickfont: {color: '#ecf7f6'}, titlefont: {color: '#ecf7f6'}}
-        },
-        hovertemplate: '<b>%{text}</b><br>Population: %{x:,}<br>Annual cost: $%{y:.2f}<br>Tax share: %{customdata}%<extra></extra>',
-        customdata: popData.map(d => d.tax_share_pct)
-      }
-    ], {
-      ...layoutBase,
-      xaxis: {...layoutBase.xaxis, title: 'Population served'},
-      yaxis: {...layoutBase.yaxis, title: 'Annual residential water cost ($)'},
-      margin: {l: 65, r: 25, t: 10, b: 60}
-    }, {responsive: true, displayModeBar: false});
+  const updateProgress = () => {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.width = `${scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0}%`;
+  };
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
 
-    Plotly.newPlot('plot4', [
-      {
-        type: 'bar',
-        x: detergentRows.map(d => d.name),
-        y: detergentRows.map(d => d.old),
-        name: '2019',
-        marker: {color: '#ff7f7f'},
-        hovertemplate: '%{x}<br>%{y:,} ppb<extra>2019</extra>'
-      },
-      {
-        type: 'bar',
-        x: detergentRows.map(d => d.name),
-        y: detergentRows.map(d => d.new),
-        name: '2024',
-        marker: {color: '#8be28c'},
-        hovertemplate: '%{x}<br>%{y:,} ppb<extra>2024</extra>'
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
       }
-    ], {
-      ...layoutBase,
-      barmode: 'group',
-      xaxis: {...layoutBase.xaxis, tickangle: -20},
-      yaxis: {...layoutBase.yaxis, title: '1,4-dioxane concentration (ppb)'}
-    }, {responsive: true, displayModeBar: false});
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element));
 
-    Plotly.newPlot('plot5', [
-      {
-        type: 'bar',
-        orientation: 'h',
-        x: detergentRows.map(d => d.reduction_pct).reverse(),
-        y: detergentRows.map(d => d.name).reverse(),
-        marker: {color: '#56c7c0'},
-        text: detergentRows.map(d => d.reduction_pct + '%').reverse(),
-        textposition: 'outside',
-        cliponaxis: false,
-        hovertemplate: '%{y}<br>%{x}% reduction<extra></extra>'
-      }
-    ], {
-      ...layoutBase,
-      xaxis: {...layoutBase.xaxis, title: 'Reduction from 2019 to 2024 (%)', range: [0, 100]},
-      yaxis: {...layoutBase.yaxis, automargin: true},
-      margin: {l: 150, r: 30, t: 10, b: 55}
-    }, {responsive: true, displayModeBar: false});
-  </script>
-</body>
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const current = `#${entry.target.id}`;
+      navLinks.forEach((link) => link.classList.toggle('is-current', link.getAttribute('href') === current));
+    });
+  }, { rootMargin: '-25% 0px -65% 0px', threshold: 0 });
+  sections.forEach((section) => sectionObserver.observe(section));
+
+  const filterButtons = [...document.querySelectorAll('.filter-button')];
+  const timelineItems = [...document.querySelectorAll('.timeline-item')];
+  filterButtons.forEach((button) => button.addEventListener('click', () => {
+    const filter = button.dataset.filter;
+    filterButtons.forEach((item) => item.classList.toggle('is-active', item === button));
+    timelineItems.forEach((item) => {
+      const visible = filter === 'all' || item.dataset.status.split(' ').includes(filter);
+      item.classList.toggle('is-hidden', !visible);
+    });
+  }));
+})();
+   
+     (() => {
+       const setText = (selector, value) => {
+         const element = document.querySelector(selector);
+         if (element) element.textContent = value;
+       };
+       const setMany = (selector, values) => {
+         document.querySelectorAll(selector).forEach((element, index) => {
+           if (values[index] !== undefined) element.textContent = values[index];
+         });
+       };
+
+       setMany('.site-nav a', ['Pathway', 'Cost', 'Maps', 'Laws', 'Results', 'Reports']);
+       setText('.filter-button[data-filter="all"]', 'ALL');
+       document.querySelector('.filter-button[data-filter="cce"]')?.remove();
+       document.querySelector('.brand')?.setAttribute('aria-label', 'Long Island Drinking Water home');
+       setText('.hero-copy h1', 'Long Island Drinking Water');
+       setText('.hero-copy .hero-lede', "A source-backed summary of 1,4-dioxane, PFAS, water costs, and the policies shaping protection of Long Island's drinking-water supply.");
+       const heroEyebrow = document.querySelector('.hero-copy .eyebrow');
+       if (heroEyebrow?.lastChild?.nodeType === Node.TEXT_NODE) heroEyebrow.lastChild.nodeValue = 'Long Island water reports';
+       const heroLede = document.querySelector('.hero-copy .hero-lede');
+       if (heroLede && !document.querySelector('.report-scope')) {
+         const scope = document.createElement('p');
+         scope.className = 'report-scope';
+        scope.textContent = 'Coverage: 2019–2026';
+         heroLede.after(scope);
+       }
+       setText('.hero-actions .button-primary', 'Read the findings ↓');
+
+       setText('.intro-band .section-kicker', 'At a glance');
+       setText('.intro-statement', 'What the reports show');
+       setMany('.intro-band .three-step span', ['Source', 'Cost', 'Policy']);
+       setMany('.intro-band .three-step strong', ['Product testing', 'Water bills', 'Source control']);
+       setMany('.intro-band .three-step p', [
+         'CCE found 1,4-dioxane in 65 of 80 products tested in 2019.',
+         "Annual estimates ranged from $148 to $1,124.52 in the report's household comparison.",
+         'New York enacted product limits, drinking-water standards, and infrastructure funding.'
+       ]);
+
+       setText('#pathway .section-kicker', '01 / Source');
+       setText('#pathway .section-heading h2', 'Sources and pathways');
+       setText('#pathway .section-heading > p:last-child', '1,4-dioxane is often an unwanted manufacturing byproduct, not an ingredient intentionally added to make a product work. When products are washed down the drain, that byproduct can enter the wastewater and groundwater pathway.');
+       setText('#cost .section-kicker', '02 / Cost');
+       setText('#cost .section-heading h2', 'Water cost varies by district');
+       setText('#maps .section-kicker', '03 / Maps');
+       setText('#maps .section-heading h2', 'Long Island water-quality maps');
+       setText('#maps .section-heading > p:last-child', "CCE mapped reported maximum detections by water district. Open a map, then consult the supplier's current annual report for the latest information.");
+       document.querySelector('#maps')?.classList.add('maps-section');
+       setText('#laws .section-kicker', '04 / Laws');
+       setText('#laws .section-heading h2', 'New York policy timeline');
+       setText('#laws .section-heading > p:last-child', 'Key state and local measures affecting drinking water, products, waste, and infrastructure.');
+       setText('#results .section-kicker', '05 / Results');
+       setText('#results .section-heading h2', 'Product testing after S4389B');
+
+       document.querySelectorAll('#maps .map-thumb').forEach((element) => element.remove());
+       setMany('#maps .map-kicker', ['2025 map · 2024 data', '2024 map · 2024 data', '2024 map · 2023 data', '2023 map · 2023 data']);
+       setMany('#maps .map-body h3', ['1,4-Dioxane Map 2025', 'Long Island Water District PFOS Map 2024', 'Long Island Water District 1,4-Dioxane Map 2024', 'Long Island Water District PFAS Map 2023']);
+
+       const statusLabels = ['LAW · CCE VICTORY', 'LAW · PFAS SOURCE CONTROL', 'LAW · STATEWIDE WASTE REDUCTION', 'LAW · DRINKING-WATER STANDARDS', 'LAW · CCE VICTORY', 'LAW · PACKAGING AND WASTE', 'BILL · NOT ENACTED', 'LAW · PHASED IMPLEMENTATION', 'FOLLOW-UP · CCE TESTING'];
+       const lawItems = [...document.querySelectorAll('#laws .timeline-item')];
+       const bagLawTitle = lawItems[2]?.querySelector('h3');
+       if (bagLawTitle) bagLawTitle.textContent = 'New York State Bag Waste Reduction Act';
+       lawItems.forEach((item, index) => {
+         const status = item.querySelector('.law-status');
+         if (!status) return;
+         status.classList.remove('status-enacted', 'status-proposed');
+         status.classList.add(index === 6 ? 'status-bill' : index === 8 ? 'status-result' : 'status-law');
+         status.textContent = statusLabels[index];
+         if (false) {
+           const mark = document.createElement('span');
+           mark.className = 'victory-mark';
+           mark.textContent = '✓ CCE-supported';
+           status.after(mark);
+         }
+       });
+       const bagLawParagraph = lawItems[2]?.querySelector('.timeline-card p');
+       if (bagLawParagraph) bagLawParagraph.textContent = 'Plastic products and packaging are part of the broader chemical-source and waste pathway: PFAS, including PFOS and PFOA, have been used in some treated materials and food packaging, while 1,4-dioxane is associated with certain product ingredients and manufacturing. Reducing plastic carryout-bag waste therefore supports pollution prevention and water-quality goals indirectly, but this law does not set limits for those chemicals.';
+       document.querySelector('#laws .nassau-callout')?.remove();
+
+       const timeline = document.querySelector('#laws .timeline');
+       if (timeline) {
+         const legend = document.createElement('div');
+         legend.className = 'timeline-legend';
+         legend.innerHTML = '<span><i class="legend-swatch"></i>Enacted law</span><span><i class="legend-swatch legend-bill"></i>Proposed bill</span>';
+         timeline.parentElement.insertBefore(legend, timeline);
+         const controls = document.createElement('div');
+         controls.className = 'timeline-controls';
+         controls.setAttribute('aria-label', 'Policy timeline controls');
+         controls.innerHTML = '<span>Policy timeline</span><span class="timeline-control-buttons"><button type="button" aria-label="Previous policy milestone">←</button><button type="button" aria-label="Next policy milestone">→</button></span>';
+         timeline.parentElement.insertBefore(controls, timeline);
+         const buttons = controls.querySelectorAll('button');
+         const updateControls = () => {
+           buttons[0].disabled = timeline.scrollLeft <= 4;
+           buttons[1].disabled = timeline.scrollLeft + timeline.clientWidth >= timeline.scrollWidth - 4;
+         };
+         buttons[0].addEventListener('click', () => { timeline.scrollLeft -= Math.max(260, timeline.clientWidth * .78); updateControls(); });
+         buttons[1].addEventListener('click', () => { timeline.scrollLeft += Math.max(260, timeline.clientWidth * .78); updateControls(); });
+         timeline.addEventListener('scroll', updateControls, { passive: true });
+         updateControls();
+       }
+
+       setText('#sources .section-kicker', 'Reports & Sources');
+       setText('#sources .sources-heading h2', 'Project documentation');
+       setText('#sources .sources-heading > p', 'The original reports provide the testing, water-cost comparisons, map data, legislation context, and methodology used in this synthesis.');
+       const projectNote = document.querySelector('#sources .source-footer p:last-child');
+       if (projectNote) projectNote.innerHTML = '<strong>Project:</strong> Long Island Water, Products, and Policy<br>Data Story Synthesis by Aadil Khan © 2026<br>Source Reports by Citizens Campaign for the Environment';
+       const sourceSection = document.querySelector('#sources');
+       if (sourceSection && !document.querySelector('.glossary-section')) {
+         const glossary = document.createElement('section');
+         glossary.className = 'glossary-section';
+         glossary.innerHTML = '<div class="container"><div class="glossary-heading"><div><p class="section-kicker">Glossary</p><h2>Key terms</h2></div><p>A quick reference for the terms used in the reports and maps.<br><strong>Data note:</strong> Map names and report publication dates do not always match the underlying water-quality data year. Health information is presented for public education and is not medical advice.</p></div><div class="glossary-grid"><div class="glossary-card"><strong>1,4-Dioxane</strong><p>A manufacturing byproduct associated with some household and personal-care products.</p></div><div class="glossary-card"><strong>PFAS</strong><p>A large family of man-made chemicals known for persistence and resistance to heat, water, and oil.</p></div><div class="glossary-card"><strong>PFOS / PFOA</strong><p>Two specific PFAS chemicals monitored in public drinking water.</p></div><div class="glossary-card"><strong>ppb / ppt</strong><p>Parts per billion and parts per trillion, units used to describe concentration.</p></div></div></div>';
+         sourceSection.after(glossary);
+       }
+     })();
+   </script>
+  </body>
 </html>

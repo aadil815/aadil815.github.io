@@ -57,7 +57,29 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .highlight .s1 { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Single */
 .highlight .ss { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Symbol */
 .highlight .il { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Integer.Long */
-  </style>
+  
+.project-docs {
+    width: min(calc(100% - 56px), var(--max, 1100px));
+    margin: 60px auto 56px;
+    padding: 18px 20px;
+    border: 1px solid rgba(120,120,120,0.22);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.08);
+    color: inherit;
+    font-size: 14px;
+    line-height: 1.55;
+}
+.project-docs p { margin: 0 0 8px; }
+.project-docs p:last-child { margin-bottom: 0; }
+.project-docs a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.project-docs-kicker { margin-bottom: 12px; color: #6b7280; font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.project-docs-grid { display: grid; grid-template-columns: 1fr 1.25fr 1.25fr; gap: 14px; }
+.doc-item { padding: 14px; border: 1px solid rgba(120,120,120,0.18); border-radius: 8px; background: rgba(255,255,255,0.08); }
+.doc-label { display: block; margin-bottom: 6px; color: #6b7280; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.doc-item strong { display: block; }
+.doc-item small { display: block; margin-top: 4px; color: #6b7280; }
+@media (max-width: 760px) { .project-docs-grid { grid-template-columns: 1fr; } }
+</style>
 
 
 
@@ -624,9 +646,23 @@ if (outputEl) {{
 </div>
 </main>
 
-<footer>
-Data Source: MTA Daily Ridership Dataset (2020–2025)<br>
-Analysis and visualization by <strong>Aadil Khan</strong> using Python (pandas, Plotly, GeoPandas)
+<footer class="project-docs">
+<div class="project-docs-kicker">Project Documentation</div>
+<div class="project-docs-grid">
+<div class="doc-item">
+<span class="doc-label">Project</span>
+<strong>MTA Pricing &copy; 2025</strong>
+<small>Project by Aadil Khan</small>
+</div>
+<div class="doc-item">
+<span class="doc-label">Data Source</span>
+<p><a href="https://data.ny.gov/Transportation/MTA-Daily-Ridership-Data-2020-2025/vxuj-8kew" target="_blank" rel="noopener noreferrer">MTA Daily Ridership Data: 2020-2025</a>, with borough-level infrastructure context derived from ACS-based inputs referenced in the project.</p>
+</div>
+<div class="doc-item">
+<span class="doc-label">Methodology</span>
+<p>Python data processing with pandas, Plotly, and GeoPandas; recovery metrics calculated relative to pre-pandemic baselines; traffic reduction calculated as post-congestion-pricing percentage change.</p>
+</div>
+</div>
 </footer>
 
 </body>

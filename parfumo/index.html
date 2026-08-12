@@ -129,7 +129,29 @@
         section {
             margin-bottom: 48px;
         }
-    </style>
+    
+    .project-docs {
+      width: min(calc(100% - 56px), var(--max, 1100px));
+      margin: 60px auto 56px;
+      padding: 18px 20px;
+      border: 1px solid rgba(120,120,120,0.22);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.08);
+      color: inherit;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .project-docs p { margin: 0 0 8px; }
+    .project-docs p:last-child { margin-bottom: 0; }
+    .project-docs a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+    .project-docs-kicker { margin-bottom: 12px; color: #555; font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    .project-docs-grid { display: grid; grid-template-columns: 1fr 1.25fr 1.25fr; gap: 14px; }
+    .doc-item { padding: 14px; border: 1px solid rgba(120,120,120,0.18); border-radius: 8px; background: rgba(255,255,255,0.16); }
+    .doc-label { display: block; margin-bottom: 6px; color: #555; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .doc-item strong { display: block; }
+    .doc-item small { display: block; margin-top: 4px; color: #555; }
+    @media (max-width: 760px) { .project-docs-grid { grid-template-columns: 1fr; } }
+  </style>
     </head><body><h1>✨ Magic in the Bottle: Unveiling the Parfumo Top 100</h1><p class='subtitle'>A luxury fragrance data story by Aadil Khan</p><div class='note'><strong>Background:</strong> This data story visualizes the cleaned and normalized relational SQL database for <code>Parfumo</code> by reproducing the five analytical queries in pandas and visualizing the results in Plotly.</div><section><h2>🕵🏽 Key Findings</h2><ul><li>The strongest recent unisex performer by sillage in the filtered top 10 set is Tony Iommi Monkey Special (Xerjoff) with a sillage rating of 8.7.</li><li>The most common note in the dataset is Vanilla, appearing in 47 perfumes.</li><li>The concentration with the highest average longevity is Elixir at 8.85.</li><li>Francis Kurkdjian appears most often among perfumers with at least 3 entries, with 7 perfumes and an average scent rating of 8.09.</li><li>The most popular accord in the dataset is Spicy, appearing in 73 perfumes.</li></ul></section>
     <section class="chart-section">
         <h2>💨 Sillage Stars</h2>
@@ -595,9 +617,22 @@
     
     </details>
     
-    <footer style="margin-top:60px; padding-top:20px; border-top:1px solid #E4D9D3; font-size:14px; color:#555;">
-        <p><strong>Data Source:</strong> Parfumo Top 100 Fragrances dataset (cleaned CSV).</p>
-        <p><strong>Methodology:</strong> SQL database design → analytical queries reproduced in Python (pandas) → visualizations created with Plotly → exported as a standalone HTML data story.</p>
-        <p>Project by <strong>Aadil Khan</strong></p>
+    <footer class="project-docs">
+      <div class="project-docs-kicker">Project Documentation</div>
+      <div class="project-docs-grid">
+        <div class="doc-item">
+          <span class="doc-label">Project</span>
+          <strong>Parfumo Trends &copy; 2025</strong>
+          <small>Project by Aadil Khan</small>
+        </div>
+        <div class="doc-item">
+          <span class="doc-label">Data Source</span>
+          <p>Self-created Parfumo Top 100 Fragrances CSV compiled and cleaned by Aadil Khan.</p>
+        </div>
+        <div class="doc-item">
+          <span class="doc-label">Methodology</span>
+          <p>Relational SQL database design, analytical queries reproduced in Python with pandas, Plotly visualization, and standalone HTML data-story export.</p>
+        </div>
+      </div>
     </footer>
     </body></html>

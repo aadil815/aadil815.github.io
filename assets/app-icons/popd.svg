@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="popd-bg" x1="18" y1="12" x2="110" y2="118" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D98CA3"/>
+      <stop offset="1" stop-color="#B65E7B"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="120" height="120" rx="24" fill="url(#popd-bg)"/>
+  <rect x="4.75" y="4.75" width="118.5" height="118.5" rx="23.25" fill="none" stroke="#F4C9D6" stroke-opacity=".55" stroke-width="1.5"/>
+  <path fill="#141210" d="M39 36h31c18 0 29 9 29 24 0 16-12 25-30 25H58v18H39V36Zm19 15v19h10c8 0 12-3 12-10 0-6-4-9-12-9H58Z"/>
+  <path fill="#141210" d="M87 25c0-6 4-10 10-10 7 0 11 5 11 12 0 9-5 16-15 20l-4-7c5-2 8-5 8-9-6 0-10-2-10-6Z"/>
+</svg>

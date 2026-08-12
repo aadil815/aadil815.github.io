@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Islamic Bioethics | Organ Donation & Reproductive Technology</title>
+  <style>
+    :root{
+      --bg:#f7edda;
+      --bg-2:#ead6b8;
+      --panel:#fffaf0;
+      --panel-2:#f8e8cf;
+      --text:#54252c;
+      --muted:#79534f;
+      --soft:#a77b68;
+      --line:rgba(104,55,55,.16);
+      --emerald:#8b3d45;
+      --mint:#703039;
+      --gold:#b27c37;
+      --rose:#c47d6e;
+      --shadow:0 18px 42px rgba(94,51,48,.11);
+      --radius:24px;
+      --max:1180px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 10% 8%,rgba(255,255,255,.78),transparent 27%),
+        radial-gradient(circle at 90% 4%,rgba(196,125,110,.16),transparent 23%),
+        linear-gradient(180deg,#f8efdd 0%,#edd9bb 50%,#f8efdd 100%);
+      line-height:1.62;
+    }
+    body::before,
+    body::after{
+      content:"";
+      position:fixed;
+      z-index:4;
+      top:0;
+      bottom:0;
+      width:52px;
+      pointer-events:none;
+      opacity:.38;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='50' viewBox='0 0 52 50'%3E%3Cg transform='translate(0 -1)' fill='none' stroke-linejoin='round'%3E%3Cpath d='M26 1L34 9H45V18L52 26L45 34V43H34L26 51L18 43H7V34L0 26L7 18V9H18Z' stroke='%23b27c37' stroke-width='1.2'/%3E%3Cpath d='M26 7L33 14H40V21L45 26L40 31V38H33L26 45L19 38H12V31L7 26L12 21V14H19Z' stroke='%238b3d45' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E");
+      background-repeat:repeat-y;
+      background-position:center top;
+    }
+    body::before{left:max(14px,calc((100vw - var(--max)) / 4 - 26px))}
+    body::after{right:max(14px,calc((100vw - var(--max)) / 4 - 26px))}
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(var(--max),calc(100% - 36px));margin:0 auto}
+    .hero{padding:70px 0 40px;position:relative;overflow:hidden}
+    .hero::after{
+      content:"";position:absolute;right:-140px;top:-60px;width:480px;height:480px;border-radius:50%;
+      background:radial-gradient(circle,rgba(196,125,110,.16),transparent 68%);pointer-events:none
+    }
+    .eyebrow,.tag,.source-tag{
+      display:inline-flex;align-items:center;gap:8px;border-radius:999px;
+      font-size:.78rem;font-weight:850;letter-spacing:.1em;text-transform:uppercase
+    }
+    .eyebrow{padding:9px 14px;color:#703039;background:rgba(255,252,244,.62);border:1px solid rgba(104,55,55,.16)}
+    h1{margin:18px 0 14px;max-width:990px;font-size:clamp(2.8rem,7vw,6rem);line-height:.98;letter-spacing:-.065em}
+    .hero-copy{max-width:900px;margin:0;color:var(--muted);font-size:1.08rem}
+    .tag-row{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+    .tag{padding:8px 11px;color:#703039;background:rgba(255,252,244,.58);border:1px solid var(--line);letter-spacing:.05em;text-transform:none}
+    .hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:18px;margin-top:28px}
+    .card,.metric,.lens,.source-card,.doc-card{
+      border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,252,245,.94),rgba(249,235,211,.94));
+      border-radius:var(--radius);box-shadow:var(--shadow)
+    }
+    .card{padding:25px}
+    .card h3{margin:0 0 10px;font-size:1.27rem;letter-spacing:-.02em}
+    .card p{margin:0;color:var(--muted)}
+    .metric-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .metric{padding:20px;min-height:144px}
+    .metric .label{color:var(--soft);font-size:.75rem;font-weight:850;letter-spacing:.1em;text-transform:uppercase}
+    .metric .value{margin-top:8px;color:var(--gold);font-size:2.35rem;font-weight:900;letter-spacing:-.07em;line-height:1}
+    .metric .note{margin-top:9px;color:var(--muted);font-size:.87rem;line-height:1.42}
+    .divider{height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent)}
+    section{padding:39px 0}
+    .section-head{display:grid;grid-template-columns:.7fr 1fr;gap:22px;align-items:end;margin-bottom:20px}
+    .kicker{color:var(--emerald);font-size:.78rem;font-weight:850;letter-spacing:.13em;text-transform:uppercase}
+    h2{margin:7px 0 0;font-size:clamp(1.95rem,4vw,3.25rem);line-height:1.06;letter-spacing:-.05em}
+    .section-copy{margin:0;color:var(--muted)}
+    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .stack{display:grid;gap:14px}
+    .bullets{list-style:none;margin:15px 0 0;padding:0}
+    .bullets li{position:relative;margin:0 0 10px;padding-left:18px;color:var(--muted)}
+    .bullets li::before{content:"";position:absolute;left:0;top:.7em;width:7px;height:7px;border-radius:50%;background:var(--emerald)}
+    .callout{margin-top:15px;padding:15px 17px;border-left:3px solid var(--emerald);background:rgba(196,125,110,.11);color:#703039;border-radius:0 14px 14px 0}
+    .section-band{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(255,252,244,.36)}
+    .lens-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .lens{padding:20px;position:relative;overflow:hidden}
+    .lens::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--tone)}
+    .lens-no{color:var(--tone);font-size:.77rem;font-weight:850;letter-spacing:.12em;text-transform:uppercase}
+    .lens h3{margin:7px 0 7px;font-size:1.05rem}
+    .lens p{margin:0;color:var(--muted);font-size:.9rem}
+    .lens:nth-child(1){--tone:var(--emerald)}
+    .lens:nth-child(2){--tone:var(--gold)}
+    .lens:nth-child(3){--tone:var(--rose)}
+    .decision-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+    .decision{padding:18px;background:rgba(255,252,244,.62);border-top:2px solid var(--emerald);border-radius:0 0 16px 16px}
+    .decision strong{display:block;color:var(--mint);font-size:1.03rem}
+    .decision span{display:block;margin-top:7px;color:var(--muted);font-size:.88rem}
+    .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}
+    table{width:100%;border-collapse:collapse;background:rgba(255,252,245,.94);min-width:760px}
+    th,td{padding:15px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+    th{color:#fff8e9;background:#71323a;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase}
+    td{color:var(--muted);font-size:.91rem}
+    tr:last-child td{border-bottom:0}
+    .status{display:inline-flex;padding:5px 8px;border-radius:999px;font-size:.72rem;font-weight:850;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+    .status.yes{color:#703039;background:rgba(139,61,69,.08);border:1px solid rgba(139,61,69,.18)}
+    .status.debate{color:#78501f;background:rgba(178,124,55,.12);border:1px solid rgba(178,124,55,.22)}
+    .status.no{color:#7b3535;background:rgba(196,125,110,.12);border:1px solid rgba(196,125,110,.23)}
+    .source-grid,.doc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .source-card,.doc-card{padding:17px}
+    .source-tag{padding:6px 9px;color:#703039;background:rgba(139,61,69,.07);border:1px solid rgba(139,61,69,.16)}
+    .source-card h3,.doc-card h3{margin:10px 0 6px;font-size:1rem}
+    .source-card p,.doc-card p{margin:0;color:var(--muted);font-size:.86rem}
+    .source-card a,.doc-card a{color:#71323a;text-decoration:underline;text-underline-offset:3px}
+    .doc-card{transition:transform .18s ease,border-color .18s ease}
+    .doc-card:hover{transform:translateY(-3px);border-color:rgba(139,61,69,.36)}
+    .footer{padding:31px 0 62px;color:var(--soft);font-size:.86rem}
+    @media(max-width:930px){
+      .hero-grid,.section-head,.grid-2{grid-template-columns:1fr}
+      .grid-3,.lens-grid{grid-template-columns:1fr}
+      .decision-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:590px){
+      body::before,
+      body::after{width:14px;opacity:.15;background-size:22px 28px}
+      body::before{left:0}
+      body::after{right:0}
+      .wrap{width:min(var(--max),calc(100% - 22px))}
+      .hero{padding-top:48px}
+      h1{font-size:3.3rem}
+      .metric-grid,.decision-grid,.source-grid,.doc-grid{grid-template-columns:1fr}
+      .card{padding:20px}
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <span class="eyebrow">Genetics & Society Research Report</span>
+      <h1>Islamic Bioethics in Modern Medicine</h1>
+      <p class="hero-copy">
+        A two-part research synthesis on organ donation and assisted reproduction within Islam. The report examines how medical innovation intersects with preservation of life, prevention of harm, bodily dignity, family formation, and lineage.
+      </p>
+      <div class="tag-row">
+        <span class="tag">Organ transplantation</span>
+        <span class="tag">Assisted reproduction</span>
+        <span class="tag">Islamic jurisprudence</span>
+        <span class="tag">Health communication</span>
+      </div>
+      <div class="hero-grid">
+        <article class="card">
+          <h3>Research focus</h3>
+          <p>
+            The supplied papers do not reduce Islamic bioethics to a single verdict. They show a decision-making framework: seek knowledge, weigh benefit against harm, protect dignity, clarify consent, and preserve family lineage. Interpretations vary across scholars, sects, national systems, and clinical circumstances.
+          </p>
+          <div class="callout">This is an educational synthesis of 2021 coursework and its cited literature. It is not a religious ruling, medical advice, or a substitute for consultation with qualified clinicians and religious authorities.</div>
+        </article>
+        <div class="metric-grid">
+          <article class="metric"><div class="label">Report sections</div><div class="value">2</div><div class="note">Organ transplantation first, reproductive technology second.</div></article>
+          <article class="metric"><div class="label">Source documents</div><div class="value">4</div><div class="note">Two research papers and two annotated bibliographies.</div></article>
+          <article class="metric"><div class="label">Muslim physicians</div><div class="value">70%</div><div class="note">Reported that organ donation is permitted in the cited U.S. physician survey.</div></article>
+          <article class="metric"><div class="label">Embryo milestone</div><div class="value">120d</div><div class="note">Ensoulment timing described in the reproductive-technology paper.</div></article>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="divider"></div>
+  <main>
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">Report frame</div><h2>A values-based approach to medical innovation</h2></div>
+          <p class="section-copy">Across both papers, the ethical analysis is shaped by several recurring considerations. These lenses explain why the same technology may be accepted, limited, debated, or prohibited depending on the circumstances.</p>
+        </div>
+        <div class="lens-grid">
+          <article class="lens"><div class="lens-no">Lens 01</div><h3>Preservation of life</h3><p>Saving a life carries substantial ethical weight, particularly when transplantation or treatment offers a necessary path to survival.</p></article>
+          <article class="lens"><div class="lens-no">Lens 02</div><h3>Prevention of harm</h3><p>Benefit is weighed against harm to the donor, recipient, embryo, family, and wider community.</p></article>
+          <article class="lens"><div class="lens-no">Lens 03</div><h3>Dignity and lineage</h3><p>Bodily dignity shapes donation debates. Family lineage shapes assisted-reproduction debates.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-band">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">01 / Organ transplant</div><h2>Destigmatizing donation and transplantation</h2></div>
+          <p class="section-copy">The first paper analyzes organ donation as a medical necessity and a communication challenge. Living donation is often treated more clearly than deceased donation, where debates about death determination, bodily sanctity, burial practices, and consent become central.</p>
+        </div>
+        <div class="grid-2">
+          <article class="card">
+            <h3>Why the subject matters</h3>
+            <p>Transplantation can become necessary when organs such as the kidney, liver, heart, or lung fail. A compatible donor-recipient match is required, while the need for donated organs exceeds availability.</p>
+            <ul class="bullets">
+              <li>Paired or regenerative donations may be allowed when the donor does not face significant harm.</li>
+              <li>Removing a vital organ from a living donor is prohibited.</li>
+              <li>Buying and selling organs is prohibited in the rulings summarized by the paper.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Where disagreement emerges</h3>
+            <p>The paper identifies deceased donation as the more contested area. The underlying questions include whether neurologically determined death is sufficient, how quickly burial should occur, how consent should work, and how the body should be treated after death.</p>
+            <div class="callout">The source paper presents three broad views: donation is impermissible; donation is generally impermissible but may become permissible in certain circumstances; or donation is permitted when specific conditions are met.</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">01A / Organ transplant</div><h2>From ethical ruling to clinical reality</h2></div>
+          <p class="section-copy">The paper moves beyond abstract permissibility. It argues that healthcare workers, religious leaders, governments, and local communities all affect whether patients and families can make informed decisions.</p>
+        </div>
+        <div class="decision-grid">
+          <article class="decision"><strong>Living donation</strong><span>Often accepted for paired or regenerative organs when harm to the donor is minimized.</span></article>
+          <article class="decision"><strong>Deceased donation</strong><span>More contested because death determination, consent, dignity, and burial timing matter.</span></article>
+          <article class="decision"><strong>Community education</strong><span>Mosques and trusted local leaders can address uncertainty and misinformation.</span></article>
+          <article class="decision"><strong>Clinical counseling</strong><span>Nurses and physicians help families navigate medical facts alongside religious concerns.</span></article>
+        </div>
+        <div class="grid-3" style="margin-top:18px">
+          <article class="card"><h3>57 nations</h3><p>The paper cites 57 predominantly Islamic nations and describes uneven transplant infrastructure, funding, public education, and scholarly support.</p></article>
+          <article class="card"><h3>70% understood permission</h3><p>In a cited study of 251 Muslim American physicians, 70% reported that Islamic bioethics and law permit organ donation.</p></article>
+          <article class="card"><h3>30% registered donors</h3><p>In the same physician survey, only 30% reported being registered as organ donors, illustrating the gap between knowledge and action.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-band">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">02 / Reproductive methods</div><h2>Alternative reproduction within Islam</h2></div>
+          <p class="section-copy">The second paper examines assisted reproductive technology through marriage, family formation, progeny, and lineage. Technologies are not evaluated as one group: the origin of gametes, the role of third parties, timing, purpose, and risks all matter.</p>
+        </div>
+        <div class="grid-2">
+          <article class="card">
+            <h3>Marriage and lineage</h3>
+            <p>The paper describes infertility treatment as compatible with the importance Islam places on family formation, while emphasizing that assisted reproduction usually remains bounded by marriage and the preservation of lineage.</p>
+            <ul class="bullets">
+              <li>IVF using the married couple's own sperm and ovum is generally presented as permissible.</li>
+              <li>Third-party sperm, egg, embryo, or uterus involvement raises lineage questions.</li>
+              <li>Sunni and Shia interpretations can differ, especially for gamete donation.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Technology is assessed by purpose</h3>
+            <p>The paper distinguishes treatment from enhancement. Preimplantation genetic diagnosis may be preferred when it reduces the need for later pregnancy termination. Somatic gene therapy is treated differently from heritable germline editing.</p>
+            <div class="callout">Safety and efficacy remain central to the discussion of germline editing. The paper argues that preventing harm and preserving life should guide any future consideration.</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">02A / Reproductive methods</div><h2>A comparative view of technologies</h2></div>
+          <p class="section-copy">This matrix summarizes how the reproductive-technology paper frames major methods. It is a map of the paper's analysis, not a universal ruling.</p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Method</th><th>Paper's framing</th><th>Key ethical question</th><th>Status in synthesis</th></tr></thead>
+            <tbody>
+              <tr><td>IVF using the married couple's own gametes</td><td>Supports conception within marriage.</td><td>Are sperm and ovum from the married couple?</td><td><span class="status yes">Generally permitted</span></td></tr>
+              <tr><td>Third-party gamete donation</td><td>Interpretations diverge, especially across Sunni and Shia contexts.</td><td>How are lineage, guardianship, and inheritance handled?</td><td><span class="status debate">Interpretations vary</span></td></tr>
+              <tr><td>Gestational surrogacy</td><td>Debated because pregnancy and genetic motherhood may be separated.</td><td>Who is recognized as the mother?</td><td><span class="status debate">Debated</span></td></tr>
+              <tr><td>Posthumous use of cryopreserved gametes</td><td>Marriage contract is no longer in effect after death or divorce.</td><td>Does reproduction occur within a valid marriage?</td><td><span class="status no">Prohibited in paper</span></td></tr>
+              <tr><td>Preimplantation genetic diagnosis</td><td>May help avoid inherited disease and later clinical termination.</td><td>Is the purpose medical and harm-reducing?</td><td><span class="status yes">Accepted use described</span></td></tr>
+              <tr><td>Human germline editing</td><td>Potential medical use remains subject to safety, efficacy, and regulation.</td><td>Can harm and misuse be prevented?</td><td><span class="status debate">Not ready for use</span></td></tr>
+              <tr><td>Non-reproductive cloning research</td><td>May be considered beneficial when directed toward research or therapy.</td><td>Does the work benefit humanity without reproductive cloning?</td><td><span class="status yes">Research use supported</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-band">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">Synthesis</div><h2>What the two papers share</h2></div>
+          <p class="section-copy">The topics are different, but the reasoning pattern is consistent: technology is not evaluated in isolation. Its medical purpose, risks, social context, and relationship to core ethical commitments all shape the analysis.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card"><h3>Knowledge before action</h3><p>Both papers emphasize informed decision-making. Clinicians and religious leaders serve as trusted interpreters when patients face unfamiliar technologies.</p></article>
+          <article class="card"><h3>Benefit is conditional</h3><p>A medical benefit does not automatically settle every question. Consent, harm, dignity, lineage, timing, and circumstance still matter.</p></article>
+          <article class="card"><h3>Context changes practice</h3><p>Scholarly interpretations, sectarian differences, national laws, infrastructure, and community knowledge all affect real-world access and uptake.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">Selected sources</div><h2>Research foundation</h2></div>
+          <p class="section-copy">The report is based on the supplied coursework and annotated bibliographies. These selected citations represent the key research threads developed in the papers.</p>
+        </div>
+        <div class="source-grid">
+          <article class="source-card"><span class="source-tag">Organ donation</span><h3>Ali et al. (2020)</h3><p>Reviews organ donation and transplantation from Islamic perspectives. <a href="https://doi.org/10.1111/ctr.13832" target="_blank" rel="noopener noreferrer">Open DOI</a></p></article>
+          <article class="source-card"><span class="source-tag">Islamic law</span><h3>Padela & Auda (2020)</h3><p>Discusses the Fiqh Council of North America's position on organ donation. <a href="https://doi.org/10.1097/TXD.0000000000000980" target="_blank" rel="noopener noreferrer">Open DOI</a></p></article>
+          <article class="source-card"><span class="source-tag">Assisted reproduction</span><h3>Serour (2008)</h3><p>Examines Islamic perspectives on assisted reproduction and embryo ethics. <a href="https://doi.org/10.1016/S1472-6483(10)60328-8" target="_blank" rel="noopener noreferrer">Open DOI</a></p></article>
+          <article class="source-card"><span class="source-tag">Gene editing</span><h3>Isa et al. (2020)</h3><p>Discusses CRISPR/Cas9-mediated human germline editing from Islamic perspectives. <a href="https://doi.org/10.1007/s11948-019-00098-z" target="_blank" rel="noopener noreferrer">Open DOI</a></p></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">Project documents</div><h2>Original coursework</h2></div>
+          <p class="section-copy">All four supplied files are included with the project so the synthesis remains traceable to the original papers and their annotated bibliographies.</p>
+        </div>
+        <div class="doc-grid">
+          <a class="doc-card" href="./docs/organ-donation-and-transplantation-within-islam.docx"><span class="source-tag">Paper 01</span><h3>Organ Donation and Transplantation</h3><p>Full research paper on destigmatizing organ donation and transplantation within Islam.</p></a>
+          <a class="doc-card" href="./docs/organ-donation-annotated-bibliography.docx"><span class="source-tag">Bibliography 01</span><h3>Organ Donation Annotated Bibliography</h3><p>Early source map for the organ-donation research paper.</p></a>
+          <a class="doc-card" href="./docs/alternative-reproduction-technology-within-islam.docx"><span class="source-tag">Paper 02</span><h3>Alternative Reproduction Technology</h3><p>Full research paper on assisted reproduction, lineage, and emerging technologies.</p></a>
+          <a class="doc-card" href="./docs/reproductive-technology-annotated-bibliography.docx"><span class="source-tag">Bibliography 02</span><h3>Reproductive Technology Annotated Bibliography</h3><p>Early source map for the reproductive-technology research paper.</p></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="divider"></div>
+  <footer class="footer">
+    <div class="wrap">Portfolio research project by Aadil Khan. Educational synthesis based on Genetics & Society coursework developed in 2021; not medical advice or a religious ruling.</div>
+  </footer>
+</body>
+</html>

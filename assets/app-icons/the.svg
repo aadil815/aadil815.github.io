@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="the-bg" x1="16" y1="12" x2="112" y2="118" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#071520"/>
+      <stop offset="1" stop-color="#030c13"/>
+    </linearGradient>
+    <linearGradient id="the-gold" x1="26" y1="28" x2="100" y2="94" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#e1bd67"/>
+      <stop offset="1" stop-color="#8b6a3d"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="120" height="120" rx="18" fill="url(#the-bg)"/>
+  <rect x="8" y="8" width="112" height="112" rx="14" fill="none" stroke="#c8a85e" stroke-opacity=".55" stroke-width="2"/>
+  <text x="64" y="76" text-anchor="middle" fill="url(#the-gold)" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="600" letter-spacing="-2">THE</text>
+  <path d="M30 91h68" stroke="#c8a85e" stroke-opacity=".72" stroke-width="2"/>
+</svg>
