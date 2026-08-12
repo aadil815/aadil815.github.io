@@ -8,8 +8,8 @@
     :root {
       --bg: #f5f0e6;
       --bg-2: #efe7d8;
-      --panel: rgba(255, 252, 246, 0.72);
-      --panel-strong: rgba(255, 252, 246, 0.9);
+      --panel: rgba(255, 252, 246, 0.76);
+      --panel-strong: rgba(255, 252, 246, 0.92);
       --text: #171411;
       --muted: #6d6258;
       --line: rgba(23, 20, 17, 0.12);
@@ -25,6 +25,11 @@
       --fmri: linear-gradient(135deg, #efe2ff 0%, #d6c3ff 100%);
       --tiger: linear-gradient(135deg, #ffe6c7 0%, #ffbf80 100%);
       --primate: linear-gradient(135deg, #e7ddd2 0%, #ccb9a7 100%);
+      --bioethics: linear-gradient(135deg, #faedbd 0%, #e4bd6f 100%);
+      --cte: linear-gradient(135deg, #eadbd2 0%, #c99f8d 100%);
+      --overview-from: rgba(255, 252, 246, 0.62);
+      --overview-to: rgba(252, 248, 241, 0.8);
+      --overview: linear-gradient(180deg, var(--overview-from) 0%, var(--overview-to) 100%);
     }
 
     * {
@@ -52,106 +57,116 @@
       text-decoration: none;
     }
 
-    .page {
-      max-width: 1220px;
-      margin: 0 auto;
-      padding: 30px 24px 56px;
+    button {
+      font: inherit;
     }
 
-    .top-links {
-      position: absolute;
-      top: 20px;
-      right: 20px;
+    .page {
+      width: min(100% - 24px, 1560px);
+      margin: 0 auto;
+      min-height: 100vh;
+      padding: 18px 0;
       display: flex;
       align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      padding: 7px;
-      border: 1px solid rgba(255,255,255,0.55);
-      background: rgba(255, 252, 246, 0.58);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-radius: 999px;
-      box-shadow: var(--shadow);
-      z-index: 2;
     }
 
-    .top-links a {
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 0.84rem;
-      color: var(--muted);
-      transition: all 0.22s ease;
+    .portfolio-shell {
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(288px, 310px) minmax(0, 1fr);
+      gap: 18px;
+      align-items: stretch;
     }
 
-    .hero-badge {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.58);
-      background: rgba(255, 252, 246, 0.58);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      box-shadow: var(--shadow);
-      font-size: 0.82rem;
-      letter-spacing: 0.03em;
-      color: var(--muted);
-      font-weight: 600;
-      z-index: 2;
-    }
-
-    .top-links a:hover {
-      background: rgba(23, 20, 17, 0.92);
-      color: #fff;
-      transform: translateY(-1px);
-    }
-
-    .hero {
+    .profile-card,
+    .work-card {
       position: relative;
       overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.6);
-      background: linear-gradient(180deg, rgba(255,252,246,0.86) 0%, rgba(255,248,239,0.78) 100%);
+      border: 1px solid rgba(255,255,255,0.62);
+      background: linear-gradient(180deg, rgba(255,252,246,0.88) 0%, rgba(255,248,239,0.78) 100%);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       border-radius: 36px;
       box-shadow: var(--shadow-strong);
-      padding: 68px 54px 46px;
-      text-align: center;
-      margin-bottom: 28px;
     }
 
-    .hero::before,
-    .hero::after {
+    .profile-card::before,
+    .profile-card::after,
+    .work-card::before {
       content: "";
       position: absolute;
       border-radius: 50%;
       filter: blur(10px);
-      opacity: 0.45;
+      opacity: 0.42;
       pointer-events: none;
     }
 
-    .hero::before {
-      width: 220px;
-      height: 220px;
-      right: -60px;
+    .profile-card::before {
+      width: 210px;
+      height: 210px;
+      right: -70px;
       top: -60px;
       background: radial-gradient(circle, rgba(255, 200, 128, 0.55), transparent 70%);
     }
 
-    .hero::after {
-      width: 200px;
-      height: 200px;
-      left: -50px;
+    .profile-card::after {
+      width: 190px;
+      height: 190px;
+      left: -60px;
       bottom: -60px;
       background: radial-gradient(circle, rgba(179, 205, 255, 0.55), transparent 70%);
     }
 
+    .work-card::before {
+      width: 220px;
+      height: 250px;
+      right: -70px;
+      bottom: -80px;
+      background: radial-gradient(circle, rgba(179, 205, 255, 0.35), transparent 70%);
+    }
+
+    .profile-card {
+      position: sticky;
+      top: 18px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      z-index: 1;
+    }
+
+    .profile-inner,
+    .work-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.58);
+      background: rgba(255, 252, 246, 0.58);
+      box-shadow: var(--shadow);
+      font-size: 0.82rem;
+      letter-spacing: 0.03em;
+      color: var(--muted);
+      font-weight: 650;
+    }
+
     .profile-ring {
-      width: 152px;
-      height: 152px;
-      margin: 0 auto 22px;
+      width: 132px;
+      height: 132px;
+      margin: 4px auto 18px;
       border-radius: 50%;
       padding: 5px;
       background: linear-gradient(135deg, #fff4dd 0%, #d7e8ff 100%);
@@ -168,34 +183,40 @@
       display: block;
     }
 
-    .hero h1 {
+    h1 {
       margin: 0;
-      font-size: clamp(2.3rem, 5vw, 4rem);
+      font-size: clamp(1.72rem, 2.3vw, 2.15rem);
       line-height: 0.96;
       letter-spacing: -0.055em;
-      font-weight: 700;
+      font-weight: 760;
+      text-align: center;
+      white-space: nowrap;
     }
 
     .subhead {
       margin-top: 12px;
-      font-size: 1.05rem;
+      font-size: 0.74rem;
       color: var(--muted);
-      letter-spacing: 0.02em;
+      letter-spacing: 0.01em;
+      font-weight: 650;
+      text-align: center;
+      white-space: nowrap;
     }
 
     .bio {
-      max-width: 850px;
-      margin: 24px auto 0;
-      font-size: 1.07rem;
+      margin: 20px 0 0;
+      padding: 14px 14px 14px 16px;
+      border-left: 4px solid rgba(23,20,17,0.16);
+      border-radius: 0 18px 18px 0;
+      background: rgba(255,255,255,0.38);
+      font-size: 0.9rem;
       color: #2c241e;
     }
 
     .education {
-      margin-top: 22px;
-      display: flex;
-      justify-content: center;
+      margin-top: 16px;
+      display: grid;
       gap: 12px;
-      flex-wrap: wrap;
     }
 
     .edu-pill {
@@ -203,18 +224,16 @@
       grid-template-columns: auto 1fr;
       align-items: center;
       column-gap: 10px;
-      padding: 12px 16px;
-      min-width: 320px;
+      padding: 10px 12px;
       background: rgba(255,255,255,0.72);
       border: 1px solid var(--line);
       border-radius: 20px;
       color: #2b221b;
       box-shadow: 0 8px 18px rgba(0,0,0,0.04);
-      text-align: left;
     }
 
     .edu-emoji {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       align-self: center;
     }
 
@@ -226,58 +245,178 @@
     }
 
     .edu-school {
-      font-size: 0.95rem;
-      font-weight: 600;
+      font-size: 0.9rem;
+      font-weight: 700;
     }
 
     .edu-degree {
-      font-size: 0.84rem;
+      font-size: 0.8rem;
       color: var(--muted);
-      font-weight: 500;
+      font-weight: 550;
     }
 
-    .edu-extra {
-      font-size: 0.76rem;
-      color: #7d7164;
-      letter-spacing: 0.01em;
+    .work-actions {
+      position: absolute;
+      top: 22px;
+      right: 22px;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 0;
     }
 
-    .section-intro {
-      text-align: center;
-      margin: 22px auto 28px;
-      max-width: 760px;
+    .top-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 6px;
+      flex-wrap: nowrap;
+      margin: 0;
+      padding: 0;
+    }
+
+    .top-links a,
+    .email-button {
+      border: 0;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255, 252, 246, 0.58);
+      border: 1px solid rgba(255,255,255,0.58);
+      box-shadow: var(--shadow);
+      font-size: 0.82rem;
+      letter-spacing: 0.03em;
+      color: var(--muted);
+      font-weight: 650;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.22s ease;
+    }
+
+    .top-links a:hover,
+    .email-button:hover {
+      background: rgba(23, 20, 17, 0.92);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .email-wrap {
+      position: relative;
+      display: inline-flex;
+    }
+
+    .copy-pop {
+      position: absolute;
+      left: 50%;
+      top: calc(100% + 10px);
+      transform: translateX(-50%) translateY(-8px);
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(23, 20, 17, 0.94);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      opacity: 0;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .copy-pop.show {
+      animation: copied 1.45s ease forwards;
+    }
+
+    @keyframes copied {
+      0% { opacity: 0; transform: translateX(-50%) translateY(-8px); }
+      18% { opacity: 1; transform: translateX(-50%) translateY(0); }
+      74% { opacity: 1; transform: translateX(-50%) translateY(4px); }
+      100% { opacity: 0; transform: translateX(-50%) translateY(12px); }
+    }
+
+    .work-card {
+      padding: 20px;
     }
 
     .section-kicker {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--muted);
       margin-bottom: 10px;
+      font-weight: 750;
     }
 
-    .section-intro h2 {
-      margin: 0 0 10px;
-      font-size: clamp(1.8rem, 4vw, 2.5rem);
-      letter-spacing: -0.04em;
+    .work-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-end;
+      padding-top: 16px;
+      margin-bottom: 32px;
     }
 
-    .section-intro p {
+    .work-head h2 {
       margin: 0;
+      max-width: 650px;
+      font-size: clamp(1.7rem, 2.8vw, 2.3rem);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+    }
+
+    .work-head p {
+      margin: 8px 0 0;
       color: var(--muted);
-      font-size: 1rem;
+      font-size: 0.95rem;
+      max-width: 620px;
+    }
+
+    .tabs {
+      display: inline-flex;
+      flex-shrink: 0;
+      align-self: flex-end;
+      padding: 6px;
+      border: 1px solid rgba(255,255,255,0.55);
+      background: rgba(255, 252, 246, 0.62);
+      border-radius: 999px;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.05);
+    }
+
+    .tab-button {
+      border: 0;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    .tab-button.active {
+      background: rgba(23,20,17,0.92);
+      color: #fff;
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: block;
     }
 
     .tiles {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 18px;
+      align-items: start;
     }
 
     .tile {
       position: relative;
-      min-height: 180px;
-      padding: 20px;
+      height: 250px;
+      padding: 18px 20px 58px;
       border-radius: 24px;
       overflow: hidden;
       border: 1px solid rgba(255,255,255,0.58);
@@ -317,15 +456,15 @@
     }
 
     .tile-code {
-      font-size: 0.76rem;
+      font-size: 0.72rem;
       text-transform: uppercase;
       letter-spacing: 0.14em;
       color: rgba(23, 20, 17, 0.62);
-      font-weight: 700;
+      font-weight: 800;
     }
 
     .tile-emoji {
-      font-size: 2rem;
+      font-size: 1.85rem;
       opacity: 0;
       transform: translateY(8px) scale(0.92);
       transition: all 0.25s ease;
@@ -337,28 +476,37 @@
     }
 
     .tile-title {
-      margin: 22px 0 8px;
-      font-size: 1.5rem;
+      margin: 18px 0 7px;
+      font-size: 1.42rem;
       letter-spacing: -0.04em;
-      line-height: 1.02;
-      font-weight: 700;
+      line-height: 1.03;
+      font-weight: 760;
     }
 
     .tile-desc {
       margin: 0;
       color: rgba(23, 20, 17, 0.72);
-      font-size: 0.95rem;
+      font-size: 0.91rem;
+      line-height: 1.45;
       max-width: 95%;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .tile-foot {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 18px;
+      margin-top: 0;
       font-size: 0.9rem;
       color: rgba(23, 20, 17, 0.72);
-      font-weight: 600;
+      font-weight: 700;
     }
 
     .tile-arrow {
@@ -379,6 +527,207 @@
       transform: translateX(2px);
     }
 
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      align-items: start;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+      align-items: start;
+    }
+
+    #websites .product-grid {
+      align-content: start;
+      max-width: 1136px;
+      margin-inline: auto;
+    }
+
+    .app-placeholder {
+      position: relative;
+      height: 250px;
+      padding: 18px 20px 58px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.54);
+      border: 1px dashed rgba(23,20,17,0.18);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      overflow: hidden;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .app-placeholder:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 22px 40px rgba(0,0,0,0.1);
+    }
+
+    .app-placeholder strong {
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .app-placeholder span {
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 650;
+    }
+
+    .app-placeholder p {
+      margin: 8px 0 0;
+      color: rgba(23, 20, 17, 0.72);
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
+
+    .product-grid .app-placeholder {
+      padding: 17px 16px 54px;
+      border-style: solid;
+      border-color: rgba(23,20,17,0.1);
+      background: var(--app-tint, rgba(255,255,255,0.54));
+    }
+
+    .product-grid .app-placeholder.empty {
+      border-style: dashed;
+      background: rgba(255,255,255,0.36);
+      box-shadow: none;
+    }
+
+    .grid-intro {
+      height: 250px;
+      padding: 22px 18px;
+      border-left: 2px solid rgba(23, 20, 17, 0.07);
+      border-radius: 16px;
+      background: var(--overview);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 8px;
+      pointer-events: none;
+    }
+
+    .grid-intro-title {
+      margin: 0;
+      font-size: clamp(0.98rem, 1.08vw, 1.08rem);
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+      font-weight: 700;
+      color: rgba(23, 20, 17, 0.8);
+    }
+
+    .grid-intro-desc {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.48;
+      color: rgba(109, 98, 88, 0.86);
+      font-weight: 500;
+    }
+
+    .app-placeholder.empty strong,
+    .app-placeholder.empty p,
+    .app-placeholder.empty .app-kind {
+      color: rgba(23,20,17,0.34);
+    }
+
+    .product-grid .app-placeholder p {
+      font-size: 0.88rem;
+      line-height: 1.38;
+    }
+
+    .app-kind {
+      display: block;
+      margin-bottom: 12px;
+      color: rgba(23,20,17,0.52);
+      font-size: 0.66rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .product-grid .app-placeholder.tint-premeducation { --app-tint: rgba(214, 228, 249, 0.7); }
+    .product-grid .app-placeholder.tint-fragrance-fyi { --app-tint: rgba(249, 239, 214, 0.72); }
+    .product-grid .app-placeholder.tint-decant-one { --app-tint: rgba(240, 226, 198, 0.72); }
+    .product-grid .app-placeholder.tint-safra { --app-tint: rgba(238, 221, 216, 0.72); }
+    .product-grid .app-placeholder.tint-hababies { --app-tint: rgba(220, 238, 231, 0.74); }
+    .product-grid .app-placeholder.tint-empti { --app-tint: rgba(224, 238, 246, 0.76); }
+    .product-grid .app-placeholder.tint-blockt { --app-tint: rgba(248, 219, 219, 0.74); }
+    .product-grid .app-placeholder.tint-instafan { --app-tint: rgba(244, 220, 235, 0.72); }
+    .product-grid .app-placeholder.tint-reddar { --app-tint: rgba(248, 218, 220, 0.72); }
+    .product-grid .app-placeholder.tint-popd { --app-tint: rgba(242, 223, 214, 0.74); }
+    .product-grid .app-placeholder.tint-ottol { --app-tint: rgba(222, 240, 221, 0.74); }
+    .product-grid .app-placeholder.tint-pic6 { --app-tint: rgba(237, 224, 224, 0.72); }
+    .product-grid .app-placeholder.tint-the { --app-tint: rgba(231, 219, 190, 0.72); }
+    .product-grid .app-placeholder.tint-housewifed { --app-tint: rgba(246, 216, 216, 0.72); }
+
+    .app-icon {
+      position: absolute;
+      right: 16px;
+      bottom: 14px;
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9px;
+      background: rgba(255,255,255,0.62);
+      border: 1px solid rgba(23,20,17,0.1);
+      color: rgba(23,20,17,0.52);
+      overflow: hidden;
+    }
+
+    .app-icon img,
+    .app-icon svg {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .app-icon-dark {
+      background: #0d0d0d;
+      border-color: rgba(255,255,255,0.12);
+    }
+
+    .app-icon-fallback {
+      font-size: 0.62rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .report-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+      align-items: start;
+    }
+
+    .report-grid .tile {
+      padding: 17px 16px 54px;
+    }
+
+    .report-grid .tile-title {
+      margin-top: 15px;
+      font-size: 1.22rem;
+    }
+
+    .report-grid .tile-desc {
+      font-size: 0.84rem;
+      line-height: 1.38;
+    }
+
+    .report-grid .tile-foot {
+      left: 16px;
+      right: 16px;
+      bottom: 14px;
+      font-size: 0.84rem;
+    }
+
     .icu { background: var(--icu); }
     .parfumo { background: var(--parfumo); }
     .mta { background: var(--mta); }
@@ -387,223 +736,443 @@
     .fmri { background: var(--fmri); }
     .tiger { background: var(--tiger); }
     .primate { background: var(--primate); }
+    .bioethics { background: var(--bioethics); }
+    .cte { background: var(--cte); }
 
-    @media (max-width: 1080px) {
-      .tiles {
+    @media (max-width: 1260px) {
+      .tiles,
+      .app-grid,
+      .product-grid,
+      .report-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
-    @media (max-width: 760px) {
-      .page {
-        padding: 20px 14px 42px;
+    @media (max-width: 1060px) {
+      .portfolio-shell {
+        grid-template-columns: 1fr;
+        align-items: start;
       }
 
-      .hero {
-        padding: 64px 20px 28px;
+      .profile-card {
+        position: static;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        width: min(100% - 28px, 760px);
+        padding: 16px 0 36px;
+        min-height: 0;
+        display: block;
+      }
+
+      .profile-card,
+      .work-card {
         border-radius: 28px;
       }
 
+      .profile-card,
+      .work-card {
+        padding: 20px;
+      }
+
+      .top-row {
+        align-items: center;
+      }
+
       .top-links {
-        top: 14px;
-        right: 14px;
-        left: 14px;
-        justify-content: center;
-      }
-
-      .hero-badge {
-        position: static;
-        display: inline-flex;
-        margin: 0 auto 10px;
-      }
-
-      .edu-pill {
-        min-width: 0;
-        width: 100%;
+        flex-wrap: wrap;
+        max-width: 190px;
       }
 
       .profile-ring {
-        width: 126px;
-        height: 126px;
+        width: 124px;
+        height: 124px;
       }
 
-      .bio {
-        font-size: 1rem;
+      h1 {
+        white-space: normal;
       }
 
-      .tiles {
+      .subhead {
+        white-space: normal;
+      }
+
+      .work-head {
+        display: block;
+      }
+
+      .work-actions {
+        position: static;
+        justify-content: flex-start;
+        margin-bottom: 16px;
+      }
+
+      .tabs {
+        width: 100%;
+        margin-top: 18px;
+      }
+
+      .tab-button {
+        flex: 1;
+      }
+
+      .tiles,
+      .app-grid,
+      .product-grid,
+      .report-grid {
         grid-template-columns: 1fr;
+      }
+
+      .tile {
+        min-height: 172px;
+      }
+
+      .grid-intro {
+        height: auto;
+        min-height: 172px;
+      }
+
+      .product-grid,
+      .report-grid {
+        gap: 10px;
+      }
+
+      .grid-intro {
+        min-height: 112px;
+        padding: 16px;
+        border-radius: 16px;
+        box-shadow: none;
+      }
+
+      .grid-intro-desc,
+      .product-grid .app-placeholder p,
+      .report-grid .tile-desc {
+        display: none;
+      }
+
+      .product-grid .app-placeholder,
+      .report-grid .tile {
+        height: auto;
+        min-height: 124px;
+        padding: 16px 16px 44px;
+        border-radius: 16px;
+        box-shadow: none;
+      }
+
+      .product-grid .app-placeholder:hover,
+      .report-grid .tile:hover {
+        transform: none;
+        box-shadow: none;
       }
     }
   </style>
 </head>
 <body>
   <div class="page">
-    <section class="hero">
-      <div class="hero-badge">📍 New York, NY</div>
-      <nav class="top-links">
-        <a href="https://www.linkedin.com/in/aadil815/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://aadil815.github.io/resume" target="_blank" rel="noopener noreferrer">Resume</a>
-        <a href="mailto:aadilmsds@gmail.com">Contact Me</a>
-      </nav>
-      <div class="profile-ring">
-        <img class="profile-photo" src="assets/profile-photo.png" alt="Portrait of Aadil Khan" />
-      </div>
+    <div class="portfolio-shell">
+      <aside class="profile-card">
+        <div class="profile-inner">
+          <div class="top-row">
+            <div class="hero-badge">📍 New York, NY</div>
+          </div>
 
-      <h1>Aadil Khan, MDS</h1>
-      <div class="subhead">Data Analyst</div>
+          <div class="profile-ring">
+            <img class="profile-photo" src="assets/profile-photo.png" alt="Portrait of Aadil Khan" />
+          </div>
 
-      <p class="bio">
-        Recent data science graduate with a neuroscience background studying decision-making and experience in analyzing healthcare, behavioral, environmental, sports, and consumer trend data. Applies quantitative methods and AI to complex real-world problems, translating data into actionable insights on markets, behavior, and emerging trends.
-      </p>
+          <h1>Aadil Khan, MDS</h1>
+          <div class="subhead">Data Analyst • AI Engineer • Web Developer</div>
 
-      <div class="education">
-        <div class="edu-pill">
-          <span class="edu-emoji">🎓</span>
-          <div class="edu-text">
-            <span class="edu-school">University of Pittsburgh</span>
-            <span class="edu-degree">Master of Data Science</span>
+          <p class="bio">
+            Data scientist and quantitative researcher with a background in neuroscience, psychology, and human decision-making. Applies statistical modeling, machine learning, and AI to healthcare, behavioral, environmental, and consumer data, translating complex real-world data into actionable insights and evidence-driven decisions.
+          </p>
+
+          <div class="education">
+            <div class="edu-pill">
+              <span class="edu-emoji">🎓</span>
+              <div class="edu-text">
+                <span class="edu-school">University of Pittsburgh</span>
+                <span class="edu-degree">Master of Data Science</span>
+              </div>
+            </div>
+            <div class="edu-pill">
+              <span class="edu-emoji">🧠</span>
+              <div class="edu-text">
+                <span class="edu-school">Adelphi University</span>
+                <span class="edu-degree">B.S. in Molecular Neuroscience</span>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="edu-pill">
-          <span class="edu-emoji">🧠</span>
-          <div class="edu-text">
-            <span class="edu-school">Adelphi University</span>
-            <span class="edu-degree">B.S. in Molecular Neuroscience</span>
+
+      </aside>
+
+      <main class="work-card">
+        <div class="work-inner">
+          <div class="work-actions">
+            <nav class="top-links" aria-label="Profile links">
+              <a href="https://www.linkedin.com/in/aadil815/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a href="https://aadil815.github.io/resume/" target="_blank" rel="noopener noreferrer">Resume</a>
+              <span class="email-wrap">
+                <button class="email-button" type="button" data-email="aadilmsds@gmail.com">Email</button>
+                <span class="copy-pop" aria-live="polite">Copied</span>
+              </span>
+            </nav>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <section class="section-intro">
-      <h2>Data projects across healthcare, policy, behavior, and consumer trends</h2>
-      <p>
-        A curated portfolio of interactive HTML projects built around analysis, modeling, and visual storytelling.
-      </p>
-    </section>
-
-    <main class="tiles">
-      <a class="tile icu" href="https://aadil815.github.io/icu/" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="tile-top">
-            <div class="tile-code">Healthcare Analytics</div>
-            <div class="tile-emoji">🏥</div>
+          <div class="work-head">
+            <div>
+              <div class="section-kicker">Portfolio</div>
+              <h2>Projects across websites, applications, extensions, and research</h2>
+            </div>
+            <div class="tabs" role="tablist" aria-label="Project categories">
+              <button class="tab-button active" type="button" role="tab" aria-selected="true" aria-controls="websites" data-tab="websites">Websites</button>
+              <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="data-projects" data-tab="data-projects">Data Projects</button>
+            </div>
           </div>
-          <h3 class="tile-title">ICU</h3>
-          <p class="tile-desc">ICU length of stay, mortality, and interpretable clinical modeling.</p>
-        </div>
-        <div class="tile-foot">
-          <span>Open Project</span>
-          <span class="tile-arrow">↗</span>
-        </div>
-      </a>
 
-      <a class="tile parfumo" href="https://aadil815.github.io/parfumo/" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="tile-top">
-            <div class="tile-code">Consumer Trends</div>
-            <div class="tile-emoji">🧴</div>
-          </div>
-          <h3 class="tile-title">Parfumo</h3>
-          <p class="tile-desc">Fragrance database analysis focused on notes, brands, accords, and popularity signals.</p>
-        </div>
-        <div class="tile-foot">
-          <span>Open Project</span>
-          <span class="tile-arrow">↗</span>
-        </div>
-      </a>
+          <section id="websites" class="tab-panel active" role="tabpanel">
+            <div class="product-grid">
+              <div class="grid-intro">
+                <h3 class="grid-intro-title">Fragrance network</h3>
+                <p class="grid-intro-desc">Interconnected scent platforms for discovery, price intelligence, decants, and comparison — sharing catalog data, search, and recommendations across the network.</p>
+              </div>
+              <a class="app-placeholder tint-decant-one" href="http://decant.one/" target="_blank" rel="noopener noreferrer">
+                <div>
+                  <small class="app-kind">Website</small>
+                  <strong>Decant.one</strong>
+                  <p>Fragrance decant marketplace that compares price per ml, availability, and trusted vendors.</p>
+                </div>
+                <div class="app-icon"><img src="assets/app-icons/decant-one.png" alt="Decant.one icon"></div>
+              </a>
+              <div class="app-placeholder tint-fragrance-fyi">
+                <div>
+                  <small class="app-kind">Website</small>
+                  <strong>Under development...</strong>
+                  <p>Fragrance discovery and price-intelligence platform with notes, performance ratings, and retailer comparisons.</p>
+                </div>
+                <div class="app-icon app-icon-fallback" aria-label="Website icon placeholder">F</div>
+              </div>
+              <div class="grid-intro">
+                <h3 class="grid-intro-title">AI-powered websites</h3>
+                <p class="grid-intro-desc">Websites built around guided workflows where structured data, user context, and LLM assistance work together — surfacing recommendations, automating steps, and adapting as inputs change.</p>
+              </div>
+              <div class="app-placeholder tint-premeducation">
+                <div>
+                  <small class="app-kind">Website</small>
+                  <strong>Under development...</strong>
+                  <p>Premed applicant operating system for planning, school strategy, readiness tracking, and application support.</p>
+                </div>
+                <div class="app-icon"><img src="assets/app-icons/premeducation.svg" alt="Website icon"></div>
+              </div>
+              <div class="grid-intro">
+                <h3 class="grid-intro-title">Islamic projects</h3>
+                <p class="grid-intro-desc">Two faith-forward consumer platforms — halal restaurant discovery and Islamic baby naming — built for Muslim communities with search, curation, and AI-assisted matching.</p>
+              </div>
+              <div class="app-placeholder tint-safra">
+                <div>
+                  <small class="app-kind">Website</small>
+                  <strong>Coming soon...</strong>
+                  <p>Creator-powered halal restaurant discovery platform with search, food passports, lists, and dinner planning.</p>
+                </div>
+                <div class="app-icon"><img src="assets/app-icons/safra.svg" alt="Website icon"></div>
+              </div>
+              <div class="app-placeholder tint-hababies">
+                <div>
+                  <small class="app-kind">Website</small>
+                  <strong>Coming soon...</strong>
+                  <p>Islamic baby-name platform with browsing, meanings, saved lists, AI matching, collections, and couple polls.</p>
+                </div>
+                <div class="app-icon"><img src="assets/app-icons/hababies.svg" alt="Website icon"></div>
+              </div>
+              <div class="grid-intro">
+                <h3 class="grid-intro-title">More projects</h3>
+                <p class="grid-intro-desc">Additional websites and tools are in development.</p>
+              </div>
+              <div class="app-placeholder empty">
+                <div>
+                  <small class="app-kind">Website</small>
+                  <strong>Coming soon...</strong>
+                  <p>Fashion discovery and tracking website for saving styles, following trends, and organizing finds.</p>
+                </div>
+              </div>
+            </div>
+          </section>
 
-      <a class="tile mta" href="https://aadil815.github.io/mta/" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="tile-top">
-            <div class="tile-code">Policy & Transportation</div>
-            <div class="tile-emoji">🚇</div>
-          </div>
-          <h3 class="tile-title">MTA</h3>
-          <p class="tile-desc">Transit and congestion pricing analysis through ridership and policy outcomes.</p>
-        </div>
-        <div class="tile-foot">
-          <span>Open Project</span>
-          <span class="tile-arrow">↗</span>
-        </div>
-      </a>
+          <section id="data-projects" class="tab-panel" role="tabpanel" hidden>
+            <div class="report-grid">
+              <a class="tile icu" href="https://aadil815.github.io/icu/" target="_blank" rel="noopener noreferrer">
+                <div>
+                  <div class="tile-top">
+                    <div class="tile-code">Healthcare Analytics</div>
+                    <div class="tile-emoji">🏥</div>
+                  </div>
+                  <h3 class="tile-title">ICU Mortality Rate</h3>
+                  <p class="tile-desc">ICU length of stay, mortality, and interpretable clinical modeling.</p>
+                </div>
+                <div class="tile-foot"><span>Open Project</span><span class="tile-arrow">↗</span></div>
+              </a>
 
-      <a class="tile spotify" href="https://aadil815.github.io/spotify/" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="tile-top">
-            <div class="tile-code">Music & Modeling</div>
-            <div class="tile-emoji">🎧</div>
-          </div>
-          <h3 class="tile-title">Spotify</h3>
-          <p class="tile-desc">Audio features, clustering, and predictive modeling of track popularity.</p>
-        </div>
-        <div class="tile-foot">
-          <span>Open Project</span>
-          <span class="tile-arrow">↗</span>
-        </div>
-      </a>
+              <a class="tile parfumo" href="https://aadil815.github.io/parfumo/" target="_blank" rel="noopener noreferrer">
+                <div>
+                  <div class="tile-top">
+                    <div class="tile-code">Consumer Trends</div>
+                    <div class="tile-emoji">🧴</div>
+                  </div>
+                  <h3 class="tile-title">Parfumo Trends</h3>
+                  <p class="tile-desc">Fragrance analysis of notes, brands, accords, and popularity signals.</p>
+                </div>
+                <div class="tile-foot"><span>Open Project</span><span class="tile-arrow">↗</span></div>
+              </a>
 
-      <a class="tile cce" href="https://aadil815.github.io/cce/" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="tile-top">
-            <div class="tile-code">Environmental Policy</div>
-            <div class="tile-emoji">💧</div>
-          </div>
-          <h3 class="tile-title">CCE</h3>
-          <p class="tile-desc">Water quality, contaminant policy, and public-interest environmental analysis.</p>
-        </div>
-        <div class="tile-foot">
-          <span>Open Project</span>
-          <span class="tile-arrow">↗</span>
-        </div>
-      </a>
+              <a class="tile mta" href="https://aadil815.github.io/mta/" target="_blank" rel="noopener noreferrer">
+                <div>
+                  <div class="tile-top">
+                    <div class="tile-code">Policy & Transportation</div>
+                    <div class="tile-emoji">🚇</div>
+                  </div>
+                  <h3 class="tile-title">MTA Pricing</h3>
+                  <p class="tile-desc">Transit and congestion pricing analysis through ridership and policy outcomes.</p>
+                </div>
+                <div class="tile-foot"><span>Open Project</span><span class="tile-arrow">↗</span></div>
+              </a>
 
-      <a class="tile fmri" href="https://aadil815.github.io/fmri/" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="tile-top">
-            <div class="tile-code">Neuroscience Research</div>
-            <div class="tile-emoji">🧠</div>
-          </div>
-          <h3 class="tile-title">fMRI</h3>
-          <p class="tile-desc">Neural response and social reward analysis with imaging-based interpretation.</p>
-        </div>
-        <div class="tile-foot">
-          <span>Open Project</span>
-          <span class="tile-arrow">↗</span>
-        </div>
-      </a>
+              <a class="tile spotify" href="https://aadil815.github.io/spotify/" target="_blank" rel="noopener noreferrer">
+                <div>
+                  <div class="tile-top">
+                    <div class="tile-code">Music & Modeling</div>
+                    <div class="tile-emoji">🎧</div>
+                  </div>
+                  <h3 class="tile-title">Spotify Popularity</h3>
+                  <p class="tile-desc">Audio features, clustering, and predictive modeling of track popularity.</p>
+                </div>
+                <div class="tile-foot"><span>Open Project</span><span class="tile-arrow">↗</span></div>
+              </a>
 
-      <a class="tile tiger" href="https://aadil815.github.io/tiger/" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="tile-top">
-            <div class="tile-code">Evolutionary Genetics</div>
-            <div class="tile-emoji">🐅</div>
-          </div>
-          <h3 class="tile-title">Tiger</h3>
-          <p class="tile-desc">Phylogenetic and genetic analysis of tiger vocal cord morphology.</p>
-        </div>
-        <div class="tile-foot">
-          <span>Open Project</span>
-          <span class="tile-arrow">↗</span>
-        </div>
-      </a>
+              <a class="tile cce" href="https://aadil815.github.io/cce/" target="_blank" rel="noopener noreferrer">
+                <div>
+                  <div class="tile-top">
+                    <div class="tile-code">Environmental Policy</div>
+                    <div class="tile-emoji">💧</div>
+                  </div>
+                  <h3 class="tile-title">CCE</h3>
+                  <p class="tile-desc">Water quality, contaminant policy, and public-interest environmental analysis.</p>
+                </div>
+                <div class="tile-foot"><span>Open Project</span><span class="tile-arrow">↗</span></div>
+              </a>
 
-      <a class="tile primate" href="https://aadil815.github.io/primate/" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="tile-top">
-            <div class="tile-code">Comparative Biology</div>
-            <div class="tile-emoji">🐒</div>
-          </div>
-          <h3 class="tile-title">Primate</h3>
-          <p class="tile-desc">Evolutionary analysis of primate menopause and leptin selection patterns.</p>
-        </div>
-        <div class="tile-foot">
-          <span>Open Project</span>
-          <span class="tile-arrow">↗</span>
-        </div>
-      </a>
-    </main>
+              <a class="tile fmri" href="https://aadil815.github.io/fmri/" target="_blank" rel="noopener noreferrer">
+                <div>
+                  <div class="tile-top">
+                    <div class="tile-code">Neuroscience Research</div>
+                    <div class="tile-emoji">🧠</div>
+                  </div>
+                  <h3 class="tile-title">fMRI Thesis</h3>
+                  <p class="tile-desc">Neural response and social reward analysis with imaging-based interpretation.</p>
+                </div>
+                <div class="tile-foot"><span>Open Project</span><span class="tile-arrow">↗</span></div>
+              </a>
 
+              <a class="tile tiger" href="https://aadil815.github.io/tiger/" target="_blank" rel="noopener noreferrer">
+                <div>
+                  <div class="tile-top">
+                    <div class="tile-code">Evolutionary Genetics</div>
+                    <div class="tile-emoji">🐅</div>
+                  </div>
+                  <h3 class="tile-title">Tigers' Vocal Cords</h3>
+                  <p class="tile-desc">Phylogenetic and genetic analysis of tiger vocal cord morphology.</p>
+                </div>
+                <div class="tile-foot"><span>Open Project</span><span class="tile-arrow">↗</span></div>
+              </a>
+
+              <a class="tile primate" href="https://aadil815.github.io/primate/" target="_blank" rel="noopener noreferrer">
+                <div>
+                  <div class="tile-top">
+                    <div class="tile-code">Comparative Biology</div>
+                    <div class="tile-emoji">🐒</div>
+                  </div>
+                  <h3 class="tile-title">Primates' Menopause</h3>
+                  <p class="tile-desc">Evolutionary analysis of primate menopause and leptin selection patterns.</p>
+                </div>
+                <div class="tile-foot"><span>Open Project</span><span class="tile-arrow">↗</span></div>
+              </a>
+
+              <a class="tile bioethics" href="https://aadil815.github.io/bioethics/" target="_blank" rel="noopener noreferrer">
+                <div>
+                  <div class="tile-top">
+                    <div class="tile-code">Medical Ethics</div>
+                    <div class="tile-emoji">⚖️</div>
+                  </div>
+                  <h3 class="tile-title">Bioethics</h3>
+                  <p class="tile-desc">Research synthesis on organ donation and assisted reproduction within Islam.</p>
+                </div>
+                <div class="tile-foot"><span>Open Project</span><span class="tile-arrow">↗</span></div>
+              </a>
+
+              <a class="tile cte" href="https://aadil815.github.io/cte/" target="_blank" rel="noopener noreferrer">
+                <div>
+                  <div class="tile-top">
+                    <div class="tile-code">Neuroscience Research</div>
+                    <div class="tile-emoji">🤕</div>
+                  </div>
+                  <h3 class="tile-title">CTE</h3>
+                  <p class="tile-desc">Repetitive head impacts, tau pathology, and CTE progression.</p>
+                </div>
+                <div class="tile-foot"><span>Open Project</span><span class="tile-arrow">↗</span></div>
+              </a>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
   </div>
+
+  <script>
+    const emailButton = document.querySelector(".email-button");
+    const copyPop = document.querySelector(".copy-pop");
+    const tabButtons = document.querySelectorAll(".tab-button");
+    const tabPanels = document.querySelectorAll(".tab-panel");
+
+    emailButton.addEventListener("click", async () => {
+      const email = emailButton.dataset.email;
+      try {
+        await navigator.clipboard.writeText(email);
+      } catch {
+        const fallback = document.createElement("textarea");
+        fallback.value = email;
+        fallback.setAttribute("readonly", "");
+        fallback.style.position = "fixed";
+        fallback.style.opacity = "0";
+        document.body.appendChild(fallback);
+        fallback.select();
+        document.execCommand("copy");
+        fallback.remove();
+      }
+
+      copyPop.classList.remove("show");
+      void copyPop.offsetWidth;
+      copyPop.classList.add("show");
+    });
+
+    tabButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const targetId = button.dataset.tab;
+
+        tabButtons.forEach((item) => {
+          const active = item === button;
+          item.classList.toggle("active", active);
+          item.setAttribute("aria-selected", String(active));
+        });
+
+        tabPanels.forEach((panel) => {
+          const active = panel.id === targetId;
+          panel.classList.toggle("active", active);
+          panel.hidden = !active;
+        });
+      });
+    });
+  </script>
 </body>
 </html>
