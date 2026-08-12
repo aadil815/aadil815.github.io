@@ -359,7 +359,7 @@
     .work-head h2 {
       margin: 0;
       max-width: 650px;
-      font-size: clamp(1.7rem, 2.8vw, 2.3rem);
+      font-size: clamp(1.6rem, 2.5vw, 2.1rem);
       line-height: 1.02;
       letter-spacing: -0.045em;
     }
@@ -536,14 +536,14 @@
 
     .product-grid {
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 14px;
       align-items: start;
     }
 
     #websites .product-grid {
       align-content: start;
-      max-width: 1136px;
+      max-width: 676px;
       margin-inline: auto;
     }
 
@@ -655,6 +655,7 @@
     .product-grid .app-placeholder.tint-decant-one { --app-tint: rgba(240, 226, 198, 0.72); }
     .product-grid .app-placeholder.tint-safra { --app-tint: rgba(238, 221, 216, 0.72); }
     .product-grid .app-placeholder.tint-hababies { --app-tint: rgba(220, 238, 231, 0.74); }
+    .product-grid .app-placeholder.tint-lavender { --app-tint: rgba(221, 216, 235, 0.76); }
     .product-grid .app-placeholder.tint-empti { --app-tint: rgba(224, 238, 246, 0.76); }
     .product-grid .app-placeholder.tint-blockt { --app-tint: rgba(248, 219, 219, 0.74); }
     .product-grid .app-placeholder.tint-instafan { --app-tint: rgba(244, 220, 235, 0.72); }
@@ -698,6 +699,23 @@
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.03em;
+    }
+
+    .app-placeholder .launch-note {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
+      padding: 5px 8px;
+      border: 1px solid rgba(23,20,17,0.08);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.46);
+      color: rgba(23,20,17,0.62);
+      font-size: 0.66rem;
+      font-weight: 750;
+      letter-spacing: 0.02em;
+      line-height: 1;
+      text-align: left;
+      white-space: nowrap;
     }
 
     .report-grid {
@@ -928,36 +946,30 @@
               <h2>Projects across websites, applications, extensions, and research</h2>
             </div>
             <div class="tabs" role="tablist" aria-label="Project categories">
-              <button class="tab-button active" type="button" role="tab" aria-selected="true" aria-controls="websites" data-tab="websites">Websites</button>
-              <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="data-projects" data-tab="data-projects">Data Projects</button>
+              <button class="tab-button active" type="button" role="tab" aria-selected="true" aria-controls="data-projects" data-tab="data-projects">Data Projects</button>
+              <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="websites" data-tab="websites">Websites</button>
             </div>
           </div>
 
-          <section id="websites" class="tab-panel active" role="tabpanel">
+          <section id="websites" class="tab-panel" role="tabpanel" hidden>
             <div class="product-grid">
-              <div class="grid-intro">
-                <h3 class="grid-intro-title">Fragrance network</h3>
-                <p class="grid-intro-desc">Interconnected scent platforms for discovery, price intelligence, decants, and comparison — sharing catalog data, search, and recommendations across the network.</p>
-              </div>
               <a class="app-placeholder tint-decant-one" href="http://decant.one/" target="_blank" rel="noopener noreferrer">
                 <div>
                   <small class="app-kind">Website</small>
                   <strong>Decant.one</strong>
                   <p>Fragrance decant marketplace that compares price per ml, availability, and trusted vendors.</p>
                 </div>
+                <span class="launch-note">August 2026</span>
                 <div class="app-icon"><img src="assets/app-icons/decant-one.png" alt="Decant.one icon"></div>
               </a>
               <div class="app-placeholder tint-fragrance-fyi">
                 <div>
                   <small class="app-kind">Website</small>
-                  <strong>Under development...</strong>
+                  <strong>Coming soon...</strong>
                   <p>Fragrance discovery and price-intelligence platform with notes, performance ratings, and retailer comparisons.</p>
                 </div>
+                <span class="launch-note">Fall 2026</span>
                 <div class="app-icon app-icon-fallback" aria-label="Website icon placeholder">F</div>
-              </div>
-              <div class="grid-intro">
-                <h3 class="grid-intro-title">AI-powered websites</h3>
-                <p class="grid-intro-desc">Websites built around guided workflows where structured data, user context, and LLM assistance work together — surfacing recommendations, automating steps, and adapting as inputs change.</p>
               </div>
               <div class="app-placeholder tint-premeducation">
                 <div>
@@ -965,18 +977,16 @@
                   <strong>Under development...</strong>
                   <p>Premed applicant operating system for planning, school strategy, readiness tracking, and application support.</p>
                 </div>
+                <span class="launch-note">Winter 2026</span>
                 <div class="app-icon"><img src="assets/app-icons/premeducation.svg" alt="Website icon"></div>
-              </div>
-              <div class="grid-intro">
-                <h3 class="grid-intro-title">Islamic projects</h3>
-                <p class="grid-intro-desc">Two faith-forward consumer platforms — halal restaurant discovery and Islamic baby naming — built for Muslim communities with search, curation, and AI-assisted matching.</p>
               </div>
               <div class="app-placeholder tint-safra">
                 <div>
                   <small class="app-kind">Website</small>
-                  <strong>Coming soon...</strong>
+                  <strong>Under development...</strong>
                   <p>Creator-powered halal restaurant discovery platform with search, food passports, lists, and dinner planning.</p>
                 </div>
+                <span class="launch-note">Winter 2026</span>
                 <div class="app-icon"><img src="assets/app-icons/safra.svg" alt="Website icon"></div>
               </div>
               <div class="app-placeholder tint-hababies">
@@ -985,23 +995,22 @@
                   <strong>Coming soon...</strong>
                   <p>Islamic baby-name platform with browsing, meanings, saved lists, AI matching, collections, and couple polls.</p>
                 </div>
+                <span class="launch-note">Fall 2026</span>
                 <div class="app-icon"><img src="assets/app-icons/hababies.svg" alt="Website icon"></div>
               </div>
-              <div class="grid-intro">
-                <h3 class="grid-intro-title">More projects</h3>
-                <p class="grid-intro-desc">Additional websites and tools are in development.</p>
-              </div>
-              <div class="app-placeholder empty">
+              <div class="app-placeholder tint-lavender">
                 <div>
                   <small class="app-kind">Website</small>
-                  <strong>Coming soon...</strong>
-                  <p>Fashion discovery and tracking website for saving styles, following trends, and organizing finds.</p>
+                  <strong>Stay tuned...</strong>
+                  <p>A thoughtfully designed fashion experience that makes discovering what fits your style feel more personal and intuitive.</p>
                 </div>
+                <span class="launch-note">Spring 2027</span>
+                <div class="app-icon"><img src="assets/app-icons/fashion.svg" alt="Website icon"></div>
               </div>
             </div>
           </section>
 
-          <section id="data-projects" class="tab-panel" role="tabpanel" hidden>
+          <section id="data-projects" class="tab-panel active" role="tabpanel">
             <div class="report-grid">
               <a class="tile icu" href="https://aadil815.github.io/icu/" target="_blank" rel="noopener noreferrer">
                 <div>
@@ -1057,7 +1066,7 @@
                     <div class="tile-code">Environmental Policy</div>
                     <div class="tile-emoji">💧</div>
                   </div>
-                  <h3 class="tile-title">CCE</h3>
+                  <h3 class="tile-title">Environmental Protection</h3>
                   <p class="tile-desc">Water quality, contaminant policy, and public-interest environmental analysis.</p>
                 </div>
                 <div class="tile-foot"><span>Open Project</span><span class="tile-arrow">↗</span></div>
@@ -1069,7 +1078,7 @@
                     <div class="tile-code">Neuroscience Research</div>
                     <div class="tile-emoji">🧠</div>
                   </div>
-                  <h3 class="tile-title">fMRI Thesis</h3>
+                  <h3 class="tile-title">fMRI Thesis Report</h3>
                   <p class="tile-desc">Neural response and social reward analysis with imaging-based interpretation.</p>
                 </div>
                 <div class="tile-foot"><span>Open Project</span><span class="tile-arrow">↗</span></div>
@@ -1105,7 +1114,7 @@
                     <div class="tile-code">Medical Ethics</div>
                     <div class="tile-emoji">⚖️</div>
                   </div>
-                  <h3 class="tile-title">Bioethics</h3>
+                  <h3 class="tile-title">Bioethics in Islam</h3>
                   <p class="tile-desc">Research synthesis on organ donation and assisted reproduction within Islam.</p>
                 </div>
                 <div class="tile-foot"><span>Open Project</span><span class="tile-arrow">↗</span></div>
@@ -1117,7 +1126,7 @@
                     <div class="tile-code">Neuroscience Research</div>
                     <div class="tile-emoji">🤕</div>
                   </div>
-                  <h3 class="tile-title">CTE</h3>
+                  <h3 class="tile-title">CTE Background</h3>
                   <p class="tile-desc">Repetitive head impacts, tau pathology, and CTE progression.</p>
                 </div>
                 <div class="tile-foot"><span>Open Project</span><span class="tile-arrow">↗</span></div>

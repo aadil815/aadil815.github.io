@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Fashion project icon</title>
+  <desc id="desc">Custom serif F with an integrated four-point star.</desc>
+  <rect width="256" height="256" rx="58" fill="#5B3F6D"/>
+  <g fill="#F7F6F3" transform="translate(65 33) scale(.78)">
+    <path d="M22 188v-8c16-1 22-7 22-23V42c0-16-6-22-22-23v-8h108l4 43h-8c-4-15-9-24-16-29-7-4-17-6-31-6H64v70h16c12 0 20-3 25-9 4-5 7-14 9-26h8v66h-8c-2-11-5-20-9-25-5-6-13-9-25-9H64v71c0 16 7 22 26 23v8H22Z M106 80C109 89 116 96 126 99C116 102 109 109 106 119C103 109 96 102 86 99C96 96 103 89 106 80Z"/>
+  </g>
+</svg>
